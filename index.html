@@ -1,0 +1,1298 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>All-in-One Tools - সব ইন ওয়ান টুলস | Free Online Tools</title>
+  <meta name="description" content="বিনামূল্যে অনলাইন টুলস - ক্যালকুলেটর, কনভার্টার, জেনারেটর এবং আরও অনেক কিছু। কোন সাইন আপ বা ক্রেডিট কার্ড প্রয়োজন নেই।">
+  <meta name="keywords" content="online tools, calculator, converter, generator, free tools, bangla tools">
+  <meta name="author" content="All-in-One Tools">
+  
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="All-in-One Tools - সব ইন ওয়ান টুলস">
+  <meta property="og:description" content="বিনামূল্যে অনলাইন টুলস - কোন সাইন আপ প্রয়োজন নেই">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  
+  <!-- Twitter Card Meta Tags -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="All-in-One Tools - সব ইন ওয়ান টুলস">
+  <meta name="twitter:description" content="বিনামূল্যে অনলাইন টুলস">
+  
+  <!-- Canonical URL -->
+  <link rel="canonical" href="">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛠️</text></svg>">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <style>
+    :root {
+      --primary: #667eea;
+      --primary-dark: #5a67d8;
+      --secondary: #764ba2;
+      --accent: #f093fb;
+      --success: #48bb78;
+      --warning: #f6ad55;
+      --danger: #fc8181;
+      --dark: #2d3748;
+      --light: #f7fafc;
+      --gray: #718096;
+      --border: #e2e8f0;
+      --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+      --radius: 20px;
+      --radius-lg: 30px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: var(--dark);
+      overflow-x: hidden;
+    }
+
+    /* Animated Background */
+    .bg-animation {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      overflow: hidden;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      top: -50%;
+      left: -50%;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.03" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,138.7C960,139,1056,117,1152,112C1248,107,1344,117,1392,122.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
+      background-size: cover;
+      animation: wave 20s linear infinite;
+    }
+
+    @keyframes wave {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
+    }
+
+    /* Floating Shapes */
+    .shape {
+      position: absolute;
+      opacity: 0.1;
+      animation: float 20s infinite ease-in-out;
+    }
+
+    .shape1 {
+      width: 80px;
+      height: 80px;
+      background: white;
+      border-radius: 50%;
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    .shape2 {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+      top: 70%;
+      right: 10%;
+      animation-delay: 5s;
+    }
+
+    .shape3 {
+      width: 100px;
+      height: 100px;
+      background: white;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      bottom: 10%;
+      left: 30%;
+      animation-delay: 10s;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      33% { transform: translateY(-20px) rotate(120deg); }
+      66% { transform: translateY(20px) rotate(240deg); }
+    }
+
+    /* Header */
+    header {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(20px);
+      padding: 1rem 2rem;
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .header-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .logo {
+      width: 50px;
+      height: 50px;
+      border-radius: var(--radius);
+      background: linear-gradient(135deg, var(--accent), var(--primary));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 24px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+
+    .logo:hover {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .site-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: white;
+      transition: width 0.3s;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4rem 2rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-content {
+      max-width: 900px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      color: white;
+      text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+      line-height: 1.2;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #fff, #f093fb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      font-size: 1.3rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 2rem;
+      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 3rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      animation: fadeInUp 1s ease 0.2s both;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: white;
+      display: block;
+    }
+
+    .stat-label {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Search Section */
+    .search-section {
+      max-width: 700px;
+      margin: -2rem auto 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-container {
+      position: relative;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 100px;
+      padding: 8px;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s;
+    }
+
+    .search-container:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 1.2rem 1.5rem 1.2rem 4rem;
+      border: none;
+      border-radius: 100px;
+      font-size: 1.1rem;
+      background: transparent;
+      outline: none;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 1.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      font-size: 1.2rem;
+    }
+
+    /* Category Filter */
+    .category-filter {
+      max-width: 1200px;
+      margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+
+    .category-pills {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .category-pill {
+      padding: 0.7rem 1.5rem;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 100px;
+      color: white;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .category-pill:hover,
+    .category-pill.active {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Main Content */
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 2rem 4rem;
+    }
+
+    /* Tools Grid */
+    .tools-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 1.5rem;
+      animation: fadeInUp 1s ease 0.4s both;
+    }
+
+    .tool-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-height: 200px;
+    }
+
+    .tool-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      transform: scaleX(0);
+      transition: transform 0.3s;
+    }
+
+    .tool-card:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .tool-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .tool-icon {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+      font-size: 30px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .tool-card:hover .tool-icon {
+      transform: rotate(10deg) scale(1.1);
+    }
+
+    .icon-gradient-1 { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .icon-gradient-2 { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .icon-gradient-3 { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .icon-gradient-4 { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+    .icon-gradient-5 { background: linear-gradient(135deg, #fa709a, #fee140); }
+    .icon-gradient-6 { background: linear-gradient(135deg, #30cfd0, #330867); }
+    .icon-gradient-7 { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+    .icon-gradient-8 { background: linear-gradient(135deg, #ff9a9e, #fecfef); }
+
+    .tool-icon i {
+      color: white;
+      font-size: 30px;
+    }
+
+    .tool-info {
+      flex: 1;
+      width: 100%;
+    }
+
+    .tool-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--dark);
+    }
+
+    .tool-description {
+      color: var(--gray);
+      font-size: 0.85rem;
+      line-height: 1.4;
+      margin-bottom: 0.75rem;
+      display: none;
+      animation: slideDown 0.3s ease;
+    }
+
+    .tool-description.show {
+      display: block;
+    }
+
+    .expand-btn {
+      background: none;
+      border: none;
+      color: var(--primary);
+      cursor: pointer;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.25rem 0.5rem;
+      border-radius: var(--radius);
+      transition: all 0.3s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+
+    .expand-btn:hover {
+      background: rgba(102, 126, 234, 0.1);
+    }
+
+    .expand-icon {
+      transition: transform 0.3s;
+      display: inline-block;
+    }
+
+    .expand-btn.expanded .expand-icon {
+      transform: rotate(180deg);
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+      margin-top: 0.75rem;
+      justify-content: center;
+    }
+
+    .tag {
+      background: rgba(102, 126, 234, 0.1);
+      color: var(--primary);
+      padding: 0.2rem 0.6rem;
+      border-radius: 100px;
+      font-size: 0.7rem;
+      font-weight: 600;
+    }
+
+    /* Loading Animation */
+    .loading {
+      text-align: center;
+      padding: 4rem;
+      color: white;
+    }
+
+    .loading-spinner {
+      width: 50px;
+      height: 50px;
+      border: 3px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* No Results */
+    .no-results {
+      text-align: center;
+      color: white;
+      grid-column: 1 / -1;
+      padding: 4rem;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: var(--radius-lg);
+    }
+
+    /* Error Message */
+    .error-message {
+      background: rgba(252, 129, 129, 0.9);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 600px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    /* Index Warning */
+    .index-warning {
+      background: rgba(246, 173, 85, 0.9);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 12px;
+      margin: 2rem auto;
+      max-width: 600px;
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    .index-warning a {
+      color: white;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+
+    /* Debug Info */
+    .debug-info {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 1rem;
+      border-radius: 12px;
+      margin: 1rem auto;
+      max-width: 600px;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    /* Footer */
+    footer {
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(20px);
+      padding: 3rem 2rem 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.8;
+      transition: color 0.3s;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+
+    .social-link {
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      transition: all 0.3s;
+    }
+
+    .social-link:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        max-height: 0;
+      }
+      to {
+        opacity: 1;
+        max-height: 200px;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .nav-links {
+        margin-top: 1rem;
+      }
+
+      .tools-container {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: 1rem;
+      }
+
+      .tool-card {
+        padding: 1rem;
+        min-height: 180px;
+      }
+
+      .tool-icon {
+        width: 60px;
+        height: 60px;
+      }
+
+      .hero-stats {
+        gap: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .tools-container {
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        gap: 0.75rem;
+      }
+
+      .tool-card {
+        padding: 0.75rem;
+        min-height: 160px;
+      }
+
+      .tool-icon {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 0.75rem;
+      }
+
+      .tool-icon i {
+        font-size: 24px;
+      }
+
+      .tool-name {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Animated Background -->
+  <div class="bg-animation">
+    <div class="shape shape1"></div>
+    <div class="shape shape2"></div>
+    <div class="shape shape3"></div>
+  </div>
+
+  <!-- Header -->
+  <header>
+    <div class="header-content">
+      <div class="logo-section">
+        <div class="logo">A</div>
+        <h1 class="site-title">All-in-One Tools</h1>
+      </div>
+      <nav class="nav-links">
+        <a href="#tools" class="nav-link">Tools</a>
+        <a href="#categories" class="nav-link">Categories</a>
+        <a href="#about" class="nav-link">About</a>
+        <a href="/admin.html" class="nav-link">Admin</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1><span class="gradient-text">All in One Site</span><br>All in One Place</h1>
+      <p>Free online tools for your everyday needs.<br>No sign up and no credit required. Totally free</p>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <span class="stat-number" id="toolCount">0</span>
+          <span class="stat-label">Tools</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">100%</span>
+          <span class="stat-label">Free</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number">24/7</span>
+          <span class="stat-label">Available</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="search-section">
+    <div class="search-container">
+      <i class="fas fa-search search-icon"></i>
+      <input type="text" class="search-box" id="searchBox" placeholder="Search for tools...">
+    </div>
+  </section>
+
+  <!-- Category Filter -->
+  <section class="category-filter">
+    <div class="category-pills">
+      <button class="category-pill active" data-category="all">All Tools</button>
+      <button class="category-pill" data-category="productivity">Productivity</button>
+      <button class="category-pill" data-category="utility">Utility</button>
+      <button class="category-pill" data-category="converter">Converter</button>
+      <button class="category-pill" data-category="calculator">Calculator</button>
+      <button class="category-pill" data-category="generator">Generator</button>
+      <button class="category-pill" data-category="developer">Developer</button>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="container">
+    <div class="loading" id="loading">
+      <div class="loading-spinner"></div>
+      <p>Loading amazing tools...</p>
+    </div>
+    <div id="toolsContainer" class="tools-container"></div>
+    <div id="indexWarning" class="index-warning" style="display: none;">
+      <h3>⚠️ Index Required</h3>
+      <p>Your Firestore query requires an index to be created. This is a one-time setup.</p>
+      <p><a href="https://console.firebase.google.com/v1/r/project/all-in-one-ab33c/firestore/indexes?create_composite=Ck5wcm9qZWN0cy9hbGwtaW4tb25lLWFiMzNjL2RhdGFiYXNlcy8oZGVmYXVsdCkvY29sbGVjdGlvbkdyb3Vwcy90b29scy9pbmRleGVzL18QARoMCghwcmlvcml0eRACGgsKB2NyZWF0ZWQQAhoMCghfX25hbWVfXxAC" target="_blank">Click here to create the index</a></p>
+      <p>After creating the index, please refresh this page (it may take a few minutes to activate).</p>
+    </div>
+    <div id="debugInfo" class="debug-info" style="display: none;"></div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>About Us</h3>
+        <p>We provide free online tools to make your life easier. No registration, no fees, just pure productivity.</p>
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+      <div class="footer-section">
+        <h3>Quick Links</h3>
+        <a href="#tools">All Tools</a><br>
+        <a href="#categories">Categories</a><br>
+        <a href="#about">About Us</a><br>
+        <a href="/admin.html">Admin Panel</a>
+      </div>
+      <div class="footer-section">
+        <h3>Popular Tools</h3>
+        <a href="#">Calculator</a><br>
+        <a href="#">QR Code Generator</a><br>
+        <a href="#">Color Picker</a><br>
+        <a href="#">Password Generator</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>Email: info@allinonetools.com</p>
+        <p>Support: support@allinonetools.com</p>
+        <p>Response time: Within 24 hours</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 All-in-One Tools. All rights reserved. Made with ❤️ in Bangladesh</p>
+    </div>
+  </footer>
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "All-in-One Tools",
+    "description": "Free online tools for your everyday needs",
+    "url": "",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "?search={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="module">
+    // Firebase imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, orderBy, query, enableIndexedDbPersistence } from "https://www.gstatic.com/firebasejs/12.3.0/firebase-firestore.js";
+
+    // Your Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyD3ylkxGRTdtRSre97x5ckmHEDGahD3AdM",
+      authDomain: "all-in-one-ab33c.firebaseapp.com",
+      projectId: "all-in-one-ab33c",
+      storageBucket: "all-in-one-ab33c.firebasestorage.app",
+      messagingSenderId: "189247543589",
+      appId: "1:189247543589:web:5f3a2cdd7ef7b525f7e2cc"
+    };
+
+    // Initialize Firebase
+    let app, db;
+    
+    try {
+      app = initializeApp(firebaseConfig);
+      db = getFirestore(app);
+      
+      // Enable offline persistence
+      enableIndexedDbPersistence(db).catch((err) => {
+        if (err.code === 'failed-precondition') {
+          console.log('Multiple tabs open, persistence can only be enabled in one tab at a time.');
+        } else if (err.code === 'unimplemented') {
+          console.log('The current browser does not support persistence.');
+        }
+      });
+      
+      console.log('✅ Firebase initialized successfully');
+      console.log('📊 Project ID:', firebaseConfig.projectId);
+      
+    } catch (error) {
+      console.error('❌ Firebase initialization error:', error);
+      showError('Failed to initialize Firebase. Please check your configuration.');
+    }
+
+    // Global variables
+    let allTools = [];
+    let filteredTools = [];
+    let currentCategory = 'all';
+    let useSimpleQuery = false; // Flag to use simple query if index is not available
+
+    // Icon mapping for different tools
+    const iconMap = {
+      'calculator': 'fa-calculator',
+      'calendar': 'fa-calendar',
+      'clock': 'fa-clock',
+      'qr': 'fa-qrcode',
+      'converter': 'fa-exchange-alt',
+      'generator': 'fa-magic',
+      'editor': 'fa-edit',
+      'analyzer': 'fa-chart-bar',
+      'color': 'fa-palette',
+      'password': 'fa-key',
+      'text': 'fa-font',
+      'image': 'fa-image',
+      'url': 'fa-link',
+      'json': 'fa-code',
+      'default': 'fa-tools'
+    };
+
+    // Get icon for tool based on name or tags
+    function getToolIcon(tool) {
+      const name = tool.name.toLowerCase();
+      const tags = (tool.tags || []).join(' ').toLowerCase();
+      
+      for (const [key, icon] of Object.entries(iconMap)) {
+        if (name.includes(key) || tags.includes(key)) {
+          return icon;
+        }
+      }
+      return iconMap.default;
+    }
+
+    // Get gradient class for tool icon
+    function getGradientClass(index) {
+      const gradients = [
+        'icon-gradient-1', 'icon-gradient-2', 'icon-gradient-3',
+        'icon-gradient-4', 'icon-gradient-5', 'icon-gradient-6',
+        'icon-gradient-7', 'icon-gradient-8'
+      ];
+      return gradients[index % gradients.length];
+    }
+
+    // Show error message
+    function showError(message) {
+      const loading = document.getElementById('loading');
+      loading.innerHTML = `
+        <div class="error-message">
+          <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
+          <h3>Error Loading Tools</h3>
+          <p>${message}</p>
+          <button onclick="location.reload()" style="margin-top: 1rem; padding: 0.5rem 1rem; background: white; color: #fc8181; border: none; border-radius: 8px; cursor: pointer;">Try Again</button>
+        </div>
+      `;
+    }
+
+    // Show index warning
+    function showIndexWarning() {
+      const warningDiv = document.getElementById('indexWarning');
+      warningDiv.style.display = 'block';
+    }
+
+    // Show debug information
+    function showDebugInfo(info) {
+      const debugDiv = document.getElementById('debugInfo');
+      debugDiv.innerHTML = `
+        <h4>Debug Information:</h4>
+        <pre>${JSON.stringify(info, null, 2)}</pre>
+      `;
+      debugDiv.style.display = 'block';
+    }
+
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      console.log('🚀 Page loaded, initializing...');
+      setupEventListeners();
+      loadTools();
+      updateToolCount();
+    });
+
+    // Setup event listeners
+    function setupEventListeners() {
+      // Search functionality
+      document.getElementById('searchBox').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        filterTools(searchTerm);
+      });
+
+      // Category filter
+      document.querySelectorAll('.category-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          document.querySelectorAll('.category-pill').forEach(p => p.classList.remove('active'));
+          pill.classList.add('active');
+          currentCategory = pill.dataset.category;
+          filterByCategory();
+        });
+      });
+
+      // Smooth scroll for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    }
+
+    // Load tools from Firestore
+    async function loadTools() {
+      const loading = document.getElementById('loading');
+      const container = document.getElementById('toolsContainer');
+      
+      if (!db) {
+        showError('Firebase database not initialized. Please check your configuration.');
+        return;
+      }
+      
+      try {
+        console.log('📥 Loading tools from Firestore...');
+        
+        let q;
+        
+        // Try the complex query first (with both priority and created ordering)
+        if (!useSimpleQuery) {
+          try {
+            q = query(collection(db, "tools"), orderBy("priority", "desc"), orderBy("created", "desc"));
+            console.log('🔍 Using complex query with priority and created ordering');
+          } catch (error) {
+            console.log('⚠️ Complex query failed, falling back to simple query');
+            useSimpleQuery = true;
+          }
+        }
+        
+        // Use simple query if complex query failed or we're already using simple query
+        if (useSimpleQuery) {
+          q = query(collection(db, "tools"), orderBy("created", "desc"));
+          console.log('🔍 Using simple query with created ordering only');
+        }
+        
+        const querySnapshot = await getDocs(q);
+        
+        console.log(`📊 Found ${querySnapshot.size} documents`);
+        
+        allTools = [];
+        querySnapshot.forEach((doc) => {
+          const tool = { id: doc.id, ...doc.data() };
+          console.log('🔧 Tool:', tool.name);
+          // Only show active tools
+          if (tool.isActive !== false) {
+            allTools.push(tool);
+          }
+        });
+        
+        // If using simple query, sort by priority in JavaScript
+        if (useSimpleQuery) {
+          allTools.sort((a, b) => {
+            // First sort by priority (high to low)
+            const priorityOrder = { high: 3, medium: 2, low: 1 };
+            const aPriority = priorityOrder[a.priority] || 2;
+            const bPriority = priorityOrder[b.priority] || 2;
+            
+            if (aPriority !== bPriority) {
+              return bPriority - aPriority;
+            }
+            
+            // Then sort by created date (newest first)
+            return b.created - a.created;
+          });
+        }
+        
+        filteredTools = [...allTools];
+        loading.style.display = 'none';
+        renderTools();
+        updateToolCount();
+        
+        console.log(`✅ Loaded ${allTools.length} active tools`);
+        
+      } catch (error) {
+        console.error('❌ Error loading tools:', error);
+        
+        // Check if it's an index error
+        if (error.code === 'failed-precondition' && error.message.includes('requires an index')) {
+          console.log('🔍 Index error detected, showing warning and using fallback');
+          showIndexWarning();
+          useSimpleQuery = true;
+          loadTools(); // Retry with simple query
+          return;
+        }
+        
+        // Show detailed error information
+        const errorInfo = {
+          message: error.message,
+          code: error.code,
+          stack: error.stack,
+          projectId: firebaseConfig.projectId,
+          timestamp: new Date().toISOString()
+        };
+        
+        showDebugInfo(errorInfo);
+        
+        let errorMessage = 'Failed to load tools from Firebase Firestore.';
+        
+        if (error.code === 'permission-denied') {
+          errorMessage = 'Permission denied. Please check your Firestore security rules.';
+        } else if (error.code === 'unavailable') {
+          errorMessage = 'Firebase service is unavailable. Please check your internet connection.';
+        } else if (error.code === 'not-found') {
+          errorMessage = 'Firestore database not found. Please create a database in your Firebase project.';
+        }
+        
+        showError(errorMessage + '<br><small>Check debug information below for details.</small>');
+      }
+    }
+
+    // Render tools
+    function renderTools() {
+      const container = document.getElementById('toolsContainer');
+      
+      if (filteredTools.length === 0) {
+        container.innerHTML = '<div class="no-results"><i class="fas fa-search" style="font-size: 3rem; margin-bottom: 1rem; display: block;"></i> No tools found matching your criteria.</div>';
+        return;
+      }
+
+      container.innerHTML = filteredTools.map((tool, index) => createToolCard(tool, index)).join('');
+      
+      // Add event listeners to expand buttons
+      document.querySelectorAll('.expand-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const description = btn.previousElementSibling;
+          description.classList.toggle('show');
+          btn.classList.toggle('expanded');
+          if (description.classList.contains('show')) {
+            btn.innerHTML = 'Less <i class="fas fa-chevron-up expand-icon"></i>';
+          } else {
+            btn.innerHTML = 'More <i class="fas fa-chevron-down expand-icon"></i>';
+          }
+        });
+      });
+    }
+
+    // Create tool card HTML
+    function createToolCard(tool, index) {
+      const description = tool.seoDescription || tool.description || 'No description available';
+      const shortDescription = description.length > 100 ? description.substring(0, 100) + '...' : description;
+      
+      return `
+        <div class="tool-card" onclick="openTool('${tool.url}', '${tool.name}')">
+          <div class="tool-icon ${getGradientClass(index)}">
+            ${tool.logo ? 
+              `<img src="${tool.logo}" style="width:100%; height:100%; object-fit:cover; border-radius:inherit;">` : 
+              `<i class="fas ${getToolIcon(tool)}"></i>`
+            }
+          </div>
+          <div class="tool-info">
+            <h3 class="tool-name">${escapeHtml(tool.name)}</h3>
+            <p class="tool-description">${escapeHtml(shortDescription)}</p>
+            ${description.length > 100 ? 
+              `<button class="expand-btn">More <i class="fas fa-chevron-down expand-icon"></i></button>` : 
+              ''
+            }
+            ${tool.tags && tool.tags.length > 0 ? 
+              `<div class="tags">${tool.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}</div>` : 
+              ''
+            }
+          </div>
+        </div>
+      `;
+    }
+
+    // Open tool
+    window.openTool = function(url, name) {
+      console.log(`🔗 Opening tool: ${name}`);
+      if (url.startsWith('http')) {
+        window.open(url, '_blank');
+      } else {
+        window.location.href = url;
+      }
+    };
+
+    // Filter tools by search term
+    function filterTools(searchTerm) {
+      if (!searchTerm) {
+        filteredTools = currentCategory === 'all' ? [...allTools] : allTools.filter(tool => tool.category === currentCategory);
+      } else {
+        filteredTools = allTools.filter(tool => {
+          const matchesSearch = tool.name.toLowerCase().includes(searchTerm) || 
+                               (tool.seoDescription && tool.seoDescription.toLowerCase().includes(searchTerm)) ||
+                               (tool.description && tool.description.toLowerCase().includes(searchTerm)) ||
+                               (tool.tags && tool.tags.some(tag => tag.toLowerCase().includes(searchTerm)));
+          const matchesCategory = currentCategory === 'all' || tool.category === currentCategory;
+          return matchesSearch && matchesCategory;
+        });
+      }
+      renderTools();
+    }
+
+    // Filter tools by category
+    function filterByCategory() {
+      const searchTerm = document.getElementById('searchBox').value.toLowerCase();
+      filterTools(searchTerm);
+    }
+
+    // Update tool count
+    function updateToolCount() {
+      const count = allTools.length;
+      document.getElementById('toolCount').textContent = count > 0 ? count : '0';
+    }
+
+    // Escape HTML to prevent XSS
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    // Add sample data if no tools exist
+    async function addSampleData() {
+      if (!db) return;
+      
+      const sampleTools = [
+        {
+          name: "Calculator",
+          url: "/calculator.html",
+          category: "calculator",
+          description: "Basic and scientific calculator",
+          seoDescription: "Free online calculator for basic and scientific calculations. No registration required.",
+          tags: ["calculator", "math", "basic"],
+          priority: "high",
+          isActive: true,
+          created: Date.now()
+        },
+        {
+          name: "QR Code Generator",
+          url: "/qr-generator.html",
+          category: "generator",
+          description: "Generate QR codes instantly",
+          seoDescription: "Free QR code generator. Create QR codes for URLs, text, and more. No signup needed.",
+          tags: ["qr", "generator", "code"],
+          priority: "high",
+          isActive: true,
+          created: Date.now()
+        },
+        {
+          name: "Color Picker",
+          url: "/color-picker.html",
+          category: "design",
+          description: "Pick and convert colors",
+          seoDescription: "Online color picker tool. Choose colors and get HEX, RGB, HSL values instantly.",
+          tags: ["color", "picker", "design"],
+          priority: "medium",
+          isActive: true,
+          created: Date.now()
+        }
+      ];
+      
+      try {
+        for (const tool of sampleTools) {
+          await addDoc(collection(db, "tools"), tool);
+        }
+        console.log('✅ Sample data added successfully');
+        loadTools();
+      } catch (error) {
+        console.error('❌ Error adding sample data:', error);
+      }
+    }
+
+    // Check if we should add sample data
+    setTimeout(() => {
+      if (allTools.length === 0 && db) {
+        console.log('📝 No tools found, adding sample data...');
+        addSampleData();
+      }
+    }, 3000);
+  </script>
+</body>
+</html>
