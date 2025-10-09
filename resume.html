@@ -1,0 +1,1288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume Builder Pro - Create Professional Resumes in Minutes</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Create professional resumes in minutes with Resume Builder Pro. Choose from modern, classic, and creative templates. Download as PDF. Free online resume builder with professional templates.">
+    <meta name="keywords" content="resume builder, professional resume, CV builder, resume templates, job application, career, employment, resume creator, online resume, PDF resume, modern resume, classic resume, creative resume">
+    <meta name="author" content="Resume Builder Pro">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Resume Builder Pro - Create Professional Resumes">
+    <meta property="og:description" content="Create professional resumes in minutes with our easy-to-use resume builder. Choose from multiple templates and download as PDF.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="#">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Resume Builder Pro - Create Professional Resumes">
+    <meta name="twitter:description" content="Create professional resumes in minutes with our easy-to-use resume builder.">
+    
+    <!-- IMA SDK for Ads -->
+    <script src="https://imasdk.googleapis.com/js/sdkloader/ima3.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .resume-preview {
+            min-height: 842px;
+            background: white;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+        }
+        
+        .template-modern {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .template-classic {
+            font-family: 'Georgia', serif;
+        }
+        
+        .template-creative {
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .skill-bar {
+            transition: width 1s ease-in-out;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hover-scale {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+        
+        .section-card {
+            transition: all 0.3s ease;
+        }
+        
+        .section-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .tab-active {
+            border-bottom: 3px solid #667eea;
+            color: #667eea;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .pulse-animation {
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(102, 126, 234, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(102, 126, 234, 0); }
+        }
+        
+        .premium-badge {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .feature-highlight {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        /* Ad Container Styles */
+        #adContainerFull {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+        }
+        
+        #adInner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            max-width: 800px;
+            max-height: 600px;
+        }
+        
+        .notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .notification.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .notification.success {
+            background-color: #10b981;
+        }
+        
+        .notification.error {
+            background-color: #ef4444;
+        }
+        
+        .notification.info {
+            background-color: #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Ad Container -->
+    <div id="adContainerFull">
+        <div id="adInner"></div>
+    </div>
+
+    <!-- Notification Container -->
+    <div id="notification" class="notification"></div>
+
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i class="fas fa-file-alt text-3xl"></i>
+                    <div>
+                        <h1 class="text-2xl font-bold">Resume Builder Pro</h1>
+                        <p class="text-sm opacity-90">Create Professional Resumes in Minutes</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button onclick="saveToLocal()" class="bg-white text-purple-600 px-4 py-2 rounded-lg hover:bg-gray-100 transition flex items-center">
+                        <i class="fas fa-save mr-2"></i>Save Draft
+                    </button>
+                    <button onclick="loadFromLocal()" class="bg-white/20 text-white px-4 py-2 rounded-lg hover:bg-white/30 transition flex items-center">
+                        <i class="fas fa-folder-open mr-2"></i>Load Draft
+                    </button>
+                    <div class="premium-badge">PRO</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-white py-8 border-b">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-4 md:mb-0">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">Build Your <span class="feature-highlight">Professional Resume</span> Today</h2>
+                    <p class="text-gray-600">Choose from our premium templates and create a resume that stands out</p>
+                </div>
+                <div class="flex space-x-4">
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600">50K+</div>
+                        <div class="text-sm text-gray-600">Resumes Created</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600">98%</div>
+                        <div class="text-sm text-gray-600">Success Rate</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl font-bold text-purple-600">4.9★</div>
+                        <div class="text-sm text-gray-600">User Rating</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Left Panel - Form -->
+            <div class="lg:col-span-1 space-y-6 custom-scrollbar" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+                <!-- Template Selection -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-palette mr-2 text-purple-600"></i>
+                        Choose Template
+                    </h3>
+                    <div class="grid grid-cols-3 gap-3">
+                        <button onclick="changeTemplate('modern')" class="template-btn p-3 border-2 border-purple-600 rounded-lg hover-scale">
+                            <i class="fas fa-laptop text-2xl text-purple-600"></i>
+                            <p class="text-xs mt-1">Modern</p>
+                        </button>
+                        <button onclick="changeTemplate('classic')" class="template-btn p-3 border-2 border-gray-300 rounded-lg hover-scale">
+                            <i class="fas fa-briefcase text-2xl text-gray-600"></i>
+                            <p class="text-xs mt-1">Classic</p>
+                        </button>
+                        <button onclick="changeTemplate('creative')" class="template-btn p-3 border-2 border-gray-300 rounded-lg hover-scale">
+                            <i class="fas fa-paint-brush text-2xl text-gray-600"></i>
+                            <p class="text-xs mt-1">Creative</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-user mr-2 text-purple-600"></i>
+                        Personal Information
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
+                            <input type="text" id="fullName" placeholder="John Doe" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Professional Title</label>
+                            <input type="text" id="title" placeholder="Software Engineer" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                <input type="email" id="email" placeholder="john@example.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                                <input type="tel" id="phone" placeholder="+1234567890" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                            <input type="text" id="location" placeholder="New York, USA" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">LinkedIn</label>
+                            <input type="text" id="linkedin" placeholder="linkedin.com/in/johndoe" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Portfolio/Website</label>
+                            <input type="text" id="website" placeholder="www.johndoe.com" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <h3 class="text-lg font-semibold mb-4 flex items-center">
+                        <i class="fas fa-align-left mr-2 text-purple-600"></i>
+                        Professional Summary
+                    </h3>
+                    <textarea id="summary" rows="4" placeholder="Write a brief summary about yourself..." class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()"></textarea>
+                </div>
+
+                <!-- Experience -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-briefcase mr-2 text-purple-600"></i>
+                            Work Experience
+                        </h3>
+                        <button onclick="addExperience()" class="bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="experienceList" class="space-y-4">
+                        <!-- Experience items will be added here -->
+                    </div>
+                </div>
+
+                <!-- Education -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-graduation-cap mr-2 text-purple-600"></i>
+                            Education
+                        </h3>
+                        <button onclick="addEducation()" class="bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="educationList" class="space-y-4">
+                        <!-- Education items will be added here -->
+                    </div>
+                </div>
+
+                <!-- Skills -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-tools mr-2 text-purple-600"></i>
+                            Skills
+                        </h3>
+                        <button onclick="addSkill()" class="bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="skillsList" class="space-y-3">
+                        <!-- Skills will be added here -->
+                    </div>
+                </div>
+
+                <!-- Projects -->
+                <div class="bg-white rounded-xl shadow-lg p-6 section-card">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-project-diagram mr-2 text-purple-600"></i>
+                            Projects
+                        </h3>
+                        <button onclick="addProject()" class="bg-purple-600 text-white px-3 py-1 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div id="projectsList" class="space-y-4">
+                        <!-- Projects will be added here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel - Preview -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg p-6 sticky top-4">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-lg font-semibold flex items-center">
+                            <i class="fas fa-eye mr-2 text-purple-600"></i>
+                            Live Preview
+                        </h3>
+                        <div class="flex space-x-3">
+                            <button onclick="resetForm()" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition flex items-center">
+                                <i class="fas fa-redo mr-2"></i>Reset
+                            </button>
+                            <button onclick="showAdAndDownload()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition pulse-animation flex items-center">
+                                <i class="fas fa-download mr-2"></i>Download PDF
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Resume Preview -->
+                    <div id="resumePreview" class="resume-preview p-8 overflow-auto custom-scrollbar template-modern">
+                        <!-- Resume content will be generated here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resume Builder Pro</h4>
+                    <p class="text-gray-400 text-sm">Create professional resumes in minutes with our easy-to-use builder.</p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Features</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li>Multiple Templates</li>
+                        <li>PDF Download</li>
+                        <li>Save & Edit</li>
+                        <li>Professional Design</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Resources</h4>
+                    <ul class="text-gray-400 text-sm space-y-2">
+                        <li>Resume Tips</li>
+                        <li>Cover Letters</li>
+                        <li>Interview Guide</li>
+                        <li>Career Advice</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-semibold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-linkedin text-xl"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram text-xl"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400 text-sm">
+                <p>&copy; 2023 Resume Builder Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <script>
+        // VAST Ad Integration
+        const AD_TAG_URL = "https://gregarious-question.com/dAm.FDzedQGtN/v/ZqGZUh/ZevmJ9WumZ/UTlZkeP/T/Yj2uN/jnACxsM/TuQBtQNLjkYw2mMGDUENxPNtSjZUs/aPWy1epjd-DZ0/xj";
+        
+        let adDisplayContainer = null;
+        let adsLoader = null;
+        let adsManager = null;
+        let isShowingAd = false;
+        let adCompleteCallback = null;
+
+        function initAdsManager() {
+            try {
+                adDisplayContainer = new google.ima.AdDisplayContainer(
+                    document.getElementById('adInner'),
+                    document.createElement('video')
+                );
+                
+                adsLoader = new google.ima.AdsLoader(adDisplayContainer);
+                
+                adsLoader.addEventListener(
+                    google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,
+                    onAdsManagerLoaded,
+                    false
+                );
+                
+                adsLoader.addEventListener(
+                    google.ima.AdErrorEvent.Type.AD_ERROR,
+                    onAdError,
+                    false
+                );
+                
+                // Initialize the container
+                adDisplayContainer.initialize();
+                
+                return true;
+            } catch (e) {
+                console.error('Failed to initialize ads manager:', e);
+                showNotification('Ad initialization failed', 'error');
+                return false;
+            }
+        }
+
+        function onAdsManagerLoaded(adsManagerLoadedEvent) {
+            try {
+                // Get the ads manager
+                adsManager = adsManagerLoadedEvent.getAdsManager(
+                    document.createElement('video')
+                );
+                
+                // Add listeners to the required events
+                adsManager.addEventListener(
+                    google.ima.AdEvent.Type.LOADED,
+                    onAdLoaded
+                );
+                
+                adsManager.addEventListener(
+                    google.ima.AdEvent.Type.STARTED,
+                    onAdStarted
+                );
+                
+                adsManager.addEventListener(
+                    google.ima.AdEvent.Type.COMPLETE,
+                    onAdComplete
+                );
+                
+                adsManager.addEventListener(
+                    google.ima.AdErrorEvent.Type.AD_ERROR,
+                    onAdError
+                );
+                
+                adsManager.addEventListener(
+                    google.ima.AdEvent.Type.SKIPPED,
+                    onAdSkipped
+                );
+                
+                // Initialize the ads manager
+                adsManager.init(
+                    window.innerWidth,
+                    window.innerHeight,
+                    google.ima.ViewMode.FULLSCREEN
+                );
+                
+                // Start the ads
+                adsManager.start();
+                
+                showNotification('Ad loaded', 'info');
+            } catch (e) {
+                console.error('Error in onAdsManagerLoaded:', e);
+                onAdError();
+            }
+        }
+
+        function onAdLoaded() {
+            console.log('Ad loaded successfully');
+        }
+
+        function onAdStarted() {
+            console.log('Ad started');
+            isShowingAd = true;
+            document.getElementById('adContainerFull').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function onAdComplete() {
+            console.log('Ad completed');
+            hideAdContainer();
+            if (adCompleteCallback) {
+                adCompleteCallback();
+                adCompleteCallback = null;
+            }
+        }
+
+        function onAdSkipped() {
+            console.log('Ad skipped');
+            hideAdContainer();
+            if (adCompleteCallback) {
+                adCompleteCallback();
+                adCompleteCallback = null;
+            }
+        }
+
+        function onAdError() {
+            console.error('Ad error occurred');
+            hideAdContainer();
+            showNotification('Ad error, proceeding with download', 'error');
+            if (adCompleteCallback) {
+                adCompleteCallback();
+                adCompleteCallback = null;
+            }
+        }
+
+        function hideAdContainer() {
+            document.getElementById('adContainerFull').style.display = 'none';
+            document.body.style.overflow = '';
+            isShowingAd = false;
+            
+            if (adsManager) {
+                try {
+                    adsManager.destroy();
+                } catch (e) {
+                    console.error('Error destroying ads manager:', e);
+                }
+                adsManager = null;
+            }
+        }
+
+        function requestAd() {
+            if (!adsLoader) {
+                if (!initAdsManager()) {
+                    return false;
+                }
+            }
+            
+            if (isShowingAd) {
+                console.log('Ad already showing');
+                return false;
+            }
+            
+            try {
+                const adsRequest = new google.ima.AdsRequest();
+                adsRequest.adTagUrl = AD_TAG_URL;
+                adsRequest.linearAdSlotWidth = window.innerWidth;
+                adsRequest.linearAdSlotHeight = window.innerHeight;
+                adsRequest.nonLinearAdSlotWidth = window.innerWidth;
+                adsRequest.nonLinearAdSlotHeight = window.innerHeight;
+                
+                adsLoader.requestAds(adsRequest);
+                return true;
+            } catch (e) {
+                console.error('Error requesting ad:', e);
+                showNotification('Failed to request ad', 'error');
+                return false;
+            }
+        }
+
+        function showAdAndDownload() {
+            adCompleteCallback = downloadPDF;
+            
+            if (requestAd()) {
+                showNotification('Loading ad before download...', 'info');
+            } else {
+                // If ad fails to load, proceed directly to download
+                downloadPDF();
+            }
+        }
+
+        // Notification System
+        function showNotification(message, type = 'success') {
+            const notification = document.getElementById('notification');
+            notification.textContent = message;
+            notification.className = 'notification ' + type;
+            notification.classList.add('show');
+            
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Resume Builder Code
+        let currentTemplate = 'modern';
+        let experienceCount = 0;
+        let educationCount = 0;
+        let skillCount = 0;
+        let projectCount = 0;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+            addExperience();
+            addEducation();
+            addSkill();
+            addProject();
+        });
+
+        // Change Template
+        function changeTemplate(template) {
+            currentTemplate = template;
+            document.querySelectorAll('.template-btn').forEach(btn => {
+                btn.classList.remove('border-purple-600');
+                btn.classList.add('border-gray-300');
+            });
+            event.target.closest('.template-btn').classList.remove('border-gray-300');
+            event.target.closest('.template-btn').classList.add('border-purple-600');
+            
+            const preview = document.getElementById('resumePreview');
+            preview.className = `resume-preview p-8 overflow-auto custom-scrollbar template-${template}`;
+            updatePreview();
+        }
+
+        // Add Experience
+        function addExperience() {
+            experienceCount++;
+            const expHtml = `
+                <div class="experience-item fade-in border-l-4 border-purple-600 pl-4">
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Job Title" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <input type="text" placeholder="Company Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" placeholder="Start Date" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                            <input type="text" placeholder="End Date" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <textarea placeholder="Job Description & Achievements" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()"></textarea>
+                        <button onclick="removeExperience(this)" class="text-red-600 hover:text-red-800 text-sm">
+                            <i class="fas fa-trash mr-1"></i>Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('experienceList').insertAdjacentHTML('beforeend', expHtml);
+            updatePreview();
+        }
+
+        // Remove Experience
+        function removeExperience(btn) {
+            btn.closest('.experience-item').remove();
+            updatePreview();
+        }
+
+        // Add Education
+        function addEducation() {
+            educationCount++;
+            const eduHtml = `
+                <div class="education-item fade-in border-l-4 border-purple-600 pl-4">
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Degree" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <input type="text" placeholder="Institution" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <div class="grid grid-cols-2 gap-3">
+                            <input type="text" placeholder="Start Year" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                            <input type="text" placeholder="End Year" class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        </div>
+                        <input type="text" placeholder="GPA (Optional)" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <button onclick="removeEducation(this)" class="text-red-600 hover:text-red-800 text-sm">
+                            <i class="fas fa-trash mr-1"></i>Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('educationList').insertAdjacentHTML('beforeend', eduHtml);
+            updatePreview();
+        }
+
+        // Remove Education
+        function removeEducation(btn) {
+            btn.closest('.education-item').remove();
+            updatePreview();
+        }
+
+        // Add Skill
+        function addSkill() {
+            skillCount++;
+            const skillHtml = `
+                <div class="skill-item fade-in flex items-center space-x-3">
+                    <input type="text" placeholder="Skill Name" class="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                    <select class="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <option value="Expert">Expert</option>
+                        <option value="Advanced">Advanced</option>
+                        <option value="Intermediate">Intermediate</option>
+                        <option value="Beginner">Beginner</option>
+                    </select>
+                    <button onclick="removeSkill(this)" class="text-red-600 hover:text-red-800">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+            `;
+            document.getElementById('skillsList').insertAdjacentHTML('beforeend', skillHtml);
+            updatePreview();
+        }
+
+        // Remove Skill
+        function removeSkill(btn) {
+            btn.closest('.skill-item').remove();
+            updatePreview();
+        }
+
+        // Add Project
+        function addProject() {
+            projectCount++;
+            const projectHtml = `
+                <div class="project-item fade-in border-l-4 border-purple-600 pl-4">
+                    <div class="space-y-3">
+                        <input type="text" placeholder="Project Name" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <input type="text" placeholder="Technologies Used" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <textarea placeholder="Project Description" rows="3" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()"></textarea>
+                        <input type="text" placeholder="Project Link (Optional)" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-600 focus:border-transparent" oninput="updatePreview()">
+                        <button onclick="removeProject(this)" class="text-red-600 hover:text-red-800 text-sm">
+                            <i class="fas fa-trash mr-1"></i>Remove
+                        </button>
+                    </div>
+                </div>
+            `;
+            document.getElementById('projectsList').insertAdjacentHTML('beforeend', projectHtml);
+            updatePreview();
+        }
+
+        // Remove Project
+        function removeProject(btn) {
+            btn.closest('.project-item').remove();
+            updatePreview();
+        }
+
+        // Update Preview
+        function updatePreview() {
+            const fullName = document.getElementById('fullName').value || 'Your Name';
+            const title = document.getElementById('title').value || 'Professional Title';
+            const email = document.getElementById('email').value || 'email@example.com';
+            const phone = document.getElementById('phone').value || '+1234567890';
+            const location = document.getElementById('location').value || 'City, Country';
+            const linkedin = document.getElementById('linkedin').value;
+            const website = document.getElementById('website').value;
+            const summary = document.getElementById('summary').value || 'Your professional summary will appear here.';
+
+            let resumeHtml = '';
+
+            if (currentTemplate === 'modern') {
+                resumeHtml = `
+                    <div class="max-w-4xl mx-auto">
+                        <!-- Header -->
+                        <div class="border-b-4 border-purple-600 pb-6 mb-6">
+                            <h1 class="text-4xl font-bold text-gray-800 mb-2">${fullName}</h1>
+                            <h2 class="text-xl text-purple-600 font-semibold mb-4">${title}</h2>
+                            <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                                <span><i class="fas fa-envelope mr-1"></i>${email}</span>
+                                <span><i class="fas fa-phone mr-1"></i>${phone}</span>
+                                <span><i class="fas fa-map-marker-alt mr-1"></i>${location}</span>
+                                ${linkedin ? `<span><i class="fab fa-linkedin mr-1"></i>${linkedin}</span>` : ''}
+                                ${website ? `<span><i class="fas fa-globe mr-1"></i>${website}</span>` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 border-l-4 border-purple-600 pl-3">Professional Summary</h3>
+                            <p class="text-gray-700 leading-relaxed">${summary}</p>
+                        </div>
+
+                        <!-- Experience -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 border-l-4 border-purple-600 pl-3">Work Experience</h3>
+                            ${getExperienceHtml()}
+                        </div>
+
+                        <!-- Education -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 border-l-4 border-purple-600 pl-3">Education</h3>
+                            ${getEducationHtml()}
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 border-l-4 border-purple-600 pl-3">Skills</h3>
+                            ${getSkillsHtml()}
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 border-l-4 border-purple-600 pl-3">Projects</h3>
+                            ${getProjectsHtml()}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTemplate === 'classic') {
+                resumeHtml = `
+                    <div class="max-w-4xl mx-auto" style="font-family: Georgia, serif;">
+                        <!-- Header -->
+                        <div class="text-center mb-8">
+                            <h1 class="text-4xl font-bold text-gray-800 mb-2" style="font-family: Georgia, serif;">${fullName}</h1>
+                            <h2 class="text-xl text-gray-600 mb-4" style="font-family: Georgia, serif;">${title}</h2>
+                            <div class="text-sm text-gray-600">
+                                <p>${email} | ${phone} | ${location}</p>
+                                ${linkedin ? `<p>${linkedin}</p>` : ''}
+                                ${website ? `<p>${website}</p>` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 uppercase" style="border-bottom: 2px solid #333; padding-bottom: 5px;">Professional Summary</h3>
+                            <p class="text-gray-700 leading-relaxed" style="text-align: justify;">${summary}</p>
+                        </div>
+
+                        <!-- Experience -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 uppercase" style="border-bottom: 2px solid #333; padding-bottom: 5px;">Work Experience</h3>
+                            ${getExperienceHtml('classic')}
+                        </div>
+
+                        <!-- Education -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 uppercase" style="border-bottom: 2px solid #333; padding-bottom: 5px;">Education</h3>
+                            ${getEducationHtml('classic')}
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 uppercase" style="border-bottom: 2px solid #333; padding-bottom: 5px;">Skills</h3>
+                            ${getSkillsHtml('classic')}
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 uppercase" style="border-bottom: 2px solid #333; padding-bottom: 5px;">Projects</h3>
+                            ${getProjectsHtml('classic')}
+                        </div>
+                    </div>
+                `;
+            } else if (currentTemplate === 'creative') {
+                resumeHtml = `
+                    <div class="max-w-4xl mx-auto">
+                        <!-- Header with gradient -->
+                        <div class="bg-gradient-to-r from-purple-600 to-pink-600 text-white p-8 -m-8 mb-8">
+                            <h1 class="text-4xl font-bold mb-2">${fullName}</h1>
+                            <h2 class="text-xl mb-4 opacity-90">${title}</h2>
+                            <div class="flex flex-wrap gap-4 text-sm">
+                                <span><i class="fas fa-envelope mr-1"></i>${email}</span>
+                                <span><i class="fas fa-phone mr-1"></i>${phone}</span>
+                                <span><i class="fas fa-map-marker-alt mr-1"></i>${location}</span>
+                                ${linkedin ? `<span><i class="fab fa-linkedin mr-1"></i>${linkedin}</span>` : ''}
+                                ${website ? `<span><i class="fas fa-globe mr-1"></i>${website}</span>` : ''}
+                            </div>
+                        </div>
+
+                        <!-- Summary -->
+                        <div class="mb-6 p-6 bg-purple-50 rounded-lg">
+                            <h3 class="text-lg font-bold text-purple-800 mb-3">
+                                <i class="fas fa-user-circle mr-2"></i>About Me
+                            </h3>
+                            <p class="text-gray-700 leading-relaxed">${summary}</p>
+                        </div>
+
+                        <!-- Experience -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-briefcase text-sm"></i>
+                                </span>
+                                Work Experience
+                            </h3>
+                            ${getExperienceHtml('creative')}
+                        </div>
+
+                        <!-- Education -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-graduation-cap text-sm"></i>
+                                </span>
+                                Education
+                            </h3>
+                            ${getEducationHtml('creative')}
+                        </div>
+
+                        <!-- Skills -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-tools text-sm"></i>
+                                </span>
+                                Skills
+                            </h3>
+                            ${getSkillsHtml('creative')}
+                        </div>
+
+                        <!-- Projects -->
+                        <div class="mb-6">
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 flex items-center">
+                                <span class="bg-purple-600 text-white w-8 h-8 rounded-full flex items-center justify-center mr-3">
+                                    <i class="fas fa-project-diagram text-sm"></i>
+                                </span>
+                                Projects
+                            </h3>
+                            ${getProjectsHtml('creative')}
+                        </div>
+                    </div>
+                `;
+            }
+
+            document.getElementById('resumePreview').innerHTML = resumeHtml;
+        }
+
+        // Get Experience HTML
+        function getExperienceHtml(template = 'modern') {
+            const experiences = document.querySelectorAll('.experience-item');
+            let html = '';
+            
+            experiences.forEach(exp => {
+                const inputs = exp.querySelectorAll('input, textarea');
+                const jobTitle = inputs[0].value || 'Job Title';
+                const company = inputs[1].value || 'Company Name';
+                const startDate = inputs[2].value || 'Start Date';
+                const endDate = inputs[3].value || 'End Date';
+                const description = inputs[4].value || 'Job description...';
+                
+                if (template === 'modern') {
+                    html += `
+                        <div class="mb-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">${jobTitle}</h4>
+                                    <p class="text-purple-600">${company}</p>
+                                </div>
+                                <span class="text-sm text-gray-600">${startDate} - ${endDate}</span>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">${description}</p>
+                        </div>
+                    `;
+                } else if (template === 'classic') {
+                    html += `
+                        <div class="mb-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800" style="font-family: Georgia, serif;">${jobTitle}</h4>
+                                    <p class="text-gray-600 italic">${company}</p>
+                                </div>
+                                <span class="text-sm text-gray-600">${startDate} - ${endDate}</span>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed" style="text-align: justify;">${description}</p>
+                        </div>
+                    `;
+                } else if (template === 'creative') {
+                    html += `
+                        <div class="mb-4 p-4 border-l-4 border-purple-600 bg-purple-50">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">${jobTitle}</h4>
+                                    <p class="text-purple-600 font-medium">${company}</p>
+                                </div>
+                                <span class="text-sm bg-purple-600 text-white px-3 py-1 rounded-full">${startDate} - ${endDate}</span>
+                            </div>
+                            <p class="text-gray-700 text-sm leading-relaxed">${description}</p>
+                        </div>
+                    `;
+                }
+            });
+            
+            return html || '<p class="text-gray-500">No experience added yet.</p>';
+        }
+
+        // Get Education HTML
+        function getEducationHtml(template = 'modern') {
+            const educations = document.querySelectorAll('.education-item');
+            let html = '';
+            
+            educations.forEach(edu => {
+                const inputs = edu.querySelectorAll('input');
+                const degree = inputs[0].value || 'Degree';
+                const institution = inputs[1].value || 'Institution';
+                const startYear = inputs[2].value || 'Start Year';
+                const endYear = inputs[3].value || 'End Year';
+                const gpa = inputs[4].value;
+                
+                if (template === 'modern') {
+                    html += `
+                        <div class="mb-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">${degree}</h4>
+                                    <p class="text-purple-600">${institution}</p>
+                                    ${gpa ? `<p class="text-sm text-gray-600">GPA: ${gpa}</p>` : ''}
+                                </div>
+                                <span class="text-sm text-gray-600">${startYear} - ${endYear}</span>
+                            </div>
+                        </div>
+                    `;
+                } else if (template === 'classic') {
+                    html += `
+                        <div class="mb-4">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800" style="font-family: Georgia, serif;">${degree}</h4>
+                                    <p class="text-gray-600 italic">${institution}</p>
+                                    ${gpa ? `<p class="text-sm text-gray-600">GPA: ${gpa}</p>` : ''}
+                                </div>
+                                <span class="text-sm text-gray-600">${startYear} - ${endYear}</span>
+                            </div>
+                        </div>
+                    `;
+                } else if (template === 'creative') {
+                    html += `
+                        <div class="mb-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg">
+                            <div class="flex justify-between items-start mb-2">
+                                <div>
+                                    <h4 class="font-semibold text-gray-800">${degree}</h4>
+                                    <p class="text-purple-600 font-medium">${institution}</p>
+                                    ${gpa ? `<p class="text-sm text-gray-600">GPA: ${gpa}</p>` : ''}
+                                </div>
+                                <span class="text-sm bg-gradient-to-r from-purple-600 to-pink-600 text-white px-3 py-1 rounded-full">${startYear} - ${endYear}</span>
+                            </div>
+                        </div>
+                    `;
+                }
+            });
+            
+            return html || '<p class="text-gray-500">No education added yet.</p>';
+        }
+
+        // Get Skills HTML
+        function getSkillsHtml(template = 'modern') {
+            const skills = document.querySelectorAll('.skill-item');
+            let html = '';
+            
+            if (template === 'modern' || template === 'classic') {
+                html = '<div class="flex flex-wrap gap-2">';
+                skills.forEach(skill => {
+                    const name = skill.querySelector('input').value || 'Skill';
+                    const level = skill.querySelector('select').value;
+                    html += `<span class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-sm">${name} - ${level}</span>`;
+                });
+                html += '</div>';
+            } else if (template === 'creative') {
+                skills.forEach(skill => {
+                    const name = skill.querySelector('input').value || 'Skill';
+                    const level = skill.querySelector('select').value;
+                    const width = level === 'Expert' ? '100%' : level === 'Advanced' ? '75%' : level === 'Intermediate' ? '50%' : '25%';
+                    html += `
+                        <div class="mb-3">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-sm font-medium text-gray-700">${name}</span>
+                                <span class="text-sm text-gray-600">${level}</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2">
+                                <div class="bg-gradient-to-r from-purple-600 to-pink-600 h-2 rounded-full skill-bar" style="width: ${width}"></div>
+                            </div>
+                        </div>
+                    `;
+                });
+            }
+            
+            return html || '<p class="text-gray-500">No skills added yet.</p>';
+        }
+
+        // Get Projects HTML
+        function getProjectsHtml(template = 'modern') {
+            const projects = document.querySelectorAll('.project-item');
+            let html = '';
+            
+            projects.forEach(project => {
+                const inputs = project.querySelectorAll('input, textarea');
+                const name = inputs[0].value || 'Project Name';
+                const technologies = inputs[1].value || 'Technologies';
+                const description = inputs[2].value || 'Project description...';
+                const link = inputs[3].value;
+                
+                if (template === 'modern') {
+                    html += `
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1">${name}</h4>
+                            <p class="text-sm text-purple-600 mb-2">${technologies}</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-2">${description}</p>
+                            ${link ? `<a href="${link}" class="text-purple-600 text-sm hover:underline"><i class="fas fa-external-link-alt mr-1"></i>View Project</a>` : ''}
+                        </div>
+                    `;
+                } else if (template === 'classic') {
+                    html += `
+                        <div class="mb-4">
+                            <h4 class="font-semibold text-gray-800 mb-1" style="font-family: Georgia, serif;">${name}</h4>
+                            <p class="text-sm text-gray-600 italic mb-2">${technologies}</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-2" style="text-align: justify;">${description}</p>
+                            ${link ? `<a href="${link}" class="text-gray-600 text-sm hover:underline"><i class="fas fa-external-link-alt mr-1"></i>View Project</a>` : ''}
+                        </div>
+                    `;
+                } else if (template === 'creative') {
+                    html += `
+                        <div class="mb-4 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
+                            <h4 class="font-semibold text-gray-800 mb-1">${name}</h4>
+                            <p class="text-sm text-purple-600 font-medium mb-2">${technologies}</p>
+                            <p class="text-gray-700 text-sm leading-relaxed mb-2">${description}</p>
+                            ${link ? `<a href="${link}" class="inline-block bg-purple-600 text-white px-3 py-1 rounded-full text-sm hover:bg-purple-700 transition"><i class="fas fa-external-link-alt mr-1"></i>View Project</a>` : ''}
+                        </div>
+                    `;
+                }
+            });
+            
+            return html || '<p class="text-gray-500">No projects added yet.</p>';
+        }
+
+        // Download PDF
+        function downloadPDF() {
+            const element = document.getElementById('resumePreview');
+            const opt = {
+                margin: 10,
+                filename: 'resume.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            };
+            
+            html2pdf().set(opt).from(element).save();
+            showToast('Resume downloaded successfully!');
+        }
+
+        // Save to Local Storage
+        function saveToLocal() {
+            const data = {
+                fullName: document.getElementById('fullName').value,
+                title: document.getElementById('title').value,
+                email: document.getElementById('email').value,
+                phone: document.getElementById('phone').value,
+                location: document.getElementById('location').value,
+                linkedin: document.getElementById('linkedin').value,
+                website: document.getElementById('website').value,
+                summary: document.getElementById('summary').value,
+                template: currentTemplate
+            };
+            
+            localStorage.setItem('resumeData', JSON.stringify(data));
+            showToast('Resume saved successfully!');
+        }
+
+        // Load from Local Storage
+        function loadFromLocal() {
+            const data = localStorage.getItem('resumeData');
+            if (data) {
+                const parsedData = JSON.parse(data);
+                document.getElementById('fullName').value = parsedData.fullName || '';
+                document.getElementById('title').value = parsedData.title || '';
+                document.getElementById('email').value = parsedData.email || '';
+                document.getElementById('phone').value = parsedData.phone || '';
+                document.getElementById('location').value = parsedData.location || '';
+                document.getElementById('linkedin').value = parsedData.linkedin || '';
+                document.getElementById('website').value = parsedData.website || '';
+                document.getElementById('summary').value = parsedData.summary || '';
+                
+                if (parsedData.template) {
+                    changeTemplate(parsedData.template);
+                }
+                
+                updatePreview();
+                showToast('Resume loaded successfully!');
+            } else {
+                showToast('No saved resume found!');
+            }
+        }
+
+        // Reset Form
+        function resetForm() {
+            if (confirm('Are you sure you want to reset all data?')) {
+                document.querySelectorAll('input, textarea').forEach(input => {
+                    input.value = '';
+                });
+                
+                document.getElementById('experienceList').innerHTML = '';
+                document.getElementById('educationList').innerHTML = '';
+                document.getElementById('skillsList').innerHTML = '';
+                document.getElementById('projectsList').innerHTML = '';
+                
+                experienceCount = 0;
+                educationCount = 0;
+                skillCount = 0;
+                projectCount = 0;
+                
+                addExperience();
+                addEducation();
+                addSkill();
+                addProject();
+                
+                updatePreview();
+                showToast('Form reset successfully!');
+            }
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.style.transform = 'translateY(0)';
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100%)';
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
