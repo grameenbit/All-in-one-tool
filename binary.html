@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to Binary Converter | Free Online Tool</title>
+    <meta name="description" content="Convert text to binary code instantly with our free online converter. Fast, accurate, and easy-to-use tool for encoding and decoding text to binary format.">
+    <meta name="keywords" content="text to binary, binary converter, text encoding, binary code, ascii to binary, binary translator, online converter, text tools, encoding tool">
+    <meta name="author" content="Binary Converter Pro">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Text to Binary Converter | Free Online Tool">
+    <meta property="og:description" content="Convert text to binary code instantly with our free online converter. Fast, accurate, and easy-to-use tool.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://binaryconverter.com">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .font-mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .dark .glass-effect {
+            background: rgba(31, 41, 55, 0.95);
+        }
+        
+        .binary-char {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tooltip {
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+        
+        .tooltip-trigger:hover .tooltip {
+            visibility: visible;
+            opacity: 1;
+        }
+        
+        .copy-success {
+            animation: copyPulse 0.5s ease-in-out;
+        }
+        
+        @keyframes copyPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-track {
+            background: #374151;
+        }
+        
+        .dark .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #6b7280;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <!-- Background Pattern -->
+    <div class="fixed inset-0 -z-10 overflow-hidden">
+        <div class="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob"></div>
+        <div class="absolute -bottom-40 -left-40 w-80 h-80 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000"></div>
+        <div class="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="glass-effect shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <!-- Logo -->
+                    <div class="w-12 h-12 gradient-bg rounded-xl flex items-center justify-center shadow-lg transform hover:scale-105 transition-transform">
+                        <i class="fas fa-code text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-800 dark:text-white">Binary Converter Pro</h1>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Text ↔ Binary Instant Converter</p>
+                    </div>
+                </div>
+                
+                <!-- Theme Toggle -->
+                <button id="themeToggle" class="p-3 rounded-lg bg-gray-200 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors">
+                    <i class="fas fa-moon text-gray-700 dark:text-yellow-400"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 max-w-6xl">
+        <!-- Converter Section -->
+        <section class="mb-12">
+            <div class="grid lg:grid-cols-2 gap-6">
+                <!-- Text Input -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transform hover:scale-[1.02] transition-transform">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-keyboard mr-2 text-purple-600"></i>
+                            Text Input
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <span id="textCharCount" class="text-sm text-gray-500 dark:text-gray-400">0 characters</span>
+                            <button id="clearText" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors tooltip-trigger relative">
+                                <i class="fas fa-trash text-gray-600 dark:text-gray-400"></i>
+                                <span class="tooltip absolute -bottom-8 right-0 bg-gray-800 text-white text-xs px-2 py-1 rounded">Clear</span>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Type or paste your text here..."
+                        class="w-full h-64 p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-purple-500 dark:focus:border-purple-400 focus:outline-none resize-none custom-scrollbar bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white"
+                    ></textarea>
+                    <div class="mt-4 flex flex-wrap gap-2">
+                        <button class="sample-text px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-lg text-sm hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors" data-text="Hello World!">
+                            Hello World!
+                        </button>
+                        <button class="sample-text px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-lg text-sm hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors" data-text="Binary is fun!">
+                            Binary is fun!
+                        </button>
+                        <button class="sample-text px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-lg text-sm hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors" data-text="1234567890">
+                            Numbers
+                        </button>
+                        <button class="sample-text px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-700 dark:text-purple-300 rounded-lg text-sm hover:bg-purple-200 dark:hover:bg-purple-800 transition-colors" data-text="!@#$%^&*()">
+                            Symbols
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Binary Output -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 transform hover:scale-[1.02] transition-transform">
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-xl font-semibold text-gray-800 dark:text-white flex items-center">
+                            <i class="fas fa-microchip mr-2 text-green-600"></i>
+                            Binary Output
+                        </h2>
+                        <div class="flex items-center space-x-2">
+                            <span id="binaryBitCount" class="text-sm text-gray-500 dark:text-gray-400">0 bits</span>
+                            <button id="copyBinary" class="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors tooltip-trigger relative">
+                                <i class="fas fa-copy text-gray-600 dark:text-gray-400"></i>
+                                <span class="tooltip absolute -bottom-8 right-0 bg-gray-800 text-white text-xs px-2 py-1 rounded">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                    <textarea 
+                        id="binaryOutput" 
+                        placeholder="Binary code will appear here..."
+                        class="w-full h-64 p-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:border-green-500 dark:focus:border-green-400 focus:outline-none resize-none custom-scrollbar bg-gray-50 dark:bg-gray-700 text-gray-800 dark:text-white font-mono text-sm"
+                        readonly
+                    ></textarea>
+                    <div class="mt-4 flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <label class="flex items-center cursor-pointer">
+                                <input type="checkbox" id="spaceSeparated" class="mr-2" checked>
+                                <span class="text-sm text-gray-600 dark:text-gray-400">Space separated</span>
+                            </label>
+                        </div>
+                        <button id="swapInputs" class="px-4 py-2 bg-gradient-to-r from-purple-600 to-green-600 text-white rounded-lg hover:from-purple-700 hover:to-green-700 transition-all transform hover:scale-105">
+                            <i class="fas fa-exchange-alt mr-2"></i>Swap
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Actions -->
+        <section class="mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4">Quick Actions</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <button id="convertToBinary" class="p-4 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:from-blue-600 hover:to-blue-700 transition-all transform hover:scale-105">
+                        <i class="fas fa-arrow-down text-2xl mb-2"></i>
+                        <p class="text-sm">Text → Binary</p>
+                    </button>
+                    <button id="convertToText" class="p-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl hover:from-green-600 hover:to-green-700 transition-all transform hover:scale-105">
+                        <i class="fas fa-arrow-up text-2xl mb-2"></i>
+                        <p class="text-sm">Binary → Text</p>
+                    </button>
+                    <button id="clearAll" class="p-4 bg-gradient-to-r from-red-500 to-red-600 text-white rounded-xl hover:from-red-600 hover:to-red-700 transition-all transform hover:scale-105">
+                        <i class="fas fa-eraser text-2xl mb-2"></i>
+                        <p class="text-sm">Clear All</p>
+                    </button>
+                    <button id="downloadResult" class="p-4 bg-gradient-to-r from-purple-500 to-purple-600 text-white rounded-xl hover:from-purple-600 hover:to-purple-700 transition-all transform hover:scale-105">
+                        <i class="fas fa-download text-2xl mb-2"></i>
+                        <p class="text-sm">Download</p>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Section -->
+        <section class="grid md:grid-cols-2 gap-6 mb-12">
+            <!-- How it Works -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                    <i class="fas fa-info-circle mr-2 text-blue-600"></i>
+                    How It Works
+                </h3>
+                <div class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                    <div class="flex items-start">
+                        <span class="text-purple-600 mr-2">1.</span>
+                        <p>Each character in your text is converted to its ASCII value</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-purple-600 mr-2">2.</span>
+                        <p>The ASCII value is then converted to 8-bit binary representation</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-purple-600 mr-2">3.</span>
+                        <p>Binary codes are separated by spaces for readability</p>
+                    </div>
+                    <div class="flex items-start">
+                        <span class="text-purple-600 mr-2">4.</span>
+                        <p>Supports all standard ASCII characters and Unicode</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Common Binary Codes -->
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-4 flex items-center">
+                    <i class="fas fa-book mr-2 text-green-600"></i>
+                    Common Binary Codes
+                </h3>
+                <div class="space-y-2 text-sm">
+                    <div class="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <span class="text-gray-600 dark:text-gray-400">A</span>
+                        <span class="font-mono text-gray-800 dark:text-white">01000001</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <span class="text-gray-600 dark:text-gray-400">a</span>
+                        <span class="font-mono text-gray-800 dark:text-white">01100001</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <span class="text-gray-600 dark:text-gray-400">0</span>
+                        <span class="font-mono text-gray-800 dark:text-white">00110000</span>
+                    </div>
+                    <div class="flex justify-between items-center p-2 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <span class="text-gray-600 dark:text-gray-400">Space</span>
+                        <span class="font-mono text-gray-800 dark:text-white">00100000</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl shadow-xl p-8 text-white">
+            <h3 class="text-2xl font-bold mb-6 text-center">Why Choose Binary Converter Pro?</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <i class="fas fa-bolt text-4xl mb-3"></i>
+                    <h4 class="font-semibold mb-2">Lightning Fast</h4>
+                    <p class="text-sm opacity-90">Instant conversion with real-time updates</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-shield-alt text-4xl mb-3"></i>
+                    <h4 class="font-semibold mb-2">Secure & Private</h4>
+                    <p class="text-sm opacity-90">All conversions happen in your browser</p>
+                </div>
+                <div class="text-center">
+                    <i class="fas fa-mobile-alt text-4xl mb-3"></i>
+                    <h4 class="font-semibold mb-2">Mobile Friendly</h4>
+                    <p class="text-sm opacity-90">Works perfectly on all devices</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-950 text-white py-8 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <p class="text-sm">© 2024 Binary Converter Pro. All rights reserved.</p>
+                    <p class="text-xs text-gray-400 mt-1">Professional text to binary conversion tool</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-twitter text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-linkedin text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-full transition-transform duration-300 z-50">
+        <div class="flex items-center">
+            <i class="fas fa-check-circle mr-2"></i>
+            <span id="toastMessage">Success!</span>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            html.classList.add('dark');
+            themeToggle.innerHTML = '<i class="fas fa-sun text-yellow-400"></i>';
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            const isDark = html.classList.contains('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeToggle.innerHTML = isDark ? 
+                '<i class="fas fa-sun text-yellow-400"></i>' : 
+                '<i class="fas fa-moon text-gray-700"></i>';
+        });
+        
+        // Text to Binary Conversion
+        const textInput = document.getElementById('textInput');
+        const binaryOutput = document.getElementById('binaryOutput');
+        const textCharCount = document.getElementById('textCharCount');
+        const binaryBitCount = document.getElementById('binaryBitCount');
+        const spaceSeparated = document.getElementById('spaceSeparated');
+        
+        function textToBinary(text) {
+            if (!text) return '';
+            const separator = spaceSeparated.checked ? ' ' : '';
+            return text.split('').map(char => {
+                const binary = char.charCodeAt(0).toString(2).padStart(8, '0');
+                return `<span class="binary-char">${binary}</span>`;
+            }).join(separator);
+        }
+        
+        function binaryToText(binary) {
+            if (!binary) return '';
+            const binaryArray = binary.trim().split(/\s+/);
+            return binaryArray.map(b => String.fromCharCode(parseInt(b, 2))).join('');
+        }
+        
+        function updateCharCount() {
+            const text = textInput.value;
+            textCharCount.textContent = `${text.length} character${text.length !== 1 ? 's' : ''}`;
+            
+            const binary = binaryOutput.value;
+            const bits = binary.replace(/\s/g, '').length;
+            binaryBitCount.textContent = `${bits} bit${bits !== 1 ? 's' : ''}`;
+        }
+        
+        textInput.addEventListener('input', () => {
+            const binary = textToBinary(textInput.value);
+            binaryOutput.innerHTML = binary;
+            binaryOutput.value = binary.replace(/<[^>]*>/g, '');
+            updateCharCount();
+        });
+        
+        spaceSeparated.addEventListener('change', () => {
+            if (textInput.value) {
+                const binary = textToBinary(textInput.value);
+                binaryOutput.innerHTML = binary;
+                binaryOutput.value = binary.replace(/<[^>]*>/g, '');
+            }
+        });
+        
+        // Sample Text Buttons
+        document.querySelectorAll('.sample-text').forEach(button => {
+            button.addEventListener('click', () => {
+                textInput.value = button.dataset.text;
+                textInput.dispatchEvent(new Event('input'));
+            });
+        });
+        
+        // Clear Text
+        document.getElementById('clearText').addEventListener('click', () => {
+            textInput.value = '';
+            textInput.dispatchEvent(new Event('input'));
+        });
+        
+        // Copy Binary
+        document.getElementById('copyBinary').addEventListener('click', () => {
+            const binaryText = binaryOutput.value;
+            if (binaryText) {
+                navigator.clipboard.writeText(binaryText).then(() => {
+                    showToast('Binary code copied to clipboard!');
+                    document.getElementById('copyBinary').classList.add('copy-success');
+                    setTimeout(() => {
+                        document.getElementById('copyBinary').classList.remove('copy-success');
+                    }, 500);
+                });
+            }
+        });
+        
+        // Swap Inputs
+        document.getElementById('swapInputs').addEventListener('click', () => {
+            const temp = textInput.value;
+            textInput.value = binaryOutput.value;
+            binaryOutput.value = temp;
+            updateCharCount();
+            
+            // Convert swapped content
+            if (textInput.value) {
+                const isBinary = /^[01\s]+$/.test(textInput.value);
+                if (isBinary) {
+                    const text = binaryToText(textInput.value);
+                    binaryOutput.value = textToBinary(text).replace(/<[^>]*>/g, '');
+                } else {
+                    const binary = textToBinary(textInput.value);
+                    binaryOutput.innerHTML = binary;
+                    binaryOutput.value = binary.replace(/<[^>]*>/g, '');
+                }
+            }
+        });
+        
+        // Convert to Binary
+        document.getElementById('convertToBinary').addEventListener('click', () => {
+            const binary = textToBinary(textInput.value);
+            binaryOutput.innerHTML = binary;
+            binaryOutput.value = binary.replace(/<[^>]*>/g, '');
+            updateCharCount();
+            showToast('Converted to binary!');
+        });
+        
+        // Convert to Text
+        document.getElementById('convertToText').addEventListener('click', () => {
+            const text = binaryToText(binaryOutput.value);
+            textInput.value = text;
+            updateCharCount();
+            showToast('Converted to text!');
+        });
+        
+        // Clear All
+        document.getElementById('clearAll').addEventListener('click', () => {
+            textInput.value = '';
+            binaryOutput.value = '';
+            updateCharCount();
+            showToast('All cleared!');
+        });
+        
+        // Download Result
+        document.getElementById('downloadResult').addEventListener('click', () => {
+            const content = binaryOutput.value || textInput.value;
+            if (content) {
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `binary-conversion-${Date.now()}.txt`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                showToast('File downloaded!');
+            }
+        });
+        
+        // Toast Notification
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toastMessage');
+            toastMessage.textContent = message;
+            toast.style.transform = 'translateY(0)';
+            
+            setTimeout(() => {
+                toast.style.transform = 'translateY(100%)';
+            }, 3000);
+        }
+        
+        // Add animation classes
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes blob {
+                0% { transform: translate(0px, 0px) scale(1); }
+                33% { transform: translate(30px, -50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.9); }
+                100% { transform: translate(0px, 0px) scale(1); }
+            }
+            .animate-blob {
+                animation: blob 7s infinite;
+            }
+            .animation-delay-2000 {
+                animation-delay: 2s;
+            }
+            .animation-delay-4000 {
+                animation-delay: 4s;
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Initialize
+        updateCharCount();
+    </script>
+</body>
+</html>
