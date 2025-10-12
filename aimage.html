@@ -1,0 +1,812 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <img src="[YourSiteURL]/main-ai-image.jpg" alt="Creative artwork generated with AI Image Generator" width="8" height="4">
+    <img src="[YourSiteURL]/feature-example.jpg" alt="Example of free AI text-to-image tool" width="6" height="3">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FreeGen AI - AI Image Generator</title>
+<html lang="en"> <!-- Set language to English -->
+<head>
+    <!-- Meta Title -->
+    <title>AI Image Generator | Create Images with Free AI - [YourSiteName]</title>
+    
+    <!-- Meta Description -->
+    <meta name="description" content="Generate stunning images from text using our AI Image Generator. Free tool, high-quality output, no skills required. Start now and unlock your creativity!">
+    
+    <!-- Meta Keywords -->
+    <meta name="keywords" content="AI image generator, free AI art tool, text to image AI, generative AI, AI art creator, DALL-E alternative, Midjourney free, AI design tool">
+    
+    <!-- Open Graph Tags (for social sharing) -->
+    <meta property="og:title" content="AI Image Generator - Create Images with Free AI">
+    <meta property="og:description" content="Easily generate beautiful images from your ideas with our simple AI tool. Free and fast!">
+    <meta property="og:image" content="[YourSiteURL]/og-image.jpg">
+    <meta property="og:url" content="[YourSiteURL]">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="AI Image Generator | Free Tool">
+    <meta name="twitter:description" content="Create images with AI – no charges!">
+    <meta name="twitter:image" content="[YourSiteURL]/twitter-image.jpg">
+    
+    <!-- Other Meta Tags (optional, for SEO) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow"> <!-- Allow search engines to index -->
+</head>
+<body>
+    <!-- Your body content goes here -->
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #8b5cf6;
+            --accent: #ec4899;
+            --dark: #111827;
+            --darker: #0f172a;
+            --gray: #374151;
+            --light: #f3f4f6;
+            --success: #10b981;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            background-image: radial-gradient(circle at 25% 25%, rgba(99, 102, 241, 0.1) 0%, transparent 50%), 
+                            radial-gradient(circle at 75% 75%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon svg {
+            width: 24px;
+            height: 24px;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(to right, #ffffff, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        nav a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: white;
+        }
+        
+        .hero {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #ffffff, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.8);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.6;
+        }
+        
+        .generator-container {
+            background-color: var(--dark);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .control-group {
+            margin-bottom: 25px;
+        }
+        
+        .control-label {
+            display: block;
+            margin-bottom: 12px;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .style-grid, .aspect-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
+        }
+        
+        .style-btn, .aspect-btn {
+            padding: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background-color: #1f2937;
+            color: white;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .style-btn:hover, .aspect-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        
+        .style-btn.active, .aspect-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-color: transparent;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.4);
+        }
+        
+        .prompt-container {
+            position: relative;
+            margin: 30px 0;
+        }
+        
+        .prompt-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            border-radius: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            background-color: #1f2937;
+            color: white;
+            font-size: 16px;
+            resize: vertical;
+            transition: all 0.3s ease;
+            margin-bottom: 15px;
+        }
+        
+        .prompt-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.3);
+        }
+        
+        .enhance-btn {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .enhance-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(139, 92, 246, 0.4);
+        }
+        
+        .enhance-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .generate-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .generate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(99, 102, 241, 0.5);
+        }
+        
+        .generate-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .spinner {
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top: 3px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            display: inline-block;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .result-container {
+            display: none;
+            background-color: var(--dark);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            margin-bottom: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .result-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+        }
+        
+        .download-btn, .share-btn {
+            padding: 10px 20px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, var(--success), #059669);
+            color: white;
+        }
+        
+        .share-btn {
+            background-color: #374151;
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .download-btn:hover, .share-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .result-image-container {
+            position: relative;
+            margin: 30px 0;
+            border-radius: 16px;
+            overflow: hidden;
+            background-color: #1f2937;
+        }
+        
+        .result-image {
+            width: 100%;
+            display: block;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 20px;
+            color: white;
+        }
+        
+        .image-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .info-tag {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+        
+        .feature-card {
+            background-color: var(--dark);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+        }
+        
+        .feature-icon svg {
+            width: 30px;
+            height: 30px;
+            color: white;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 60px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+        
+        .developer-tag {
+            margin-top: 20px;
+            font-weight: 600;
+            color: #6366f1;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .style-grid, .aspect-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            nav {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <div class="logo-text">FreeGen AI</div>
+            </div>
+            <nav>
+                <a href="#">Home</a>
+                <a href="#">Gallery</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
+            </nav>
+        </header>
+        
+        <section class="hero">
+            <h1>Create Stunning AI Art</h1>
+            <p>Transform your imagination into breathtaking visuals with our advanced AI powered by Pollinations. Free, fast, and incredibly powerful.</p>
+        </section>
+        
+        <div class="generator-container">
+            <div class="control-group">
+                <label class="control-label">Select Style</label>
+                <div class="style-grid">
+                    <button class="style-btn active" data-style="realistic">🎨 Realistic</button>
+                    <button class="style-btn" data-style="anime">🎌 Anime</button>
+                    <button class="style-btn" data-style="digital-art">🖌️ Digital Art</button>
+                    <button class="style-btn" data-style="photographic">📸 Photographic</button>
+                    <button class="style-btn" data-style="fantasy-art">🧙 Fantasy Art</button>
+                    <button class="style-btn" data-style="neon-punk">🔮 Neon Punk</button>
+                    <button class="style-btn" data-style="isometric">📐 Isometric</button>
+                    <button class="style-btn" data-style="cinematic">🎬 Cinematic</button>
+                </div>
+            </div>
+            
+            <div class="control-group">
+                <label class="control-label">Aspect Ratio</label>
+                <div class="aspect-grid">
+                    <button class="aspect-btn active" data-ratio="1:1">Square (1:1)</button>
+                    <button class="aspect-btn" data-ratio="16:9">Landscape (16:9)</button>
+                    <button class="aspect-btn" data-ratio="9:16">Portrait (9:16)</button>
+                    <button class="aspect-btn" data-ratio="4:3">Standard (4:3)</button>
+                    <button class="aspect-btn" data-ratio="21:9">Cinematic (21:9)</button>
+                </div>
+            </div>
+            
+            <div class="prompt-container">
+                <label class="control-label">Describe your image</label>
+                <textarea class="prompt-input" placeholder="Describe the image you want to create... (e.g., 'A majestic dragon flying over a futuristic city at sunset, cinematic lighting, 8k')"></textarea>
+                <button class="enhance-btn" id="enhanceBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16zm0-10a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                    </svg>
+                    Enhance Prompt
+                </button>
+            </div>
+            
+            <button class="generate-btn" id="generateBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                    <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                </svg>
+                Generate Image
+            </button>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <div class="result-header">
+                <h2 class="result-title">Your Generated Masterpiece</h2>
+                <div class="action-buttons">
+                    <button class="download-btn" id="downloadBtn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/>
+                        </svg>
+                        Download
+                    </button>
+                    <button class="share-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.367 2.684 3 3 0 00-5.367-2.684z"/>
+                        </svg>
+                        Share
+                    </button>
+                </div>
+            </div>
+            
+            <div class="result-image-container">
+                <img src="" alt="Generated AI Image" class="result-image" id="resultImage">
+                <div class="image-overlay">
+                    <p id="imagePrompt"></p>
+                    <div class="image-info">
+                        <span class="info-tag" id="imageStyle">Style: Realistic</span>
+                        <span class="info-tag" id="imageRatio">Ratio: 1:1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Lightning Fast</h3>
+                <p class="feature-desc">Generate stunning AI images in seconds with our optimized integration with Pollinations AI technology.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Completely Free</h3>
+                <p class="feature-desc">No hidden fees, no subscriptions. Create unlimited AI-generated images with no restrictions.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                    </svg>
+                </div>
+                <h3 class="feature-title">Advanced AI</h3>
+                <p class="feature-desc">Powered by cutting-edge Pollinations AI for the most realistic and creative results across multiple styles.</p>
+            </div>
+        </section>
+        
+        <footer>
+            <p>Create stunning AI-generated images for free</p>
+            <p>© 2024 FreeGen AI. All rights reserved.</p>
+            <p class="developer-tag">Developed by Mustasim Fuyad</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Style selection
+            const styleButtons = document.querySelectorAll('.style-btn');
+            let selectedStyle = 'realistic';
+            
+            styleButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    styleButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedStyle = this.getAttribute('data-style');
+                });
+            });
+            
+            // Aspect ratio selection
+            const aspectButtons = document.querySelectorAll('.aspect-btn');
+            let selectedRatio = '1:1';
+            
+            aspectButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    aspectButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    selectedRatio = this.getAttribute('data-ratio');
+                });
+            });
+            
+            // Get dimensions based on aspect ratio
+            function getDimensions(ratio) {
+                switch (ratio) {
+                    case '16:9':
+                        return { width: 1024, height: 576 };
+                    case '9:16':
+                        return { width: 576, height: 1024 };
+                    case '4:3':
+                        return { width: 1024, height: 768 };
+                    case '21:9':
+                        return { width: 1176, height: 504 };
+                    default:
+                        return { width: 1024, height: 1024 };
+                }
+            }
+            
+            // Enhance prompt with Gemini API
+            const enhanceBtn = document.getElementById('enhanceBtn');
+            const promptInput = document.querySelector('.prompt-input');
+            
+            enhanceBtn.addEventListener('click', async function() {
+                const originalPrompt = promptInput.value.trim();
+                if (!originalPrompt) {
+                    alert('Please enter a prompt first');
+                    return;
+                }
+                
+                this.disabled = true;
+                this.innerHTML = '<div class="spinner"></div> Enhancing...';
+                
+                try {
+                    const response = await fetch('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyAakfzY0vaTwG2c5fP7tbrnuM09NrIbl8U', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{
+                                    text: `Enhance this image generation prompt to make it more detailed and visually appealing: "${originalPrompt}". Keep it as a single paragraph under 200 words.`
+                                }]
+                            }]
+                        })
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (data.candidates && data.candidates[0].content) {
+                        const enhancedPrompt = data.candidates[0].content.parts[0].text;
+                        promptInput.value = enhancedPrompt;
+                    } else {
+                        alert('Failed to enhance prompt. Please try again.');
+                    }
+                } catch (error) {
+                    console.error('Error enhancing prompt:', error);
+                    alert('Error enhancing prompt. Please try again.');
+                } finally {
+                    this.disabled = false;
+                    this.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16zm0-10a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                        </svg>
+                        Enhance Prompt
+                    `;
+                }
+            });
+            
+            // Generate image
+            const generateBtn = document.getElementById('generateBtn');
+            const resultContainer = document.getElementById('resultContainer');
+            const resultImage = document.getElementById('resultImage');
+            const imagePrompt = document.getElementById('imagePrompt');
+            const imageStyle = document.getElementById('imageStyle');
+            const imageRatio = document.getElementById('imageRatio');
+            
+            generateBtn.addEventListener('click', function() {
+                const prompt = promptInput.value.trim();
+                if (!prompt) {
+                    alert('Please enter a prompt');
+                    return;
+                }
+                
+                this.disabled = true;
+                this.innerHTML = '<div class="spinner"></div> Generating...';
+                
+                // Get dimensions
+                const { width, height } = getDimensions(selectedRatio);
+                
+                // Construct Pollinations API URL
+                let apiUrl = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}`;
+                apiUrl += `?width=${width}&height=${height}&model=${selectedStyle}`;
+                
+                // Set a timeout to simulate loading
+                setTimeout(() => {
+                    resultImage.src = apiUrl;
+                    imagePrompt.textContent = `"${prompt}"`;
+                    imageStyle.textContent = `Style: ${selectedStyle.charAt(0).toUpperCase() + selectedStyle.slice(1)}`;
+                    imageRatio.textContent = `Ratio: ${selectedRatio}`;
+                    
+                    resultContainer.style.display = 'block';
+                    resultContainer.scrollIntoView({ behavior: 'smooth' });
+                    
+                    this.disabled = false;
+                    this.innerHTML = `
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                        Generate Image
+                    `;
+                }, 2000);
+            });
+            
+            // Download image
+            document.getElementById('downloadBtn').addEventListener('click', function() {
+                const imageUrl = resultImage.src;
+                if (!imageUrl) return;
+                
+                fetch(imageUrl)
+                    .then(response => response.blob())
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `freegen-ai-${Date.now()}.jpg`;
+                        document.body.appendChild(a);
+                        a.click();
+                        window.URL.revokeObjectURL(url);
+                        document.body.removeChild(a);
+                    })
+                    .catch(error => {
+                        console.error('Error downloading image:', error);
+                        alert('Error downloading image. Please try again.');
+                    });
+            });
+        });
+    </script>
+<script>
+(function(esmjjxm){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = esmjjxm || {};
+s.src = "\/\/scientific-husband.com\/bgXlVKs.dTGrlH0jYpWscc\/Welmb9luuZCUzlskEPwToYP2uNYzFId5\/NuzXUqt\/NEjFY-3NMtjhkP3\/NOgv";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+
+ //video
+
+<script>
+(function(dor){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = dor || {};
+s.src = "\/\/scientific-husband.com\/bQXGVxs.dvGSl\/0HY\/WTch\/cedm\/9QukZ\/U\/lQkbP\/TJY\/2NNfjuA-zFMTz\/Q\/tMNejdYP2hMpDbMQzDNMQV";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+</body>
+</html>
+```
