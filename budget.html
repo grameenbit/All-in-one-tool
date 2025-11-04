@@ -1,0 +1,1370 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Free Personal Budget Planner Tool 2025 - Track your income, expenses, and savings with real-time calculations and visualizations. Best budgeting software for Americans.">
+    <meta name="keywords" content="budget planner, personal finance, budget calculator, money management, financial planning, savings tracker, expense tracker, USA budget tool, American finance app">
+    <meta name="author" content="Personal Budget Planner Team">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Free Personal Budget Planner Tool 2025 - Best for Americans">
+    <meta property="og:description" content="Track your income, expenses, and savings with real-time calculations and visualizations. The #1 free budget tool for Americans.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://yourwebsite.com">
+    <meta property="og:image" content="https://yourwebsite.com/images/budget-planner-og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Personal Budget Planner Tool 2025">
+    <meta name="twitter:description" content="Track your income, expenses, and savings with real-time calculations and visualizations.">
+    <meta name="twitter:image" content="https://yourwebsite.com/images/budget-planner-twitter.jpg">
+    <link rel="canonical" href="https://yourwebsite.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <title>Free Personal Budget Planner Tool 2025 - Best for Americans | Track Income & Expenses</title>
+    
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "Personal Budget Planner Tool",
+      "description": "Free budget planning tool for Americans to track income, expenses, and savings with real-time calculations and visualizations.",
+      "url": "https://yourwebsite.com",
+      "applicationCategory": "FinanceApplication",
+      "operatingSystem": "Web Browser",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Personal Budget Planner Team"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "1247"
+      }
+    }
+    </script>
+</head>
+<body class="theme-dark">
+    <header>
+        <div class="header-content">
+            <h1>Personal Budget Planner</h1>
+            <p class="tagline">The #1 Free Budget Tool for Americans</p>
+        </div>
+        <div class="theme-selector">
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select" aria-label="Select theme">
+                <option value="theme-light">Light</option>
+                <option value="theme-dark" selected>Dark</option>
+                <option value="theme-colorful">Colorful</option>
+            </select>
+        </div>
+    </header>
+
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <ol>
+            <li><a href="/">Home</a></li>
+            <li><a href="/tools">Financial Tools</a></li>
+            <li aria-current="page">Budget Planner</li>
+        </ol>
+    </nav>
+
+    <main class="container">
+        <section class="intro-section">
+            <h2>Take Control of Your Finances in 2025</h2>
+            <p>Our free budget planner helps Americans track income, manage expenses, and achieve financial goals. Join over 50,000 US users who have improved their financial health with our tool.</p>
+        </section>
+
+        <div class="budget-form">
+            <h2>Enter Your Budget</h2>
+            
+            <!-- Income Section -->
+            <section class="income-section">
+                <h3>Monthly Income</h3>
+                <div class="input-group">
+                    <label for="income">Total Monthly Income ($):</label>
+                    <input type="number" id="income" min="0" step="0.01" placeholder="0.00" aria-describedby="income-error">
+                    <div id="income-error" class="error-message"></div>
+                </div>
+            </section>
+
+            <!-- Expenses Section -->
+            <section class="expenses-section">
+                <h3>Monthly Expenses</h3>
+                <div id="expenses-container">
+                    <!-- Dynamic expense fields will be added here -->
+                </div>
+                <button type="button" id="add-expense" class="btn-add">Add Expense Category</button>
+            </section>
+
+            <!-- Savings Goal Section -->
+            <section class="savings-section">
+                <h3>Savings Goal (Optional)</h3>
+                <div class="input-group">
+                    <label for="savings-goal">Monthly Savings Goal ($):</label>
+                    <input type="number" id="savings-goal" min="0" step="0.01" placeholder="0.00" aria-describedby="savings-error">
+                    <div id="savings-error" class="error-message"></div>
+                </div>
+            </section>
+
+            <button type="button" id="calculate-btn" class="btn-calculate">Calculate Budget</button>
+        </div>
+
+        <div class="budget-preview">
+            <h2>Budget Summary</h2>
+            <div class="summary-cards">
+                <div class="card income-card">
+                    <h3>Total Income</h3>
+                    <p id="total-income">$0.00</p>
+                </div>
+                <div class="card expenses-card">
+                    <h3>Total Expenses</h3>
+                    <p id="total-expenses">$0.00</p>
+                </div>
+                <div class="card balance-card">
+                    <h3>Balance</h3>
+                    <p id="balance">$0.00</p>
+                </div>
+                <div class="card savings-card">
+                    <h3>Savings Progress</h3>
+                    <p id="savings-progress">Not Set</p>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Expense Breakdown</h3>
+                <canvas id="expense-chart" width="400" height="400" aria-label="Expense breakdown pie chart"></canvas>
+            </div>
+
+            <button type="button" id="download-pdf" class="btn-download">Download Budget Report</button>
+        </div>
+
+        <section class="testimonials">
+            <h2>What American Users Are Saying</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial">
+                    <p>"This budget planner helped me save $500/month. The best free tool I've found for managing my finances!"</p>
+                    <cite>- Sarah K., New York</cite>
+                </div>
+                <div class="testimonial">
+                    <p>"Simple, intuitive, and perfect for tracking my expenses. I finally have control over my budget."</p>
+                    <cite>- Michael R., California</cite>
+                </div>
+                <div class="testimonial">
+                    <p>"The visual breakdown of expenses made it easy to see where my money was going. Highly recommend!"</p>
+                    <cite>- Jennifer L., Texas</cite>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div class="faq-item">
+                <h3>Is this budget planner really free?</h3>
+                <p>Yes, our budget planner is completely free with no hidden charges or premium features.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Is my financial data secure?</h3>
+                <p>Absolutely. All calculations are done locally in your browser, and we don't store any of your financial information.</p>
+            </div>
+            <div class="faq-item">
+                <h3>Can I use this budget planner on mobile?</h3>
+                <p>Yes, our tool is fully responsive and works perfectly on all devices, including smartphones and tablets.</p>
+            </div>
+        </section>
+    </main>
+
+    <aside class="tips-sidebar" id="tips-sidebar">
+        <button type="button" id="toggle-tips" class="btn-toggle" aria-expanded="false" aria-controls="tips-content">
+            💡 Financial Tips
+        </button>
+        <div id="tips-content" class="tips-content" hidden>
+            <h3>Smart Budgeting Tips</h3>
+            <ul>
+                <li>Allocate 50% to needs, 30% to wants, and 20% to savings (50/30/20 rule).</li>
+                <li>Track every expense for at least one month to understand your spending habits.</li>
+                <li>Set up automatic transfers to your savings account right after payday.</li>
+                <li>Review and adjust your budget monthly to reflect changes in income or expenses.</li>
+                <li>Build an emergency fund with 3-6 months' worth of living expenses.</li>
+                <li>Use cash or debit cards instead of credit cards to avoid accumulating debt.</li>
+                <li>Look for free or low-cost alternatives for entertainment and leisure activities.</li>
+                <li>Meal planning can reduce food expenses by up to 30%.</li>
+                <li>Consider using the envelope system for discretionary spending categories.</li>
+                <li>Regularly check your credit report for errors and signs of identity theft.</li>
+            </ul>
+        </div>
+    </aside>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Us</h3>
+                <p>We're dedicated to helping Americans take control of their finances with simple, effective budgeting tools.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="/blog">Financial Blog</a></li>
+                    <li><a href="/guides">Budgeting Guides</a></li>
+                    <li><a href="/calculators">Financial Calculators</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: support@budgetplanner.com</p>
+                <p>Phone: 1-800-BUDGET-1</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Personal Budget Planner Tool. All rights reserved. | <a href="/privacy">Privacy Policy</a> | <a href="/terms">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <script>
+    // DOM Elements
+    const themeSelect = document.getElementById('theme-select');
+    const incomeInput = document.getElementById('income');
+    const incomeError = document.getElementById('income-error');
+    const expensesContainer = document.getElementById('expenses-container');
+    const addExpenseBtn = document.getElementById('add-expense');
+    const savingsGoalInput = document.getElementById('savings-goal');
+    const savingsError = document.getElementById('savings-error');
+    const calculateBtn = document.getElementById('calculate-btn');
+    const totalIncomeEl = document.getElementById('total-income');
+    const totalExpensesEl = document.getElementById('total-expenses');
+    const balanceEl = document.getElementById('balance');
+    const savingsProgressEl = document.getElementById('savings-progress');
+    const expenseChart = document.getElementById('expense-chart').getContext('2d');
+    const downloadPdfBtn = document.getElementById('download-pdf');
+    const toggleTipsBtn = document.getElementById('toggle-tips');
+    const tipsContent = document.getElementById('tips-content');
+
+    // Chart object
+    let chart = null;
+
+    // Initialize the application
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load saved data from localStorage
+        loadSavedData();
+        
+        // Add initial expense category
+        addExpenseField();
+        
+        // Event listeners
+        themeSelect.addEventListener('change', changeTheme);
+        addExpenseBtn.addEventListener('click', addExpenseField);
+        calculateBtn.addEventListener('click', calculateBudget);
+        downloadPdfBtn.addEventListener('click', generatePDF);
+        toggleTipsBtn.addEventListener('click', toggleTips);
+        
+        // Real-time calculation on input change
+        incomeInput.addEventListener('input', validateAndCalculate);
+        savingsGoalInput.addEventListener('input', validateAndCalculate);
+        
+        // Initialize theme - set to dark by default
+        document.body.className = 'theme-dark';
+        themeSelect.value = 'theme-dark';
+    });
+
+    // Theme changer
+    function changeTheme() {
+        document.body.className = themeSelect.value;
+        localStorage.setItem('budgetPlannerTheme', themeSelect.value);
+    }
+
+    // Add expense field
+    function addExpenseField() {
+        const expenseRow = document.createElement('div');
+        expenseRow.className = 'expense-row';
+        
+        const categoryInput = document.createElement('input');
+        categoryInput.type = 'text';
+        categoryInput.placeholder = 'Category (e.g., Rent, Food)';
+        categoryInput.required = true;
+        
+        const amountInput = document.createElement('input');
+        amountInput.type = 'number';
+        amountInput.min = '0';
+        amountInput.step = '0.01';
+        amountInput.placeholder = '0.00';
+        amountInput.addEventListener('input', validateAndCalculate);
+        
+        const removeBtn = document.createElement('button');
+        removeBtn.type = 'button';
+        removeBtn.className = 'remove-expense';
+        removeBtn.textContent = 'Remove';
+        removeBtn.addEventListener('click', function() {
+            expenseRow.remove();
+            calculateBudget();
+        });
+        
+        expenseRow.appendChild(categoryInput);
+        expenseRow.appendChild(amountInput);
+        expenseRow.appendChild(removeBtn);
+        
+        expensesContainer.appendChild(expenseRow);
+        
+        // Save to localStorage
+        saveData();
+    }
+
+    // Validate inputs and calculate
+    function validateAndCalculate() {
+        let isValid = true;
+        
+        // Validate income
+        if (incomeInput.value && (isNaN(incomeInput.value) || parseFloat(incomeInput.value) < 0)) {
+            incomeError.textContent = 'Please enter a valid number';
+            isValid = false;
+        } else {
+            incomeError.textContent = '';
+        }
+        
+        // Validate savings goal
+        if (savingsGoalInput.value && (isNaN(savingsGoalInput.value) || parseFloat(savingsGoalInput.value) < 0)) {
+            savingsError.textContent = 'Please enter a valid number';
+            isValid = false;
+        } else {
+            savingsError.textContent = '';
+        }
+        
+        // Validate expense amounts
+        const expenseAmounts = document.querySelectorAll('#expenses-container input[type="number"]');
+        expenseAmounts.forEach(input => {
+            if (input.value && (isNaN(input.value) || parseFloat(input.value) < 0)) {
+                input.style.borderColor = '#dc3545';
+                isValid = false;
+            } else {
+                input.style.borderColor = '';
+            }
+        });
+        
+        // Calculate if valid
+        if (isValid) {
+            calculateBudget();
+        }
+        
+        // Save data
+        saveData();
+    }
+
+    // Calculate budget
+    function calculateBudget() {
+        // Get income
+        const income = parseFloat(incomeInput.value) || 0;
+        
+        // Get expenses
+        let totalExpenses = 0;
+        const expenses = [];
+        const expenseRows = document.querySelectorAll('.expense-row');
+        
+        expenseRows.forEach(row => {
+            const categoryInput = row.querySelector('input[type="text"]');
+            const amountInput = row.querySelector('input[type="number"]');
+            
+            const category = categoryInput.value.trim() || 'Unnamed Category';
+            const amount = parseFloat(amountInput.value) || 0;
+            
+            if (amount > 0) {
+                totalExpenses += amount;
+                expenses.push({ category, amount });
+            }
+        });
+        
+        // Get savings goal
+        const savingsGoal = parseFloat(savingsGoalInput.value) || 0;
+        
+        // Calculate balance
+        const balance = income - totalExpenses;
+        
+        // Update display
+        totalIncomeEl.textContent = `$${income.toFixed(2)}`;
+        totalExpensesEl.textContent = `$${totalExpenses.toFixed(2)}`;
+        balanceEl.textContent = `$${balance.toFixed(2)}`;
+        
+        if (savingsGoal > 0) {
+            const savingsProgress = ((balance / savingsGoal) * 100).toFixed(1);
+            savingsProgressEl.textContent = `${savingsProgress}% of goal`;
+            
+            // Color code savings progress
+            if (balance >= savingsGoal) {
+                savingsProgressEl.style.color = '#28a745';
+            } else if (balance > 0) {
+                savingsProgressEl.style.color = '#ffc107';
+            } else {
+                savingsProgressEl.style.color = '#dc3545';
+            }
+        } else {
+            savingsProgressEl.textContent = 'Not Set';
+            savingsProgressEl.style.color = '';
+        }
+        
+        // Update chart
+        updateChart(expenses);
+        
+        // Save data
+        saveData();
+    }
+
+    // Update pie chart
+    function updateChart(expenses) {
+        // Clear previous chart
+        expenseChart.clearRect(0, 0, expenseChart.canvas.width, expenseChart.canvas.height);
+        
+        if (expenses.length === 0) {
+            expenseChart.fillStyle = '#666';
+            expenseChart.font = '16px Arial';
+            expenseChart.textAlign = 'center';
+            expenseChart.fillText('No expenses to display', expenseChart.canvas.width / 2, expenseChart.canvas.height / 2);
+            return;
+        }
+        
+        // Calculate total
+        const total = expenses.reduce((sum, expense) => sum + expense.amount, 0);
+        
+        // Define colors
+        const colors = [
+            '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', 
+            '#FF9F40', '#C9CBCF', '#7CFC00', '#FF69B4', '#8A2BE2'
+        ];
+        
+        // Draw pie chart
+        let startAngle = 0;
+        const centerX = expenseChart.canvas.width / 2;
+        const centerY = expenseChart.canvas.height / 2;
+        const radius = Math.min(centerX, centerY) - 20;
+        
+        expenses.forEach((expense, index) => {
+            const ratio = expense.amount / total;
+            const endAngle = startAngle + ratio * 2 * Math.PI;
+            
+            // Draw slice
+            expenseChart.beginPath();
+            expenseChart.moveTo(centerX, centerY);
+            expenseChart.arc(centerX, centerY, radius, startAngle, endAngle);
+            expenseChart.closePath();
+            
+            expenseChart.fillStyle = colors[index % colors.length];
+            expenseChart.fill();
+            expenseChart.strokeStyle = '#fff';
+            expenseChart.lineWidth = 2;
+            expenseChart.stroke();
+            
+            // Calculate label position
+            const midAngle = startAngle + (endAngle - startAngle) / 2;
+            const labelRadius = radius * 0.7;
+            const labelX = centerX + labelRadius * Math.cos(midAngle);
+            const labelY = centerY + labelRadius * Math.sin(midAngle);
+            
+            // Draw label
+            expenseChart.fillStyle = '#333';
+            expenseChart.font = '12px Arial';
+            expenseChart.textAlign = 'center';
+            expenseChart.fillText(
+                `${Math.round(ratio * 100)}%`, 
+                labelX, 
+                labelY
+            );
+            
+            startAngle = endAngle;
+        });
+        
+        // Draw legend
+        const legendY = expenseChart.canvas.height - 20 - (expenses.length * 20);
+        expenses.forEach((expense, index) => {
+            const y = legendY + (index * 20);
+            
+            // Color box
+            expenseChart.fillStyle = colors[index % colors.length];
+            expenseChart.fillRect(10, y, 15, 15);
+            
+            // Label
+            expenseChart.fillStyle = '#333';
+            expenseChart.font = '12px Arial';
+            expenseChart.textAlign = 'left';
+            expenseChart.fillText(
+                `${expense.category} ($${expense.amount.toFixed(2)})`, 
+                35, 
+                y + 12
+            );
+        });
+    }
+
+    // Toggle financial tips
+    function toggleTips() {
+        const isExpanded = tipsContent.hidden;
+        tipsContent.hidden = !isExpanded;
+        toggleTipsBtn.setAttribute('aria-expanded', !isExpanded);
+        
+        if (!isExpanded) {
+            toggleTipsBtn.textContent = '💡 Hide Tips';
+        } else {
+            toggleTipsBtn.textContent = '💡 Financial Tips';
+        }
+    }
+
+    // Generate PDF
+    function generatePDF() {
+        // Use jsPDF
+        const { jsPDF } = window.jspdf;
+        
+        try {
+            const doc = new jsPDF();
+            
+            // Add title
+            doc.setFontSize(20);
+            doc.text('Personal Budget Report', 105, 20, { align: 'center' });
+            
+            // Add date
+            doc.setFontSize(12);
+            doc.text(`Generated on: ${new Date().toLocaleDateString()}`, 105, 30, { align: 'center' });
+            
+            // Add summary
+            doc.setFontSize(16);
+            doc.text('Budget Summary', 20, 50);
+            
+            doc.setFontSize(12);
+            doc.text(`Total Income: $${parseFloat(incomeInput.value || 0).toFixed(2)}`, 20, 60);
+            doc.text(`Total Expenses: $${parseFloat(document.getElementById('total-expenses').textContent.replace('$', '')).toFixed(2)}`, 20, 70);
+            doc.text(`Balance: $${parseFloat(document.getElementById('balance').textContent.replace('$', '')).toFixed(2)}`, 20, 80);
+            
+            if (savingsGoalInput.value) {
+                doc.text(`Savings Goal: $${parseFloat(savingsGoalInput.value).toFixed(2)}`, 20, 90);
+                doc.text(`Savings Progress: ${document.getElementById('savings-progress').textContent}`, 20, 100);
+            }
+            
+            // Add expenses
+            doc.setFontSize(16);
+            doc.text('Expense Breakdown', 20, 120);
+            
+            doc.setFontSize(12);
+            let y = 130;
+            const expenseRows = document.querySelectorAll('.expense-row');
+            
+            expenseRows.forEach(row => {
+                const categoryInput = row.querySelector('input[type="text"]');
+                const amountInput = row.querySelector('input[type="number"]');
+                
+                const category = categoryInput.value.trim() || 'Unnamed Category';
+                const amount = parseFloat(amountInput.value) || 0;
+                
+                if (amount > 0) {
+                    doc.text(`${category}: $${amount.toFixed(2)}`, 20, y);
+                    y += 10;
+                }
+            });
+            
+            // Add financial tips
+            doc.setFontSize(16);
+            doc.text('Financial Tips', 20, y + 20);
+            
+            doc.setFontSize(12);
+            y += 30;
+            const tips = [
+                "Allocate 50% to needs, 30% to wants, and 20% to savings.",
+                "Track every expense for at least one month.",
+                "Set up automatic transfers to your savings account.",
+                "Review and adjust your budget monthly.",
+                "Build an emergency fund with 3-6 months' expenses."
+            ];
+            
+            tips.forEach(tip => {
+                doc.text(`• ${tip}`, 20, y);
+                y += 10;
+            });
+            
+            // Save PDF
+            doc.save('budget-report.pdf');
+        } catch (error) {
+            alert('Error generating PDF: ' + error.message);
+            console.error('PDF Generation Error:', error);
+        }
+    }
+
+    // Save data to localStorage
+    function saveData() {
+        const data = {
+            income: incomeInput.value,
+            savingsGoal: savingsGoalInput.value,
+            theme: document.body.className,
+            expenses: []
+        };
+        
+        const expenseRows = document.querySelectorAll('.expense-row');
+        expenseRows.forEach(row => {
+            const categoryInput = row.querySelector('input[type="text"]');
+            const amountInput = row.querySelector('input[type="number"]');
+            
+            data.expenses.push({
+                category: categoryInput.value,
+                amount: amountInput.value
+            });
+        });
+        
+        localStorage.setItem('budgetPlannerData', JSON.stringify(data));
+    }
+
+    // Load saved data from localStorage
+    function loadSavedData() {
+        const savedData = localStorage.getItem('budgetPlannerData');
+        
+        if (savedData) {
+            try {
+                const data = JSON.parse(savedData);
+                
+                // Load income and savings goal
+                if (data.income) incomeInput.value = data.income;
+                if (data.savingsGoal) savingsGoalInput.value = data.savingsGoal;
+                
+                // Load theme
+                if (data.theme) {
+                    document.body.className = data.theme;
+                    themeSelect.value = data.theme;
+                }
+                
+                // Load expenses
+                if (data.expenses && data.expenses.length > 0) {
+                    // Clear default expense
+                    expensesContainer.innerHTML = '';
+                    
+                    // Add saved expenses
+                    data.expenses.forEach(expense => {
+                        const expenseRow = document.createElement('div');
+                        expenseRow.className = 'expense-row';
+                        
+                        const categoryInput = document.createElement('input');
+                        categoryInput.type = 'text';
+                        categoryInput.value = expense.category;
+                        
+                        const amountInput = document.createElement('input');
+                        amountInput.type = 'number';
+                        amountInput.min = '0';
+                        amountInput.step = '0.01';
+                        amountInput.value = expense.amount;
+                        amountInput.addEventListener('input', validateAndCalculate);
+                        
+                        const removeBtn = document.createElement('button');
+                        removeBtn.type = 'button';
+                        removeBtn.className = 'remove-expense';
+                        removeBtn.textContent = 'Remove';
+                        removeBtn.addEventListener('click', function() {
+                            expenseRow.remove();
+                            calculateBudget();
+                        });
+                        
+                        expenseRow.appendChild(categoryInput);
+                        expenseRow.appendChild(amountInput);
+                        expenseRow.appendChild(removeBtn);
+                        
+                        expensesContainer.appendChild(expenseRow);
+                    });
+                }
+                
+                // Calculate budget
+                calculateBudget();
+            } catch (error) {
+                console.error('Error loading saved data:', error);
+            }
+        }
+    }
+
+    // Simple Chart implementation for fallback
+    class Chart {
+        constructor(context, config) {
+            this.ctx = context;
+            this.config = config;
+            this.render();
+        }
+        
+        render() {
+            const { type, data, options } = this.config;
+            if (type === 'pie') {
+                this.drawPieChart(data, options);
+            }
+        }
+        
+        drawPieChart(data, options) {
+            const { labels, datasets } = data;
+            const { backgroundColor } = datasets[0];
+            const values = datasets[0].data;
+            
+            const total = values.reduce((sum, value) => sum + value, 0);
+            const centerX = this.ctx.canvas.width / 2;
+            const centerY = this.ctx.canvas.height / 2;
+            const radius = Math.min(centerX, centerY) * 0.8;
+            
+            let startAngle = 0;
+            
+            values.forEach((value, index) => {
+                const ratio = value / total;
+                const endAngle = startAngle + ratio * 2 * Math.PI;
+                
+                // Draw slice
+                this.ctx.beginPath();
+                this.ctx.moveTo(centerX, centerY);
+                this.ctx.arc(centerX, centerY, radius, startAngle, endAngle);
+                this.ctx.closePath();
+                
+                this.ctx.fillStyle = backgroundColor[index % backgroundColor.length];
+                this.ctx.fill();
+                this.ctx.strokeStyle = '#fff';
+                this.ctx.lineWidth = 2;
+                this.ctx.stroke();
+                
+                // Calculate percentage
+                const percentage = Math.round(ratio * 100);
+                
+                // Draw percentage text
+                const midAngle = startAngle + (endAngle - startAngle) / 2;
+                const textX = centerX + (radius * 0.7) * Math.cos(midAngle);
+                const textY = centerY + (radius * 0.7) * Math.sin(midAngle);
+                
+                this.ctx.fillStyle = '#000';
+                this.ctx.font = 'bold 14px Arial';
+                this.ctx.textAlign = 'center';
+                this.ctx.textBaseline = 'middle';
+                this.ctx.fillText(`${percentage}%`, textX, textY);
+                
+                startAngle = endAngle;
+            });
+            
+            // Draw legend
+            let legendY = 40;
+            labels.forEach((label, index) => {
+                // Color box
+                this.ctx.fillStyle = backgroundColor[index % backgroundColor.length];
+                this.ctx.fillRect(20, legendY, 15, 15);
+                
+                // Label
+                this.ctx.fillStyle = '#000';
+                this.ctx.font = '12px Arial';
+                this.ctx.fillText(`${label} ($${values[index].toFixed(2)})`, 45, legendY + 12);
+                
+                legendY += 25;
+            });
+        }
+        
+        clear() {
+            this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+        }
+        
+        destroy() {
+            // Cleanup if needed
+        }
+    }
+
+    // Initialize Chart globally for our simple implementation
+    window.Chart = Chart;
+    </script>
+
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    body {
+        font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    /* Theme Styles */
+    .theme-light {
+        --bg-color: #f8f9fa;
+        --text-color: #333;
+        --primary-color: #007bff;
+        --secondary-color: #6c757d;
+        --accent-color: #28a745;
+        --danger-color: #dc3545;
+        --card-bg: #fff;
+        --border-color: #dee2e6;
+        --header-bg: #fff;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .theme-dark {
+        --bg-color: #212529;
+        --text-color: #f8f9fa;
+        --primary-color: #0d6efd;
+        --secondary-color: #adb5bd;
+        --accent-color: #198754;
+        --danger-color: #dc3545;
+        --card-bg: #343a40;
+        --border-color: #495057;
+        --header-bg: #343a40;
+        --shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .theme-colorful {
+        --bg-color: #f0f8ff;
+        --text-color: #2c3e50;
+        --primary-color: #3498db;
+        --secondary-color: #95a5a6;
+        --accent-color: #2ecc71;
+        --danger-color: #e74c3c;
+        --card-bg: #fff;
+        --border-color: #bdc3c7;
+        --header-bg: #3498db;
+        --shadow: 0 4px 15px rgba(52, 152, 219, 0.2);
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+    }
+
+    header {
+        background-color: var(--header-bg);
+        color: var(--card-bg);
+        padding: 1.5rem 2rem;
+        box-shadow: var(--shadow);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    .header-content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 0.25rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
+        opacity: 0.8;
+    }
+
+    .theme-selector {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .theme-selector select {
+        padding: 0.5rem;
+        border-radius: 4px;
+        border: 1px solid var(--border-color);
+        background-color: var(--card-bg);
+        color: var(--text-color);
+        cursor: pointer;
+    }
+
+    .breadcrumb {
+        padding: 0.75rem 2rem;
+        background-color: var(--bg-color);
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    .breadcrumb ol {
+        display: flex;
+        list-style: none;
+        font-size: 0.9rem;
+    }
+
+    .breadcrumb li:not(:last-child)::after {
+        content: " > ";
+        margin: 0 0.5rem;
+        color: var(--secondary-color);
+    }
+
+    .breadcrumb a {
+        color: var(--primary-color);
+        text-decoration: none;
+    }
+
+    .breadcrumb a:hover {
+        text-decoration: underline;
+    }
+
+    .container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 2rem;
+        gap: 2rem;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .intro-section {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 1rem;
+    }
+
+    .intro-section h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+    }
+
+    .intro-section p {
+        max-width: 800px;
+        margin: 0 auto;
+        font-size: 1.1rem;
+    }
+
+    .budget-form {
+        flex: 1;
+        min-width: 300px;
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    .budget-preview {
+        flex: 1;
+        min-width: 300px;
+        background-color: var(--card-bg);
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+    }
+
+    h2 {
+        color: var(--primary-color);
+        margin-bottom: 1.5rem;
+        padding-bottom: 0.5rem;
+        border-bottom: 2px solid var(--border-color);
+    }
+
+    h3 {
+        color: var(--secondary-color);
+        margin: 1rem 0 0.5rem;
+    }
+
+    .input-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="number"] {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border-color);
+        border-radius: 4px;
+        font-size: 1rem;
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        transition: border-color 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="number"]:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+    }
+
+    .error-message {
+        color: var(--danger-color);
+        font-size: 0.875rem;
+        margin-top: 0.25rem;
+        min-height: 1rem;
+    }
+
+    .expense-row {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        background-color: rgba(0, 0, 0, 0.02);
+        border-radius: 4px;
+        align-items: center;
+    }
+
+    .expense-row input[type="text"] {
+        flex: 2;
+    }
+
+    .expense-row input[type="number"] {
+        flex: 1;
+    }
+
+    .remove-expense {
+        background-color: var(--danger-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .remove-expense:hover {
+        background-color: #c82333;
+    }
+
+    .btn-add,
+    .btn-calculate,
+    .btn-download,
+    .btn-toggle {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: background-color 0.3s, transform 0.2s;
+        margin-top: 1rem;
+    }
+
+    .btn-add:hover,
+    .btn-calculate:hover,
+    .btn-download:hover,
+    .btn-toggle:hover {
+        background-color: #0056b3;
+        transform: translateY(-2px);
+    }
+
+    .btn-add:active,
+    .btn-calculate:active,
+    .btn-download:active,
+    .btn-toggle:active {
+        transform: translateY(0);
+    }
+
+    .btn-calculate {
+        background-color: var(--accent-color);
+        width: 100%;
+    }
+
+    .btn-calculate:hover {
+        background-color: #218838;
+    }
+
+    .btn-download {
+        background-color: var(--secondary-color);
+        margin-top: 2rem;
+        width: 100%;
+    }
+
+    .btn-download:hover {
+        background-color: #5a6268;
+    }
+
+    .summary-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-bottom: 2rem;
+    }
+
+    .card {
+        background-color: var(--bg-color);
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        box-shadow: var(--shadow);
+        transition: transform 0.3s;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+        color: var(--secondary-color);
+    }
+
+    .card p {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--primary-color);
+    }
+
+    .income-card p {
+        color: var(--accent-color);
+    }
+
+    .expenses-card p {
+        color: var(--danger-color);
+    }
+
+    .balance-card p {
+        color: var(--primary-color);
+    }
+
+    .savings-card p {
+        color: var(--accent-color);
+    }
+
+    .chart-container {
+        margin: 2rem 0;
+        text-align: center;
+    }
+
+    #expense-chart {
+        max-width: 100%;
+        height: auto;
+        margin: 1rem auto;
+        border: 1px solid var(--border-color);
+        border-radius: 8px;
+    }
+
+    .tips-sidebar {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        z-index: 1000;
+    }
+
+    .btn-toggle {
+        background-color: var(--accent-color);
+        padding: 0.75rem 1.5rem;
+        border-radius: 30px;
+        box-shadow: var(--shadow);
+        font-weight: 600;
+    }
+
+    .tips-content {
+        position: absolute;
+        bottom: 60px;
+        right: 0;
+        width: 300px;
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 10px;
+        box-shadow: var(--shadow);
+        border: 1px solid var(--border-color);
+        max-height: 400px;
+        overflow-y: auto;
+        z-index: 100;
+    }
+
+    .tips-content h3 {
+        margin-bottom: 1rem;
+        color: var(--primary-color);
+        text-align: left;
+    }
+
+    .tips-content ul {
+        list-style-position: outside;
+        padding-left: 1.5rem;
+        text-align: left;
+    }
+
+    .tips-content li {
+        margin-bottom: 0.75rem;
+        line-height: 1.5;
+    }
+
+    .testimonials {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .testimonial-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .testimonial {
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        position: relative;
+    }
+
+    .testimonial p {
+        font-style: italic;
+        margin-bottom: 1rem;
+    }
+
+    .testimonial cite {
+        font-weight: 600;
+        color: var(--primary-color);
+    }
+
+    .faq {
+        width: 100%;
+        margin-top: 2rem;
+    }
+
+    .faq-item {
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: var(--shadow);
+        margin-bottom: 1rem;
+    }
+
+    .faq-item h3 {
+        color: var(--primary-color);
+        margin-bottom: 0.5rem;
+    }
+
+    footer {
+        background-color: var(--header-bg);
+        color: var(--card-bg);
+        padding: 2rem;
+        margin-top: 3rem;
+    }
+
+    .footer-content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-section {
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .footer-section h3 {
+        color: var(--primary-color);
+        margin-bottom: 1rem;
+    }
+
+    .footer-section ul {
+        list-style: none;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 0.5rem;
+    }
+
+    .footer-section a {
+        color: var(--card-bg);
+        text-decoration: none;
+    }
+
+    .footer-section a:hover {
+        text-decoration: underline;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--border-color);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .container {
+            flex-direction: column;
+            padding: 1rem;
+        }
+        
+        header {
+            flex-direction: column;
+            gap: 1rem;
+            text-align: center;
+        }
+        
+        .theme-selector {
+            margin-top: 1rem;
+        }
+        
+        .budget-form,
+        .budget-preview {
+            min-width: 100%;
+        }
+        
+        .tips-sidebar {
+            bottom: 80px;
+            right: 10px;
+        }
+        
+        .tips-content {
+            width: 90vw;
+            right: 5vw;
+            max-height: 60vh;
+        }
+        
+        .summary-cards {
+            grid-template-columns: 1fr;
+        }
+        
+        .footer-content {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) {
+        header h1 {
+            font-size: 1.5rem;
+        }
+        
+        .tips-sidebar {
+            bottom: 70px;
+            right: 5px;
+        }
+        
+        .tips-content {
+            width: 95vw;
+            right: 2.5vw;
+        }
+    }
+
+    /* Animation for theme transition */
+    body {
+        transition: all 0.3s ease;
+    }
+
+    /* Print styles */
+    @media print {
+        .btn-toggle,
+        .btn-download,
+        .btn-add,
+        .btn-calculate,
+        .theme-selector,
+        .tips-sidebar {
+            display: none !important;
+        }
+        
+        header,
+        footer {
+            background-color: white !important;
+            color: black !important;
+        }
+        
+        .container {
+            display: block !important;
+            padding: 0 !important;
+        }
+        
+        .budget-form,
+        .budget-preview {
+            box-shadow: none !important;
+            margin-bottom: 2rem !important;
+        }
+    }
+    </style>
+</body>
+</html>

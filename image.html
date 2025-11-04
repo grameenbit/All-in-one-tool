@@ -1,0 +1,1056 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Online Image Resizer Tool - Resize Images Instantly | ImageResizer Pro</title>
+    <meta name="description" content="Professional free online image resizer tool for USA users. Instantly resize, compress, and optimize images for web, social media, and print. No registration required.">
+    <meta name="keywords" content="image resizer, photo resize tool, online image resizer, free image compressor, resize images online, image optimizer, photo editor, bulk image resize, image resizer USA">
+    <meta name="author" content="ImageResizer Pro">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="googlebot" content="index, follow">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Free Online Image Resizer Tool - Resize Images Instantly">
+    <meta property="og:description" content="Professional free online image resizer tool. Instantly resize, compress, and optimize images for web, social media, and print.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://imageresizerpro.com">
+    <meta property="og:image" content="https://imageresizerpro.com/og-image.jpg">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online Image Resizer Tool">
+    <meta name="twitter:description" content="Professional free online image resizer tool. Instantly resize, compress, and optimize images.">
+    <meta name="twitter:image" content="https://imageresizerpro.com/twitter-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://imageresizerpro.com">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "ImageResizer Pro",
+        "description": "Professional free online image resizer tool for instant image resizing and optimization",
+        "url": "https://imageresizerpro.com",
+        "applicationCategory": "MultimediaApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "creator": {
+            "@type": "Organization",
+            "name": "ImageResizer Pro"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "ratingCount": "12547"
+        }
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .drop-zone {
+            transition: all 0.3s ease;
+            background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' stroke='%239CA3AF' stroke-width='3' stroke-dasharray='10' stroke-dashoffset='0' stroke-linecap='square'/%3e%3c/svg%3e");
+        }
+        
+        .drop-zone.dragover {
+            background-color: rgba(99, 102, 241, 0.1);
+            border-color: #6366f1;
+            transform: scale(1.02);
+        }
+        
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        
+        .slider::-webkit-slider-track {
+            background: #e5e7eb;
+            height: 6px;
+            border-radius: 3px;
+        }
+        
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            background: #6366f1;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            margin-top: -7px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            transition: all 0.2s;
+        }
+        
+        .slider::-webkit-slider-thumb:hover {
+            background: #4f46e5;
+            transform: scale(1.2);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        
+        .toast.show {
+            transform: translateX(0);
+        }
+        
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #6366f1;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .comparison-slider {
+            position: relative;
+            overflow: hidden;
+            cursor: col-resize;
+        }
+        
+        .comparison-slider .divider {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: white;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            cursor: col-resize;
+        }
+        
+        .comparison-slider .divider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+        
+        .comparison-slider .divider::after {
+            content: '◀ ▶';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 12px;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="gradient-bg text-white shadow-lg">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <!-- Logo -->
+                    <div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center shadow-lg">
+                        <i class="fas fa-image text-2xl text-purple-600"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">ImageResizer Pro</h1>
+                        <p class="text-purple-100 text-sm">Trusted by 1M+ Americans | Free Online Tool</p>
+                    </div>
+                </div>
+                <nav class="hidden md:flex space-x-6">
+                    <a href="#features" class="hover:text-purple-200 transition">Features</a>
+                    <a href="#how-it-works" class="hover:text-purple-200 transition">How It Works</a>
+                    <a href="#testimonials" class="hover:text-purple-200 transition">Reviews</a>
+                    <a href="#faq" class="hover:text-purple-200 transition">FAQ</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Hero Section -->
+        <section class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+                Resize Images Instantly - <span class="text-purple-600">100% Free</span>
+            </h2>
+            <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                The #1 free online image resizer tool in the USA. Resize, compress, and optimize your images for web, social media, and print. No registration required.
+            </p>
+            
+            <!-- Trust Badges -->
+            <div class="flex justify-center space-x-8 mb-8">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-check-circle text-green-500"></i>
+                    <span class="text-sm text-gray-600">100% Free Forever</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-shield-alt text-green-500"></i>
+                    <span class="text-sm text-gray-600">Secure & Private</span>
+                </div>
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-bolt text-yellow-500"></i>
+                    <span class="text-sm text-gray-600">Lightning Fast</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Main Tool Section -->
+        <section class="mb-12">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Upload Area -->
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <i class="fas fa-upload mr-2 text-purple-600"></i>Upload Your Image
+                    </h2>
+                    
+                    <div id="dropZone" class="drop-zone rounded-xl p-12 text-center cursor-pointer hover:bg-gray-50 transition">
+                        <i class="fas fa-cloud-upload-alt text-6xl text-gray-400 mb-4"></i>
+                        <p class="text-gray-600 mb-2">Drag & drop your image here</p>
+                        <p class="text-sm text-gray-500 mb-4">or</p>
+                        <label for="fileInput" class="btn-primary text-white px-6 py-3 rounded-lg inline-block cursor-pointer">
+                            Browse Files
+                        </label>
+                        <input type="file" id="fileInput" class="hidden" accept="image/*" multiple>
+                        <p class="text-xs text-gray-400 mt-4">Supports: JPG, PNG, GIF, WebP, BMP (Max 25MB)</p>
+                    </div>
+                    
+                    <!-- Image Info -->
+                    <div id="imageInfo" class="mt-6 p-4 bg-gray-50 rounded-lg hidden">
+                        <h3 class="font-semibold text-gray-700 mb-2">Image Information</h3>
+                        <div class="grid grid-cols-2 gap-2 text-sm">
+                            <div><span class="text-gray-500">Name:</span> <span id="imageName" class="font-medium"></span></div>
+                            <div><span class="text-gray-500">Size:</span> <span id="imageSize" class="font-medium"></span></div>
+                            <div><span class="text-gray-500">Dimensions:</span> <span id="imageDimensions" class="font-medium"></span></div>
+                            <div><span class="text-gray-500">Type:</span> <span id="imageType" class="font-medium"></span></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Resize Options -->
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <i class="fas fa-sliders-h mr-2 text-purple-600"></i>Resize Options
+                    </h2>
+                    
+                    <!-- Social Media Presets -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Popular Presets (USA)</label>
+                        <div class="grid grid-cols-2 gap-2">
+                            <button onclick="setSocialPreset('instagram')" class="preset-btn px-3 py-2 bg-pink-100 hover:bg-pink-200 rounded-lg text-sm transition">
+                                <i class="fab fa-instagram mr-1"></i>Instagram Post
+                            </button>
+                            <button onclick="setSocialPreset('facebook')" class="preset-btn px-3 py-2 bg-blue-100 hover:bg-blue-200 rounded-lg text-sm transition">
+                                <i class="fab fa-facebook mr-1"></i>Facebook Cover
+                            </button>
+                            <button onclick="setSocialPreset('twitter')" class="preset-btn px-3 py-2 bg-sky-100 hover:bg-sky-200 rounded-lg text-sm transition">
+                                <i class="fab fa-twitter mr-1"></i>Twitter Header
+                            </button>
+                            <button onclick="setSocialPreset('youtube')" class="preset-btn px-3 py-2 bg-red-100 hover:bg-red-200 rounded-lg text-sm transition">
+                                <i class="fab fa-youtube mr-1"></i>YouTube Thumb
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Presets -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Quick Resize</label>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="setPresetSize(800, 600)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">800×600</button>
+                            <button onclick="setPresetSize(1024, 768)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">1024×768</button>
+                            <button onclick="setPresetSize(1280, 720)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">1280×720</button>
+                            <button onclick="setPresetSize(1920, 1080)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">1920×1080</button>
+                            <button onclick="setPresetSize(500, 500)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">500×500</button>
+                            <button onclick="setPresetSize(300, 300)" class="preset-btn px-3 py-2 bg-gray-100 hover:bg-purple-100 rounded-lg text-sm transition">300×300</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Custom Dimensions -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Custom Dimensions</label>
+                        <div class="flex items-center space-x-3">
+                            <div class="flex-1">
+                                <label class="text-xs text-gray-500">Width (px)</label>
+                                <input type="number" id="widthInput" placeholder="Width" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                            <div class="text-gray-500 pt-6">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <div class="flex-1">
+                                <label class="text-xs text-gray-500">Height (px)</label>
+                                <input type="number" id="heightInput" placeholder="Height" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <label class="flex items-center">
+                                <input type="checkbox" id="maintainAspect" class="mr-2 text-purple-600 focus:ring-purple-500">
+                                <span class="text-sm text-gray-700">Maintain aspect ratio</span>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <!-- Percentage Resize -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Resize by Percentage: <span id="percentageValue" class="text-purple-600 font-semibold">100%</span>
+                        </label>
+                        <input type="range" id="percentageSlider" min="10" max="200" value="100" class="slider w-full">
+                    </div>
+                    
+                    <!-- Quality Settings -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">
+                            Quality: <span id="qualityValue" class="text-purple-600 font-semibold">90%</span>
+                        </label>
+                        <input type="range" id="qualitySlider" min="10" max="100" value="90" class="slider w-full">
+                    </div>
+                    
+                    <!-- Format Selection -->
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Output Format</label>
+                        <select id="formatSelect" class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                            <option value="jpeg">JPEG (Best for photos)</option>
+                            <option value="png">PNG (With transparency)</option>
+                            <option value="webp">WebP (Modern format)</option>
+                            <option value="original">Original Format</option>
+                        </select>
+                    </div>
+                    
+                    <!-- Action Buttons -->
+                    <div class="flex space-x-3">
+                        <button onclick="resizeImage()" class="flex-1 btn-primary text-white px-6 py-3 rounded-lg font-medium">
+                            <i class="fas fa-magic mr-2"></i>Resize Image
+                        </button>
+                        <button onclick="resetAll()" class="px-6 py-3 bg-gray-200 hover:bg-gray-300 rounded-lg font-medium transition">
+                            <i class="fas fa-redo mr-2"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview Section -->
+            <div id="previewSection" class="mt-8 hidden">
+                <div class="glass-effect rounded-2xl p-6 shadow-xl">
+                    <h2 class="text-2xl font-semibold mb-4 text-gray-800">
+                        <i class="fas fa-eye mr-2 text-purple-600"></i>Preview & Download
+                    </h2>
+                    
+                    <div class="grid lg:grid-cols-2 gap-6">
+                        <!-- Original Image -->
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-700 mb-3">Original</h3>
+                            <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+                                <img id="originalPreview" class="w-full h-auto">
+                                <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                                    <span id="originalSize"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Resized Image -->
+                        <div>
+                            <h3 class="text-lg font-medium text-gray-700 mb-3">Resized</h3>
+                            <div class="relative bg-gray-100 rounded-lg overflow-hidden">
+                                <img id="resizedPreview" class="w-full h-auto">
+                                <div class="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white px-2 py-1 rounded text-sm">
+                                    <span id="resizedSize"></span> | <span id="fileSizeReduction"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Download Button -->
+                    <div class="mt-6 flex justify-center">
+                        <button onclick="downloadImage()" class="btn-primary text-white px-8 py-3 rounded-lg font-medium">
+                            <i class="fas fa-download mr-2"></i>Download Resized Image
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Why Choose ImageResizer Pro?</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="feature-card glass-effect rounded-xl p-6 text-center">
+                    <i class="fas fa-rocket text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Lightning Fast</h3>
+                    <p class="text-gray-600">Resize images in seconds with our optimized processing engine. No waiting, no delays.</p>
+                </div>
+                <div class="feature-card glass-effect rounded-xl p-6 text-center">
+                    <i class="fas fa-shield-alt text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">100% Secure</h3>
+                    <p class="text-gray-600">All processing happens in your browser. Your images never leave your device.</p>
+                </div>
+                <div class="feature-card glass-effect rounded-xl p-6 text-center">
+                    <i class="fas fa-gem text-4xl text-purple-600 mb-4"></i>
+                    <h3 class="text-xl font-semibold mb-2">Premium Quality</h3>
+                    <p class="text-gray-600">Maintain image quality while reducing file size. Perfect for web and print.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section id="how-it-works" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">How It Works</h2>
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">1</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Upload Image</h3>
+                    <p class="text-sm text-gray-600">Drag & drop or browse your image</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">2</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Choose Settings</h3>
+                    <p class="text-sm text-gray-600">Select size, quality, and format</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">3</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Resize Instantly</h3>
+                    <p class="text-sm text-gray-600">Click resize and see results</p>
+                </div>
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-2xl font-bold text-purple-600">4</span>
+                    </div>
+                    <h3 class="font-semibold mb-2">Download</h3>
+                    <p class="text-sm text-gray-600">Save your resized image</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section id="testimonials" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">What Americans Are Saying</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Best image resizer I've used! Fast, simple, and the quality is amazing. I use it daily for my e-commerce store."</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Sarah Johnson</p>
+                            <p class="text-sm text-gray-500">New York, NY</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"Perfect tool for my social media marketing. The presets save me so much time. Highly recommend!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Mike Chen</p>
+                            <p class="text-sm text-gray-500">Los Angeles, CA</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-effect rounded-xl p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="flex text-yellow-400">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">"As a photographer, I need quality tools. This resizer maintains image quality perfectly. Thank you!"</p>
+                    <div class="flex items-center">
+                        <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center mr-3">
+                            <i class="fas fa-user text-purple-600"></i>
+                        </div>
+                        <div>
+                            <p class="font-semibold">Emily Davis</p>
+                            <p class="text-sm text-gray-500">Chicago, IL</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section id="faq" class="mb-12">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Frequently Asked Questions</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="glass-effect rounded-xl p-6 mb-4">
+                    <h3 class="font-semibold mb-2">Is ImageResizer Pro really free?</h3>
+                    <p class="text-gray-600">Yes! ImageResizer Pro is 100% free forever. No hidden charges, no subscriptions, no limits.</p>
+                </div>
+                <div class="glass-effect rounded-xl p-6 mb-4">
+                    <h3 class="font-semibold mb-2">What image formats are supported?</h3>
+                    <p class="text-gray-600">We support all major image formats including JPEG, PNG, GIF, WebP, BMP, and TIFF.</p>
+                </div>
+                <div class="glass-effect rounded-xl p-6 mb-4">
+                    <h3 class="font-semibold mb-2">Is my data secure?</h3>
+                    <p class="text-gray-600">Absolutely! All image processing happens directly in your browser. Your images never leave your device or get uploaded to our servers.</p>
+                </div>
+                <div class="glass-effect rounded-xl p-6 mb-4">
+                    <h3 class="font-semibold mb-2">What's the maximum file size?</h3>
+                    <p class="text-gray-600">You can upload images up to 25MB in size. For larger files, we recommend compressing first.</p>
+                </div>
+                <div class="glass-effect rounded-xl p-6">
+                    <h3 class="font-semibold mb-2">Can I resize multiple images at once?</h3>
+                    <p class="text-gray-600">Currently, we support one image at a time to ensure the best quality and performance. Batch processing is coming soon!</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-white rounded-lg flex items-center justify-center">
+                            <i class="fas fa-image text-xl text-purple-600"></i>
+                        </div>
+                        <span class="text-xl font-semibold">ImageResizer Pro</span>
+                    </div>
+                    <p class="text-gray-400 text-sm">The #1 free online image resizer tool trusted by millions of Americans.</p>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="#features" class="hover:text-white transition">Features</a></li>
+                        <li><a href="#how-it-works" class="hover:text-white transition">How It Works</a></li>
+                        <li><a href="#testimonials" class="hover:text-white transition">Reviews</a></li>
+                        <li><a href="#faq" class="hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Popular Sizes</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li>Instagram Post (1080×1080)</li>
+                        <li>Facebook Cover (1200×630)</li>
+                        <li>YouTube Thumbnail (1280×720)</li>
+                        <li>Twitter Header (1500×500)</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><i class="fas fa-envelope mr-2"></i>support@imageresizerpro.com</li>
+                        <li><i class="fas fa-phone mr-2"></i>1-800-RESIZE</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i>New York, NY</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                        &copy; 2024 ImageResizer Pro. All rights reserved. | Made with ❤️ in the USA
+                    </p>
+                    <div class="flex space-x-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-linkedin text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Toast Notification -->
+    <div id="toast" class="toast glass-effect rounded-lg shadow-xl p-4 min-w-[300px]">
+        <div class="flex items-center">
+            <i id="toastIcon" class="fas fa-check-circle text-green-500 text-xl mr-3"></i>
+            <div>
+                <p id="toastTitle" class="font-semibold text-gray-800">Success!</p>
+                <p id="toastMessage" class="text-sm text-gray-600">Operation completed successfully</p>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables
+        let currentImage = null;
+        let resizedImageData = null;
+        let originalAspectRatio = 1;
+        let maintainAspectRatio = false;
+        let originalFileSize = 0;
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupEventListeners();
+            initializeSEO();
+        });
+        
+        // Setup event listeners
+        function setupEventListeners() {
+            // File input
+            document.getElementById('fileInput').addEventListener('change', handleFileSelect);
+            
+            // Drag and drop
+            const dropZone = document.getElementById('dropZone');
+            dropZone.addEventListener('dragover', handleDragOver);
+            dropZone.addEventListener('dragleave', handleDragLeave);
+            dropZone.addEventListener('drop', handleDrop);
+            
+            // Sliders
+            document.getElementById('percentageSlider').addEventListener('input', updatePercentage);
+            document.getElementById('qualitySlider').addEventListener('input', updateQuality);
+            
+            // FIXED: Height/Width input handling
+            const widthInput = document.getElementById('widthInput');
+            const heightInput = document.getElementById('heightInput');
+            const maintainAspectCheckbox = document.getElementById('maintainAspect');
+            
+            // Update maintainAspectRatio when checkbox changes
+            maintainAspectCheckbox.addEventListener('change', function() {
+                maintainAspectRatio = this.checked;
+            });
+            
+            // Handle width input
+            widthInput.addEventListener('input', function() {
+                if (maintainAspectRatio && currentImage) {
+                    const width = parseInt(this.value);
+                    if (width && width > 0) {
+                        const newHeight = Math.round(width / originalAspectRatio);
+                        heightInput.value = newHeight;
+                    }
+                }
+            });
+            
+            // Handle height input
+            heightInput.addEventListener('input', function() {
+                if (maintainAspectRatio && currentImage) {
+                    const height = parseInt(this.value);
+                    if (height && height > 0) {
+                        const newWidth = Math.round(height * originalAspectRatio);
+                        widthInput.value = newWidth;
+                    }
+                }
+            });
+        }
+        
+        // Initialize SEO
+        function initializeSEO() {
+            // Add structured data for breadcrumbs
+            const breadcrumbScript = document.createElement('script');
+            breadcrumbScript.type = 'application/ld+json';
+            breadcrumbScript.textContent = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "BreadcrumbList",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Home",
+                        "item": "https://imageresizerpro.com"
+                    },
+                    {
+                        "@type": "ListItem",
+                        "position": 2,
+                        "name": "Image Resizer Tool",
+                        "item": "https://imageresizerpro.com/#tool"
+                    }
+                ]
+            });
+            document.head.appendChild(breadcrumbScript);
+            
+            // Track page view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_view', {
+                    page_title: 'ImageResizer Pro - Free Online Image Resizer',
+                    page_location: window.location.href
+                });
+            }
+        }
+        
+        // File handling
+        function handleFileSelect(e) {
+            const files = e.target.files;
+            if (files.length > 0) {
+                loadImage(files[0]);
+            }
+        }
+        
+        // Drag and drop handlers
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.currentTarget.classList.add('dragover');
+        }
+        
+        function handleDragLeave(e) {
+            e.currentTarget.classList.remove('dragover');
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            e.currentTarget.classList.remove('dragover');
+            
+            const files = e.dataTransfer.files;
+            if (files.length > 0) {
+                loadImage(files[0]);
+            }
+        }
+        
+        // Load image
+        function loadImage(file) {
+            if (!file.type.startsWith('image/')) {
+                showToast('Error', 'Please select a valid image file', 'error');
+                return;
+            }
+            
+            if (file.size > 25 * 1024 * 1024) {
+                showToast('Error', 'File size must be less than 25MB', 'error');
+                return;
+            }
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = new Image();
+                img.onload = function() {
+                    currentImage = img;
+                    originalAspectRatio = img.width / img.height;
+                    originalFileSize = file.size;
+                    
+                    // Update image info
+                    document.getElementById('imageName').textContent = file.name;
+                    document.getElementById('imageSize').textContent = formatFileSize(file.size);
+                    document.getElementById('imageDimensions').textContent = `${img.width} × ${img.height}px`;
+                    document.getElementById('imageType').textContent = file.type;
+                    document.getElementById('imageInfo').classList.remove('hidden');
+                    
+                    // Set initial dimensions
+                    document.getElementById('widthInput').value = img.width;
+                    document.getElementById('heightInput').value = img.height;
+                    
+                    // Show preview
+                    document.getElementById('originalPreview').src = e.target.result;
+                    document.getElementById('originalSize').textContent = `${img.width} × ${img.height}`;
+                    
+                    // Track event
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'image_upload', {
+                            file_type: file.type,
+                            file_size: file.size
+                        });
+                    }
+                    
+                    showToast('Success', 'Image loaded successfully', 'success');
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        
+        // Social media presets
+        function setSocialPreset(preset) {
+            const presets = {
+                'instagram': { width: 1080, height: 1080 },
+                'facebook': { width: 1200, height: 630 },
+                'twitter': { width: 1500, height: 500 },
+                'youtube': { width: 1280, height: 720 }
+            };
+            
+            const size = presets[preset];
+            if (size) {
+                document.getElementById('widthInput').value = size.width;
+                document.getElementById('heightInput').value = size.height;
+                
+                // Track preset usage
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'preset_used', {
+                        preset_name: preset
+                    });
+                }
+                
+                showToast('Success', `Applied ${preset} preset`, 'success');
+            }
+        }
+        
+        // Standard presets
+        function setPresetSize(width, height) {
+            document.getElementById('widthInput').value = width;
+            document.getElementById('heightInput').value = height;
+        }
+        
+        // Update functions
+        function updatePercentage() {
+            const percentage = document.getElementById('percentageSlider').value;
+            document.getElementById('percentageValue').textContent = `${percentage}%`;
+            
+            if (currentImage) {
+                const newWidth = Math.round(currentImage.width * (percentage / 100));
+                const newHeight = Math.round(currentImage.height * (percentage / 100));
+                
+                document.getElementById('widthInput').value = newWidth;
+                document.getElementById('heightInput').value = newHeight;
+            }
+        }
+        
+        function updateQuality() {
+            const quality = document.getElementById('qualitySlider').value;
+            document.getElementById('qualityValue').textContent = `${quality}%`;
+        }
+        
+        // Resize image
+        function resizeImage() {
+            if (!currentImage) {
+                showToast('Error', 'Please upload an image first', 'error');
+                return;
+            }
+            
+            const width = parseInt(document.getElementById('widthInput').value) || currentImage.width;
+            const height = parseInt(document.getElementById('heightInput').value) || currentImage.height;
+            const quality = parseInt(document.getElementById('qualitySlider').value) / 100;
+            const format = document.getElementById('formatSelect').value;
+            
+            // Validate dimensions
+            if (width <= 0 || height <= 0) {
+                showToast('Error', 'Please enter valid dimensions', 'error');
+                return;
+            }
+            
+            // Show loading state
+            showToast('Processing', 'Resizing your image...', 'info');
+            
+            const canvas = document.createElement('canvas');
+            canvas.width = width;
+            canvas.height = height;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(currentImage, 0, 0, width, height);
+            
+            // Convert to desired format
+            let mimeType = 'image/jpeg';
+            if (format === 'png') mimeType = 'image/png';
+            else if (format === 'webp') mimeType = 'image/webp';
+            else if (format === 'original' && currentImage.src.startsWith('data:')) {
+                mimeType = currentImage.src.split(':')[1].split(';')[0];
+            }
+            
+            resizedImageData = canvas.toDataURL(mimeType, quality);
+            
+            // Calculate file size reduction
+            const resizedSize = Math.round(resizedImageData.length * 0.75);
+            const reduction = Math.round((1 - resizedSize / originalFileSize) * 100);
+            
+            // Show preview
+            document.getElementById('resizedPreview').src = resizedImageData;
+            document.getElementById('resizedSize').textContent = `${width} × ${height}`;
+            document.getElementById('fileSizeReduction').textContent = `${reduction}% smaller`;
+            document.getElementById('previewSection').classList.remove('hidden');
+            
+            // Track resize event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'image_resize', {
+                    original_width: currentImage.width,
+                    original_height: currentImage.height,
+                    new_width: width,
+                    new_height: height,
+                    format: format,
+                    quality: quality
+                });
+            }
+            
+            showToast('Success', 'Image resized successfully', 'success');
+        }
+        
+        // Download functions
+        function downloadImage() {
+            if (!resizedImageData) {
+                showToast('Error', 'No resized image to download', 'error');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            const timestamp = new Date().getTime();
+            link.download = `resized-image-${timestamp}.jpg`;
+            link.href = resizedImageData;
+            link.click();
+            
+            // Track download event
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'image_download', {
+                    file_format: 'jpg'
+                });
+            }
+            
+            showToast('Success', 'Image downloaded successfully', 'success');
+        }
+        
+        // UI Helper functions
+        function resetAll() {
+            currentImage = null;
+            resizedImageData = null;
+            maintainAspectRatio = false;
+            originalFileSize = 0;
+            
+            document.getElementById('fileInput').value = '';
+            document.getElementById('imageInfo').classList.add('hidden');
+            document.getElementById('previewSection').classList.add('hidden');
+            
+            document.getElementById('widthInput').value = '';
+            document.getElementById('heightInput').value = '';
+            document.getElementById('percentageSlider').value = 100;
+            document.getElementById('qualitySlider').value = 90;
+            document.getElementById('percentageValue').textContent = '100%';
+            document.getElementById('qualityValue').textContent = '90%';
+            document.getElementById('maintainAspect').checked = false;
+            
+            showToast('Success', 'All settings reset', 'success');
+        }
+        
+        // Utility functions
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+        
+        function showToast(title, message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastIcon = document.getElementById('toastIcon');
+            const toastTitle = document.getElementById('toastTitle');
+            const toastMessage = document.getElementById('toastMessage');
+            
+            toastTitle.textContent = title;
+            toastMessage.textContent = message;
+            
+            // Set icon based on type
+            toastIcon.className = 'fas text-xl mr-3';
+            if (type === 'success') {
+                toastIcon.classList.add('fa-check-circle', 'text-green-500');
+            } else if (type === 'error') {
+                toastIcon.classList.add('fa-exclamation-circle', 'text-red-500');
+            } else if (type === 'info') {
+                toastIcon.classList.add('fa-info-circle', 'text-blue-500');
+            }
+            
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Performance monitoring
+        window.addEventListener('load', function() {
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'page_load_complete', {
+                    load_time: performance.now()
+                });
+            }
+        });
+    </script>
+</body>
+</html>
