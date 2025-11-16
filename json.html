@@ -1,0 +1,1341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text to JSON Converter - Free Online Tool | Convert Text to JSON Format</title>
+    <meta name="description" content="Free online text to JSON converter tool. Convert plain text, CSV, key-value pairs to JSON format instantly. Features validation, pretty print, and download options.">
+    <meta name="keywords" content="text to json, json converter, online json tool, convert text json, json formatter, text parser, json validator">
+    <meta name="author" content="Text to JSON Converter">
+    <meta property="og:title" content="Text to JSON Converter - Free Online Tool">
+    <meta property="og:description" content="Convert any text to JSON format instantly with our free online converter. Support for multiple formats, validation, and export options.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://texttojsonconverter.com">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://texttojsonconverter.com">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Text to JSON Converter",
+        "description": "Free online tool to convert text to JSON format with validation and formatting options",
+        "url": "https://texttojsonconverter.com",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1e40af;
+            --secondary: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f3f4f6;
+            --bg-tertiary: #e5e7eb;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --border: #d1d5db;
+            --shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1f2937;
+            --bg-secondary: #111827;
+            --bg-tertiary: #374151;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --border: #4b5563;
+            --shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.4);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: var(--bg-primary);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: background-color 0.3s;
+        }
+
+        .header-content {
+            padding: 1rem 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo svg {
+            width: 32px;
+            height: 32px;
+        }
+
+        .header-controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .theme-toggle {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: var(--shadow);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 2rem 0;
+            background: var(--bg-primary);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .converter-section {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+        }
+
+        .mode-selector {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid var(--border);
+            background: var(--bg-primary);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .mode-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .mode-btn.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .editor-panel {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+        }
+
+        .panel-title {
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .icon-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .icon-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 400px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            resize: vertical;
+            background: var(--bg-secondary);
+            color: var(--text-primary);
+            transition: all 0.3s;
+        }
+
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+
+        .json-output {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            min-height: 400px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 14px;
+            overflow: auto;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .json-output.valid {
+            border-color: var(--secondary);
+        }
+
+        .json-output.invalid {
+            border-color: var(--danger);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 2rem;
+        }
+
+        .btn {
+            padding: 0.75rem 2rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #059669;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .options-panel {
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .option-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .option-label {
+            font-weight: 500;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .option-control {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .select {
+            padding: 0.5rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            cursor: pointer;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background: var(--bg-tertiary);
+            border-radius: 8px;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .status-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--secondary);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .error-message {
+            background: #fef2f2;
+            border: 1px solid #fecaca;
+            color: var(--danger);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        [data-theme="dark"] .error-message {
+            background: #450a0a;
+            border-color: #7f1d1d;
+        }
+
+        .success-message {
+            background: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            color: var(--secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        [data-theme="dark"] .success-message {
+            background: #052e16;
+            border-color: #14532d;
+        }
+
+        .history-section {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .history-list {
+            display: grid;
+            gap: 1rem;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .history-item:hover {
+            border-color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .history-item-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+        }
+
+        .history-time {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        .history-preview {
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        footer {
+            background: var(--bg-primary);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--primary);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: relative;
+        }
+
+        .tooltip::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            white-space: nowrap;
+            font-size: 0.85rem;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .tooltip:hover::after {
+            opacity: 1;
+        }
+
+        .char-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 {
+                font-size: 1.75rem;
+            }
+            
+            .mode-selector {
+                flex-direction: column;
+            }
+            
+            .mode-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                        <polyline points="14 2 14 8 20 8"></polyline>
+                        <line x1="16" y1="13" x2="8" y2="13"></line>
+                        <line x1="16" y1="17" x2="8" y2="17"></line>
+                        <polyline points="10 9 9 9 8 9"></polyline>
+                    </svg>
+                    Text to JSON Converter
+                </div>
+                <div class="header-controls">
+                    <button class="theme-toggle tooltip" data-tooltip="Toggle theme" onclick="toggleTheme()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1>Convert Text to JSON Instantly</h1>
+                <p>The most powerful and user-friendly text to JSON converter online. Support for multiple formats, real-time validation, and beautiful output formatting.</p>
+            </section>
+
+            <section class="converter-section">
+                <div class="mode-selector">
+                    <button class="mode-btn active" onclick="setMode('keyvalue')">Key-Value Pairs</button>
+                    <button class="mode-btn" onclick="setMode('csv')">CSV Format</button>
+                    <button class="mode-btn" onclick="setMode('lines')">Lines to Array</button>
+                    <button class="mode-btn" onclick="setMode('json')">JSON Validate</button>
+                    <button class="mode-btn" onclick="setMode('xml')">XML to JSON</button>
+                </div>
+
+                <div class="options-panel">
+                    <div class="options-grid">
+                        <div class="option-group">
+                            <label class="option-label">Indentation</label>
+                            <select class="select" id="indentSelect" onchange="updateJSON()">
+                                <option value="2">2 Spaces</option>
+                                <option value="4" selected>4 Spaces</option>
+                                <option value="tab">Tab</option>
+                                <option value="0">Minified</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Quote Style</label>
+                            <select class="select" id="quoteSelect" onchange="updateJSON()">
+                                <option value="double" selected>Double Quotes</option>
+                                <option value="single">Single Quotes</option>
+                            </select>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Options</label>
+                            <div class="option-control">
+                                <input type="checkbox" class="checkbox" id="sortKeys" onchange="updateJSON()">
+                                <label for="sortKeys">Sort Keys</label>
+                            </div>
+                        </div>
+                        <div class="option-group">
+                            <label class="option-label">Auto Convert</label>
+                            <div class="option-control">
+                                <input type="checkbox" class="checkbox" id="autoConvert" checked onchange="toggleAutoConvert()">
+                                <label for="autoConvert">Enable</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="editor-container">
+                    <div class="editor-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                    <polyline points="14 2 14 8 20 8"></polyline>
+                                </svg>
+                                Input Text
+                            </div>
+                            <div class="panel-actions">
+                                <button class="icon-btn tooltip" data-tooltip="Clear" onclick="clearInput()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="3 6 5 6 21 6"></polyline>
+                                        <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn tooltip" data-tooltip="Paste" onclick="pasteFromClipboard()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn tooltip" data-tooltip="Upload File" onclick="document.getElementById('fileInput').click()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="17 8 12 3 7 8"></polyline>
+                                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                                    </svg>
+                                </button>
+                                <input type="file" id="fileInput" style="display: none;" accept=".txt,.csv,.json,.xml" onchange="loadFile(event)">
+                            </div>
+                        </div>
+                        <textarea id="inputText" placeholder="Enter your text here...&#10;&#10;Examples:&#10;Key-Value: name: John, age: 30&#10;CSV: name,age,city&#10;Lines: Item 1&#10;Item 2&#10;Item 3" oninput="handleInput()"></textarea>
+                        <div class="char-count">
+                            <span id="charCount">0</span> characters | <span id="lineCount">0</span> lines
+                        </div>
+                    </div>
+
+                    <div class="editor-panel">
+                        <div class="panel-header">
+                            <div class="panel-title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                JSON Output
+                            </div>
+                            <div class="panel-actions">
+                                <button class="icon-btn tooltip" data-tooltip="Copy" onclick="copyToClipboard()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                                        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn tooltip" data-tooltip="Download" onclick="downloadJSON()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7 10 12 15 17 10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                </button>
+                                <button class="icon-btn tooltip" data-tooltip="Format" onclick="formatJSON()">
+                                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="4 7 4 4 20 4 20 7"></polyline>
+                                        <line x1="9" y1="20" x2="15" y2="20"></line>
+                                        <line x1="12" y1="4" x2="12" y2="20"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="jsonOutput" class="json-output">{}<br><span style="color: var(--text-secondary);">// Your JSON will appear here</span></div>
+                        <div class="status-bar">
+                            <div class="status-item">
+                                <span class="status-indicator"></span>
+                                <span id="statusText">Ready</span>
+                            </div>
+                            <div class="status-item">
+                                <span id="jsonSize">0 bytes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button class="btn btn-primary" onclick="convertToJSON()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                            <polyline points="17 6 23 6 23 12"></polyline>
+                        </svg>
+                        Convert to JSON
+                    </button>
+                    <button class="btn btn-secondary" onclick="swapPanels()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="17 1 21 5 17 9"></polyline>
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14"></path>
+                            <polyline points="7 23 3 19 7 15"></polyline>
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3"></path>
+                        </svg>
+                        Swap Panels
+                    </button>
+                    <button class="btn btn-danger" onclick="clearAll()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                        Clear All
+                    </button>
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+                <div id="successMessage" class="success-message"></div>
+            </section>
+
+            <section class="history-section">
+                <h2 style="margin-bottom: 1.5rem;">Conversion History</h2>
+                <div id="historyList" class="history-list">
+                    <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        No conversion history yet. Start converting to see your history here.
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#keyvalue">Key-Value Conversion</a></li>
+                        <li><a href="#csv">CSV to JSON</a></li>
+                        <li><a href="#validate">JSON Validation</a></li>
+                        <li><a href="#format">JSON Formatting</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Tools</h3>
+                    <ul>
+                        <li><a href="#converter">Text Converter</a></li>
+                        <li><a href="#validator">JSON Validator</a></li>
+                        <li><a href="#formatter">JSON Formatter</a></li>
+                        <li><a href="#minifier">JSON Minifier</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#docs">Documentation</a></li>
+                        <li><a href="#examples">Examples</a></li>
+                        <li><a href="#api">API Reference</a></li>
+                        <li><a href="#support">Support</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>About</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#github">GitHub</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Text to JSON Converter. All rights reserved. Built with ❤️ for developers.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        let currentMode = 'keyvalue';
+        let conversionHistory = [];
+        let autoConvertEnabled = true;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHistory();
+            updateCharCount();
+            checkTheme();
+        });
+
+        // Theme Management
+        function checkTheme() {
+            const theme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', theme);
+        }
+
+        function toggleTheme() {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        }
+
+        // Mode Management
+        function setMode(mode) {
+            currentMode = mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            const inputText = document.getElementById('inputText');
+            const placeholders = {
+                'keyvalue': 'Enter key-value pairs...\nExample:\nname: John\nage: 30\ncity: New York',
+                'csv': 'Enter CSV data...\nExample:\nname,age,city\nJohn,30,New York\nJane,25,Los Angeles',
+                'lines': 'Enter lines to convert to array...\nExample:\nItem 1\nItem 2\nItem 3',
+                'json': 'Enter JSON to validate...\nExample:\n{"name": "John", "age": 30}',
+                'xml': 'Enter XML to convert...\nExample:\n<person>\n  <name>John</name>\n  <age>30</age>\n</person>'
+            };
+            inputText.placeholder = placeholders[mode];
+            
+            if (autoConvertEnabled) {
+                convertToJSON();
+            }
+        }
+
+        // Input Handling
+        function handleInput() {
+            updateCharCount();
+            if (autoConvertEnabled) {
+                convertToJSON();
+            }
+        }
+
+        function updateCharCount() {
+            const input = document.getElementById('inputText');
+            const charCount = document.getElementById('charCount');
+            const lineCount = document.getElementById('lineCount');
+            
+            charCount.textContent = input.value.length;
+            lineCount.textContent = input.value.split('\n').length;
+        }
+
+        function toggleAutoConvert() {
+            autoConvertEnabled = document.getElementById('autoConvert').checked;
+        }
+
+        // Conversion Functions
+        function convertToJSON() {
+            const input = document.getElementById('inputText').value.trim();
+            const output = document.getElementById('jsonOutput');
+            const statusText = document.getElementById('statusText');
+            const errorMessage = document.getElementById('errorMessage');
+            const successMessage = document.getElementById('successMessage');
+            
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+            
+            if (!input) {
+                output.innerHTML = '{}<br><span style="color: var(--text-secondary);">// Your JSON will appear here</span>';
+                output.className = 'json-output';
+                statusText.textContent = 'Ready';
+                return;
+            }
+            
+            try {
+                let result = {};
+                
+                switch(currentMode) {
+                    case 'keyvalue':
+                        result = convertKeyValue(input);
+                        break;
+                    case 'csv':
+                        result = convertCSV(input);
+                        break;
+                    case 'lines':
+                        result = convertLines(input);
+                        break;
+                    case 'json':
+                        result = validateJSON(input);
+                        break;
+                    case 'xml':
+                        result = convertXML(input);
+                        break;
+                }
+                
+                const formattedJSON = formatJSONOutput(result);
+                output.textContent = formattedJSON;
+                output.className = 'json-output valid';
+                statusText.textContent = 'Valid JSON';
+                
+                updateJSONSize(formattedJSON);
+                addToHistory(input, formattedJSON);
+                showSuccess('Conversion successful!');
+                
+            } catch (error) {
+                output.textContent = error.message;
+                output.className = 'json-output invalid';
+                statusText.textContent = 'Error';
+                showError(error.message);
+            }
+        }
+
+        function convertKeyValue(text) {
+            const lines = text.split('\n').filter(line => line.trim());
+            const result = {};
+            
+            lines.forEach(line => {
+                const parts = line.split(/[:=]/);
+                if (parts.length >= 2) {
+                    const key = parts[0].trim();
+                    const value = parts.slice(1).join(':').trim();
+                    
+                    // Try to parse as number or boolean
+                    if (value === 'true') result[key] = true;
+                    else if (value === 'false') result[key] = false;
+                    else if (!isNaN(value) && value !== '') result[key] = Number(value);
+                    else result[key] = value;
+                }
+            });
+            
+            return result;
+        }
+
+        function convertCSV(text) {
+            const lines = text.split('\n').filter(line => line.trim());
+            if (lines.length < 2) throw new Error('CSV must have at least a header and one data row');
+            
+            const headers = lines[0].split(',').map(h => h.trim());
+            const result = [];
+            
+            for (let i = 1; i < lines.length; i++) {
+                const values = lines[i].split(',').map(v => v.trim());
+                const row = {};
+                
+                headers.forEach((header, index) => {
+                    const value = values[index] || '';
+                    if (value === 'true') row[header] = true;
+                    else if (value === 'false') row[header] = false;
+                    else if (!isNaN(value) && value !== '') row[header] = Number(value);
+                    else row[header] = value;
+                });
+                
+                result.push(row);
+            }
+            
+            return result;
+        }
+
+        function convertLines(text) {
+            const lines = text.split('\n').filter(line => line.trim());
+            return lines.map(line => {
+                const trimmed = line.trim();
+                if (!isNaN(trimmed) && trimmed !== '') return Number(trimmed);
+                return trimmed;
+            });
+        }
+
+        function validateJSON(text) {
+            try {
+                return JSON.parse(text);
+            } catch (error) {
+                throw new Error(`Invalid JSON: ${error.message}`);
+            }
+        }
+
+        function convertXML(text) {
+            // Simple XML to JSON conversion (basic implementation)
+            const parser = new DOMParser();
+            const xmlDoc = parser.parseFromString(text, "text/xml");
+            
+            if (xmlDoc.getElementsByTagName("parsererror").length > 0) {
+                throw new Error('Invalid XML format');
+            }
+            
+            function xmlToJson(xml) {
+                const obj = {};
+                
+                if (xml.nodeType === 1) { // element
+                    if (xml.attributes.length > 0) {
+                        obj["@attributes"] = {};
+                        for (let i = 0; i < xml.attributes.length; i++) {
+                            const attribute = xml.attributes.item(i);
+                            obj["@attributes"][attribute.nodeName] = attribute.nodeValue;
+                        }
+                    }
+                } else if (xml.nodeType === 3) { // text
+                    obj = xml.nodeValue.trim();
+                }
+                
+                if (xml.hasChildNodes()) {
+                    for (let i = 0; i < xml.childNodes.length; i++) {
+                        const item = xml.childNodes.item(i);
+                        const nodeName = item.nodeName;
+                        
+                        if (typeof(obj[nodeName]) === "undefined") {
+                            obj[nodeName] = xmlToJson(item);
+                        } else {
+                            if (typeof(obj[nodeName].push) === "undefined") {
+                                const old = obj[nodeName];
+                                obj[nodeName] = [];
+                                obj[nodeName].push(old);
+                            }
+                            obj[nodeName].push(xmlToJson(item));
+                        }
+                    }
+                }
+                
+                return obj;
+            }
+            
+            return xmlToJson(xmlDoc.documentElement);
+        }
+
+        function formatJSONOutput(data) {
+            const indent = document.getElementById('indentSelect').value;
+            const sortKeys = document.getElementById('sortKeys').checked;
+            const quoteStyle = document.getElementById('quoteSelect').value;
+            
+            let json = JSON.stringify(data, null, indent === '0' ? undefined : (indent === 'tab' ? '\t' : Number(indent)));
+            
+            if (sortKeys && typeof data === 'object' && !Array.isArray(data)) {
+                const sorted = {};
+                Object.keys(data).sort().forEach(key => {
+                    sorted[key] = data[key];
+                });
+                json = JSON.stringify(sorted, null, indent === '0' ? undefined : (indent === 'tab' ? '\t' : Number(indent)));
+            }
+            
+            if (quoteStyle === 'single') {
+                json = json.replace(/"/g, "'");
+            }
+            
+            return json;
+        }
+
+        function updateJSON() {
+            if (document.getElementById('inputText').value.trim()) {
+                convertToJSON();
+            }
+        }
+
+        function updateJSONSize(json) {
+            const bytes = new Blob([json]).size;
+            document.getElementById('jsonSize').textContent = `${bytes} bytes`;
+        }
+
+        // Utility Functions
+        function clearInput() {
+            document.getElementById('inputText').value = '';
+            updateCharCount();
+            if (autoConvertEnabled) {
+                convertToJSON();
+            }
+        }
+
+        function clearAll() {
+            document.getElementById('inputText').value = '';
+            document.getElementById('jsonOutput').innerHTML = '{}<br><span style="color: var(--text-secondary);">// Your JSON will appear here</span>';
+            document.getElementById('jsonOutput').className = 'json-output';
+            document.getElementById('statusText').textContent = 'Ready';
+            updateCharCount();
+            hideMessages();
+        }
+
+        function copyToClipboard() {
+            const output = document.getElementById('jsonOutput').textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                showSuccess('Copied to clipboard!');
+            });
+        }
+
+        function downloadJSON() {
+            const output = document.getElementById('jsonOutput').textContent;
+            const blob = new Blob([output], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `converted-${Date.now()}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+            showSuccess('JSON file downloaded!');
+        }
+
+        function formatJSON() {
+            const input = document.getElementById('inputText').value;
+            if (!input) return;
+            
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = formatJSONOutput(parsed);
+                document.getElementById('jsonOutput').textContent = formatted;
+                document.getElementById('jsonOutput').className = 'json-output valid';
+                showSuccess('JSON formatted successfully!');
+            } catch (error) {
+                showError('Invalid JSON format');
+            }
+        }
+
+        function swapPanels() {
+            const inputText = document.getElementById('inputText').value;
+            const jsonOutput = document.getElementById('jsonOutput').textContent;
+            
+            document.getElementById('inputText').value = jsonOutput;
+            document.getElementById('jsonOutput').textContent = inputText;
+            updateCharCount();
+            showSuccess('Panels swapped!');
+        }
+
+        async function pasteFromClipboard() {
+            try {
+                const text = await navigator.clipboard.readText();
+                document.getElementById('inputText').value = text;
+                updateCharCount();
+                if (autoConvertEnabled) {
+                    convertToJSON();
+                }
+                showSuccess('Text pasted from clipboard!');
+            } catch (error) {
+                showError('Failed to paste from clipboard');
+            }
+        }
+
+        function loadFile(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('inputText').value = e.target.result;
+                updateCharCount();
+                if (autoConvertEnabled) {
+                    convertToJSON();
+                }
+                showSuccess('File loaded successfully!');
+            };
+            reader.readAsText(file);
+        }
+
+        // History Management
+        function addToHistory(input, output) {
+            const historyItem = {
+                timestamp: new Date().toISOString(),
+                input: input.substring(0, 100),
+                output: output,
+                mode: currentMode
+            };
+            
+            conversionHistory.unshift(historyItem);
+            if (conversionHistory.length > 10) {
+                conversionHistory = conversionHistory.slice(0, 10);
+            }
+            
+            localStorage.setItem('conversionHistory', JSON.stringify(conversionHistory));
+            displayHistory();
+        }
+
+        function loadHistory() {
+            const saved = localStorage.getItem('conversionHistory');
+            if (saved) {
+                conversionHistory = JSON.parse(saved);
+                displayHistory();
+            }
+        }
+
+        function displayHistory() {
+            const historyList = document.getElementById('historyList');
+            
+            if (conversionHistory.length === 0) {
+                historyList.innerHTML = `
+                    <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+                        No conversion history yet. Start converting to see your history here.
+                    </div>
+                `;
+                return;
+            }
+            
+            historyList.innerHTML = conversionHistory.map((item, index) => `
+                <div class="history-item" onclick="loadFromHistory(${index})">
+                    <div class="history-item-header">
+                        <span style="font-weight: 600;">${item.mode.toUpperCase()}</span>
+                        <span class="history-time">${new Date(item.timestamp).toLocaleString()}</span>
+                    </div>
+                    <div class="history-preview">${item.input}${item.input.length >= 100 ? '...' : ''}</div>
+                </div>
+            `).join('');
+        }
+
+        function loadFromHistory(index) {
+            const item = conversionHistory[index];
+            document.getElementById('inputText').value = item.input;
+            document.getElementById('jsonOutput').textContent = item.output;
+            updateCharCount();
+            setMode(item.mode);
+            showSuccess('Loaded from history!');
+        }
+
+        // Message Functions
+        function showError(message) {
+            const errorDiv = document.getElementById('errorMessage');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            setTimeout(() => {
+                errorDiv.style.display = 'none';
+            }, 5000);
+        }
+
+        function showSuccess(message) {
+            const successDiv = document.getElementById('successMessage');
+            successDiv.textContent = message;
+            successDiv.style.display = 'block';
+            setTimeout(() => {
+                successDiv.style.display = 'none';
+            }, 3000);
+        }
+
+        function hideMessages() {
+            document.getElementById('errorMessage').style.display = 'none';
+            document.getElementById('successMessage').style.display = 'none';
+        }
+
+        // Keyboard Shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'Enter':
+                        e.preventDefault();
+                        convertToJSON();
+                        break;
+                    case 's':
+                        e.preventDefault();
+                        downloadJSON();
+                        break;
+                    case 'c':
+                        if (e.shiftKey) {
+                            e.preventDefault();
+                            copyToClipboard();
+                        }
+                        break;
+                    case 'l':
+                        e.preventDefault();
+                        clearAll();
+                        break;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
