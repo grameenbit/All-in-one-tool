@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="en-US" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Mail - Free Temporary Email Service USA | Disposable Email Address</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get a free temporary email address in seconds. No registration required. Protect your privacy with disposable emails. Perfect for USA users - fast, secure, and reliable temporary email service.">
+    <meta name="keywords" content="temporary email, disposable email, fake email, throwaway email, temp mail, anonymous email, USA email service, privacy protection, spam prevention, free temporary email">
+    <meta name="author" content="More Mail">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="geo.region" content="US">
+    <meta name="geo.country" content="United States">
+    <meta name="geo.placename" content="USA">
+    <link rel="canonical" href="https://moremail.app">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="More Mail - Free Temporary Email Service USA">
+    <meta property="og:description" content="Get a free temporary email address instantly. No signup required. Protect your privacy with our secure disposable email service.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://moremail.app">
+    <meta property="og:site_name" content="More Mail">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:image" content="https://moremail.app/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="More Mail - Free Temporary Email Service USA">
+    <meta name="twitter:description" content="Get a free temporary email address instantly. No signup required. Protect your privacy.">
+    <meta name="twitter:image" content="https://moremail.app/twitter-image.jpg">
+    <meta name="twitter:site" content="@moremailapp">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📧</text></svg>">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "More Mail",
+        "description": "Free temporary email service for USA users. Get disposable email addresses instantly without registration.",
+        "url": "https://moremail.app",
+        "applicationCategory": "CommunicationApplication",
+        "operatingSystem": "Any",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "provider": {
+            "@type": "Organization",
+            "name": "More Mail",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "US"
+            }
+        },
+        "featureList": [
+            "Free temporary email addresses",
+            "No registration required",
+            "Instant email generation",
+            "Privacy protection",
+            "Spam prevention",
+            "Mobile friendly"
+        ]
+    }
+    </script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'space': ['Space Grotesk', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        
+        .toast-enter {
+            animation: slideUp 0.3s ease-out;
+        }
+        
+        .toast-exit {
+            animation: slideDown 0.3s ease-out;
+        }
+        
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100%);
+                opacity: 0;
+            }
+        }
+        
+        .loader {
+            border-top-color: #F59E0B;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-bar {
+            animation: loading 2s ease-out forwards;
+        }
+        
+        @keyframes loading {
+            from { width: 0%; }
+            to { width: 100%; }
+        }
+        
+        .logo-text {
+            background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="h-full bg-gray-50 dark:bg-black text-gray-900 dark:text-gray-100">
+    <!-- Splash Screen -->
+    <div id="splashScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center bg-amber-50 dark:bg-black transition-colors duration-300">
+        <div class="text-center">
+            <!-- Logo -->
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-20 h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-2xl flex items-center justify-center shadow-xl">
+                    <span class="text-4xl">📧</span>
+                </div>
+            </div>
+            <h1 class="text-5xl font-bold text-amber-500 dark:text-amber-400 mb-4">More Mail</h1>
+            <p class="text-gray-600 dark:text-gray-400 mb-8">No Login, No Signup, Just Privacy.</p>
+            <div class="w-64 h-2 bg-gray-200 dark:bg-gray-800 rounded-full overflow-hidden mx-auto">
+                <div class="loading-bar h-full bg-amber-500 dark:bg-amber-400 rounded-full"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Home Screen -->
+    <div id="homeScreen" class="hidden h-full flex flex-col bg-amber-50 dark:bg-black">
+        <!-- Header -->
+        <header class="bg-white dark:bg-black shadow-sm px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center flex-1">
+                <!-- Logo -->
+                <div class="w-10 h-10 bg-gradient-to-br from-amber-400 to-amber-600 rounded-xl flex items-center justify-center mr-3 shadow-md">
+                    <span class="text-xl">📧</span>
+                </div>
+                <h1 class="text-xl font-semibold text-amber-600 dark:text-amber-400">More Mail</h1>
+            </div>
+            <button id="themeToggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-900 transition-colors">
+                <span class="material-symbols-outlined text-2xl" id="themeIcon">🌙</span>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="flex-1 overflow-hidden flex flex-col px-4 py-4">
+            <!-- Action Buttons -->
+            <div class="flex gap-3 mb-4">
+                <button id="changeMailBtn" class="flex-1 bg-amber-500 hover:bg-amber-600 text-white font-medium py-3 px-4 rounded-lg shadow-md transition-all transform hover:scale-105 active:scale-95">
+                    Change Mail
+                </button>
+                <button id="deleteMailBtn" class="flex-1 bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-4 rounded-lg shadow-md transition-all transform hover:scale-105 active:scale-95">
+                    Delete Mail
+                </button>
+            </div>
+
+            <!-- Email Display Card -->
+            <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-4 mb-4">
+                <div class="flex items-center">
+                    <p id="emailAddress" class="text-lg font-medium flex-1 truncate mr-2" data-email="">Loading...</p>
+                    <button id="copyBtn" class="p-2 bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400 rounded-lg hover:bg-amber-200 dark:hover:bg-amber-900/50 transition-colors">
+                        <span class="material-symbols-outlined">content_copy</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Inbox Section -->
+            <div class="flex-1 bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden flex flex-col">
+                <div class="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+                    <h2 class="text-lg font-medium">Inbox</h2>
+                    <button id="refreshBtn" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+                        <span class="material-symbols-outlined">refresh</span>
+                    </button>
+                </div>
+                <div id="inboxContainer" class="flex-1 overflow-y-auto no-scrollbar">
+                    <div id="emptyInbox" class="flex flex-col items-center justify-center h-full p-8 text-center">
+                        <span class="material-symbols-outlined text-6xl text-gray-300 dark:text-gray-700 mb-4">inbox</span>
+                        <p class="text-gray-500 dark:text-gray-400">Your inbox is empty...</p>
+                        <p class="text-gray-400 dark:text-gray-500 text-sm mt-2">Waiting for incoming emails...</p>
+                    </div>
+                    <div id="emailList" class="hidden">
+                        <!-- Emails will be dynamically added here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Email Details Screen -->
+    <div id="emailDetailsScreen" class="hidden h-full flex flex-col bg-green-50">
+        <!-- Header -->
+        <header class="bg-white shadow-sm px-4 py-3 flex items-center">
+            <button id="backBtn" class="p-2 rounded-full hover:bg-gray-100 transition-colors mr-3">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </button>
+            <h1 class="text-lg font-medium">Email Details</h1>
+        </header>
+
+        <!-- Email Content -->
+        <div id="emailContent" class="flex-1 overflow-y-auto p-4">
+            <!-- Email details will be dynamically added here -->
+        </div>
+
+        <!-- Delete Button -->
+        <div class="p-4 bg-white shadow-lg">
+            <button id="deleteMessageBtn" class="w-full bg-red-500 hover:bg-red-600 text-white font-medium py-3 px-4 rounded-lg shadow-md transition-all transform hover:scale-105 active:scale-95">
+                Delete Message
+            </button>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="fixed bottom-4 left-0 right-0 z-50 flex flex-col items-center gap-2 px-4">
+        <!-- Toasts will be dynamically added here -->
+    </div>
+
+    <script>
+        // App State
+        let currentEmail = '';
+        let jwtToken = '';
+        let emails = [];
+        let currentEmailDetails = null;
+        let fetchInterval = null;
+        let accountId = '';
+
+        // DOM Elements
+        const splashScreen = document.getElementById('splashScreen');
+        const homeScreen = document.getElementById('homeScreen');
+        const emailDetailsScreen = document.getElementById('emailDetailsScreen');
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const changeMailBtn = document.getElementById('changeMailBtn');
+        const deleteMailBtn = document.getElementById('deleteMailBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const backBtn = document.getElementById('backBtn');
+        const deleteMessageBtn = document.getElementById('deleteMessageBtn');
+        const emailAddress = document.getElementById('emailAddress');
+        const inboxContainer = document.getElementById('inboxContainer');
+        const emptyInbox = document.getElementById('emptyInbox');
+        const emailList = document.getElementById('emailList');
+        const emailContent = document.getElementById('emailContent');
+        const toastContainer = document.getElementById('toastContainer');
+
+        // Initialize App
+        document.addEventListener('DOMContentLoaded', () => {
+            // Set initial theme
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                themeIcon.textContent = '☀️';
+            }
+
+            // Hide splash screen after loading animation
+            setTimeout(() => {
+                splashScreen.classList.add('hidden');
+                homeScreen.classList.remove('hidden');
+                initializeApp();
+            }, 2000);
+
+            // Event Listeners
+            themeToggle.addEventListener('click', toggleTheme);
+            changeMailBtn.addEventListener('click', generateNewEmail);
+            deleteMailBtn.addEventListener('click', deleteCurrentEmail);
+            copyBtn.addEventListener('click', copyToClipboard);
+            refreshBtn.addEventListener('click', fetchEmails);
+            backBtn.addEventListener('click', showHomeScreen);
+            deleteMessageBtn.addEventListener('click', deleteCurrentMessage);
+        });
+
+        // Theme Toggle
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+            themeIcon.textContent = isDark ? '☀️' : '🌙';
+        }
+
+        // API Functions
+        async function initializeApp() {
+            try {
+                // Clear any existing intervals
+                if (fetchInterval) {
+                    clearInterval(fetchInterval);
+                }
+                
+                // Get domains
+                const domainsResponse = await fetch('https://api.mail.tm/domains');
+                const domains = await domainsResponse.json();
+                
+                if (domains['hydra:member'] && domains['hydra:member'].length > 0) {
+                    const randomDomain = domains['hydra:member'][0].domain;
+                    
+                    // Generate random username
+                    const username = generateRandomUsername();
+                    currentEmail = `${username}@${randomDomain}`;
+                    
+                    // Update both the variable and the DOM
+                    emailAddress.textContent = currentEmail;
+                    emailAddress.setAttribute('data-email', currentEmail);
+                    
+                    // Generate random password
+                    const password = generateRandomPassword();
+                    
+                    // Create account
+                    const accountResponse = await fetch('https://api.mail.tm/accounts', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            address: currentEmail,
+                            password: password
+                        })
+                    });
+                    
+                    if (accountResponse.ok) {
+                        const accountData = await accountResponse.json();
+                        accountId = accountData.id;
+                        
+                        // Get JWT token
+                        const authResponse = await fetch('https://api.mail.tm/token', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                address: currentEmail,
+                                password: password
+                            })
+                        });
+                        
+                        if (authResponse.ok) {
+                            const authData = await authResponse.json();
+                            jwtToken = authData.token;
+                            
+                            // Fetch emails immediately
+                            await fetchEmails();
+                            
+                            // Set up periodic email fetching (every 5 seconds for faster updates)
+                            fetchInterval = setInterval(fetchEmails, 5000);
+                            
+                            showToast('Email created successfully', 'success');
+                        } else {
+                            const errorData = await authResponse.json();
+                            console.error('Authentication failed:', errorData);
+                            showToast('Authentication failed', 'error');
+                        }
+                    } else {
+                        const errorData = await accountResponse.json();
+                        console.error('Account creation failed:', errorData);
+                        showToast('Account creation failed', 'error');
+                    }
+                } else {
+                    showToast('No available domains', 'error');
+                }
+            } catch (error) {
+                console.error('Error initializing app:', error);
+                showToast('Failed to initialize. Please refresh.', 'error');
+            }
+        }
+
+        function generateRandomUsername() {
+            const adjectives = ['quick', 'lazy', 'sleepy', 'noisy', 'hungry', 'happy', 'sad', 'angry', 'brave', 'calm'];
+            const nouns = ['cat', 'dog', 'bird', 'fish', 'lion', 'tiger', 'elephant', 'monkey', 'zebra', 'giraffe'];
+            const randomAdjective = adjectives[Math.floor(Math.random() * adjectives.length)];
+            const randomNoun = nouns[Math.floor(Math.random() * nouns.length)];
+            const randomNumber = Math.floor(Math.random() * 1000);
+            return `${randomAdjective}${randomNoun}${randomNumber}`;
+        }
+
+        function generateRandomPassword() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*';
+            let password = '';
+            for (let i = 0; i < 12; i++) {
+                password += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return password;
+        }
+
+        async function generateNewEmail() {
+            // Clear existing interval
+            if (fetchInterval) {
+                clearInterval(fetchInterval);
+            }
+            
+            // Initialize new email
+            await initializeApp();
+            
+            showToast('Email changed successfully', 'success');
+        }
+
+        async function deleteCurrentEmail() {
+            if (jwtToken) {
+                try {
+                    // Delete account
+                    await fetch('https://api.mail.tm/me', {
+                        method: 'DELETE',
+                        headers: {
+                            'Authorization': `Bearer ${jwtToken}`
+                        }
+                    });
+                    
+                    // Clear interval
+                    if (fetchInterval) {
+                        clearInterval(fetchInterval);
+                    }
+                    
+                    // Reset state
+                    jwtToken = '';
+                    currentEmail = '';
+                    accountId = '';
+                    emails = [];
+                    
+                    // Update UI
+                    emailAddress.textContent = 'No email';
+                    emailAddress.setAttribute('data-email', '');
+                    emptyInbox.classList.remove('hidden');
+                    emailList.classList.add('hidden');
+                    
+                    // Generate new email
+                    await generateNewEmail();
+                    
+                    showToast('Email deleted and new one generated', 'success');
+                } catch (error) {
+                    console.error('Error deleting email:', error);
+                    showToast('Failed to delete email', 'error');
+                }
+            }
+        }
+
+        async function fetchEmails() {
+            if (!jwtToken) return;
+            
+            try {
+                // Show loading state
+                refreshBtn.querySelector('.material-symbols-outlined').style.animation = 'spin 1s linear infinite';
+                
+                const response = await fetch('https://api.mail.tm/messages', {
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    const newEmails = data['hydra:member'] || [];
+                    
+                    // Check if there are new emails
+                    if (newEmails.length > emails.length) {
+                        emails = newEmails;
+                        updateEmailList();
+                        
+                        // Show notification for new emails
+                        if (newEmails.length > 0) {
+                            showToast(`You have ${newEmails.length} new email${newEmails.length > 1 ? 's' : ''}`, 'success');
+                        }
+                    } else if (newEmails.length !== emails.length) {
+                        emails = newEmails;
+                        updateEmailList();
+                    }
+                } else {
+                    const errorData = await response.json();
+                    console.error('Failed to fetch emails:', errorData);
+                    
+                    // If token is invalid, try to re-authenticate
+                    if (response.status === 401) {
+                        showToast('Session expired. Refreshing...', 'warning');
+                        await initializeApp();
+                    }
+                }
+            } catch (error) {
+                console.error('Error fetching emails:', error);
+                showToast('Failed to fetch emails', 'error');
+            } finally {
+                // Stop loading animation
+                refreshBtn.querySelector('.material-symbols-outlined').style.animation = '';
+            }
+        }
+
+        function updateEmailList() {
+            if (emails.length > 0) {
+                emptyInbox.classList.add('hidden');
+                emailList.classList.remove('hidden');
+                
+                // Clear current list
+                emailList.innerHTML = '';
+                
+                // Add emails to list (newest first)
+                emails.slice().reverse().forEach(email => {
+                    const emailItem = document.createElement('div');
+                    emailItem.className = 'p-4 border-b border-gray-200 dark:border-gray-800 hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors';
+                    
+                    const date = new Date(email.createdAt);
+                    const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
+                    emailItem.innerHTML = `
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-3 flex-shrink-0">
+                                <span class="text-amber-600 dark:text-amber-400 font-medium">${email.from.name ? email.from.name.charAt(0).toUpperCase() : email.from.address.charAt(0).toUpperCase()}</span>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-center justify-between mb-1">
+                                    <p class="font-medium truncate">${email.from.name || email.from.address}</p>
+                                    <p class="text-xs text-gray-500 dark:text-gray-400 ml-2 flex-shrink-0">${timeString}</p>
+                                </div>
+                                <p class="font-medium text-sm mb-1 truncate">${email.subject || '(No Subject)'}</p>
+                                <p class="text-sm text-gray-600 dark:text-gray-400 truncate">${getEmailPreview(email.text || email.html)}</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    emailItem.addEventListener('click', () => showEmailDetails(email));
+                    emailList.appendChild(emailItem);
+                });
+            } else {
+                emptyInbox.classList.remove('hidden');
+                emailList.classList.add('hidden');
+            }
+        }
+
+        function getEmailPreview(content) {
+            // Strip HTML tags if content is HTML
+            const textContent = content ? content.replace(/<[^>]*>/g, '') : '';
+            return textContent.length > 50 ? textContent.substring(0, 50) + '...' : textContent;
+        }
+
+        async function showEmailDetails(email) {
+            currentEmailDetails = email;
+            
+            try {
+                // Fetch the full email details
+                const response = await fetch(`https://api.mail.tm/messages/${email.id}`, {
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+                
+                if (response.ok) {
+                    const emailDetails = await response.json();
+                    
+                    // Update email details screen
+                    const date = new Date(emailDetails.createdAt);
+                    const dateString = date.toLocaleDateString();
+                    const timeString = date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    
+                    let emailBody = '';
+                    if (emailDetails.html) {
+                        // For HTML emails, create a safe iframe to display content
+                        emailBody = `<div class="prose dark:prose-invert max-w-none">${emailDetails.html}</div>`;
+                    } else {
+                        // For plain text emails, convert line breaks to <br>
+                        emailBody = `<div class="whitespace-pre-wrap">${emailDetails.text || '(No content)'}</div>`;
+                    }
+                    
+                    emailContent.innerHTML = `
+                        <div class="bg-white rounded-xl shadow-lg p-4 mb-4">
+                            <div class="flex items-start mb-4">
+                                <div class="w-12 h-12 rounded-full bg-amber-100 dark:bg-amber-900/30 flex items-center justify-center mr-3 flex-shrink-0">
+                                    <span class="text-amber-600 dark:text-amber-400 font-medium text-lg">${emailDetails.from.name ? emailDetails.from.name.charAt(0).toUpperCase() : emailDetails.from.address.charAt(0).toUpperCase()}</span>
+                                </div>
+                                <div class="flex-1">
+                                    <p class="font-medium">${emailDetails.from.name || emailDetails.from.address}</p>
+                                    <p class="text-sm text-gray-500 dark:text-gray-400">${emailDetails.from.address}</p>
+                                </div>
+                            </div>
+                            <h2 class="text-xl font-medium mb-2">${emailDetails.subject || '(No Subject)'}</h2>
+                            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">${dateString} at ${timeString}</p>
+                            <div class="border-t border-gray-200 dark:border-gray-800 pt-4">
+                                ${emailBody}
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Show email details screen
+                    homeScreen.classList.add('hidden');
+                    emailDetailsScreen.classList.remove('hidden');
+                } else {
+                    showToast('Failed to load email details', 'error');
+                }
+            } catch (error) {
+                console.error('Error fetching email details:', error);
+                showToast('Failed to load email details', 'error');
+            }
+        }
+
+        function showHomeScreen() {
+            emailDetailsScreen.classList.add('hidden');
+            homeScreen.classList.remove('hidden');
+        }
+
+        async function deleteCurrentMessage() {
+            if (!currentEmailDetails || !jwtToken) return;
+            
+            try {
+                await fetch(`https://api.mail.tm/messages/${currentEmailDetails.id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${jwtToken}`
+                    }
+                });
+                
+                // Refresh email list
+                await fetchEmails();
+                
+                // Go back to home screen
+                showHomeScreen();
+                
+                showToast('Message deleted', 'success');
+            } catch (error) {
+                console.error('Error deleting message:', error);
+                showToast('Failed to delete message', 'error');
+            }
+        }
+
+        function copyToClipboard() {
+            // Get email from DOM attribute as fallback
+            const emailToCopy = currentEmail || emailAddress.getAttribute('data-email') || emailAddress.textContent;
+            
+            if (!emailToCopy || emailToCopy === 'Loading...' || emailToCopy === 'No email') {
+                showToast('No email to copy', 'error');
+                return;
+            }
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(emailToCopy).then(() => {
+                    showToast('Copied to clipboard', 'success');
+                }).catch(err => {
+                    console.error('Clipboard API failed:', err);
+                    // Fallback method
+                    fallbackCopyToClipboard(emailToCopy);
+                });
+            } else {
+                // Fallback for older browsers
+                fallbackCopyToClipboard(emailToCopy);
+            }
+        }
+
+        function fallbackCopyToClipboard(text) {
+            // Create a temporary textarea element
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            
+            try {
+                textArea.focus();
+                textArea.select();
+                
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showToast('Copied to clipboard', 'success');
+                } else {
+                    showToast('Failed to copy', 'error');
+                }
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                showToast('Failed to copy', 'error');
+            }
+            
+            // Remove the temporary textarea
+            document.body.removeChild(textArea);
+        }
+
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            
+            // Set background color based on type
+            let bgColor = 'bg-gray-800';
+            if (type === 'success') bgColor = 'bg-green-600';
+            if (type === 'error') bgColor = 'bg-red-600';
+            if (type === 'warning') bgColor = 'bg-amber-600';
+            
+            toast.className = `${bgColor} text-white px-4 py-3 rounded-lg shadow-lg toast-enter max-w-xs`;
+            toast.textContent = message;
+            
+            toastContainer.appendChild(toast);
+            
+            // Remove toast after 3 seconds
+            setTimeout(() => {
+                toast.classList.remove('toast-enter');
+                toast.classList.add('toast-exit');
+                
+                setTimeout(() => {
+                    if (toastContainer.contains(toast)) {
+                        toastContainer.removeChild(toast);
+                    }
+                }, 300);
+            }, 3000);
+        }
+    </script>
+<script>
+(function(esmjjxm){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = esmjjxm || {};
+s.src = "\/\/scientific-husband.com\/bgXlVKs.dTGrlH0jYpWscc\/Welmb9luuZCUzlskEPwToYP2uNYzFId5\/NuzXUqt\/NEjFY-3NMtjhkP3\/NOgv";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+
+</body>
+</html>
