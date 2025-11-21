@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1 Point — Shorten URLs Instantly</title>
+  <meta name="description" content="Shorten URLs instantly with 1 Point. Made by Param. No ads on content, only bottom banner for support.">
+  <meta name="keywords" content="url shortener, link shortener, 1pt.co, Param, free url shortener">
+  <meta name="author" content="Param">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://1pt.co/">
+
+  <!-- Open Graph Tags -->
+  <meta property="og:title" content="1 Point — Shorten URLs Instantly">
+  <meta property="og:description" content="Free URL shortener service by Param. Clean interface, no content ads.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://1pt.co/">
+  <meta property="og:image" content="https://1pt.co/thumbnail.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="1 Point — Shorten URLs Instantly">
+  <meta name="twitter:description" content="Free URL shortener service by Param. Clean interface, no content ads.">
+
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    }
+    .content-iframe {
+      width: 100vw;
+      height: calc(100vh - 60px); /* 60px for ad banner height */
+      border: none;
+      display: block;
+    }
+    .ad-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border-top: 1px solid #e0e0e0;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <!-- Main Content: Embedded 1pt.co Interface -->
+  <iframe class="content-iframe" src="https://1pt.co/" allowtransparency="true"></iframe>
+
+  <!-- Fixed Banner Ads at Bottom -->
+  <div class="ad-banner" id="ad-container">
+    <<script>
+(function(chcuto){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = chcuto || {};
+s.src = "\/\/scientific-husband.com\/bhX\/V.sDdEGwl\/0\/YWWmch\/cermv9oubZSUclok\/P\/TDYh2VNVz\/UZwlMMz\/Ict-NnjUYv3\/NWTAAuzpMYwI";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+</script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/a50d45a54eb76b75a5a0798690458c37/invoke.js"></script>
+  </div>
+
+  <!-- Safety Note: Added for transparency -->
+  <script>
+    // Block all redirects from iframe content
+    window.addEventListener('DOMContentLoaded', () => {
+      const iframe = document.querySelector('.content-iframe');
+      iframe.addEventListener('load', () => {
+        try {
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          iframeDoc.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', e => {
+              e.preventDefault();
+              window.open(link.href, '_blank'); // Force external links to open in new tab
+            });
+          });
+        } catch (err) {
+          console.log('Cannot access iframe content due to CORS restrictions');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
