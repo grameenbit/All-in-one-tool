@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563eb"/>
+      <stop offset="100%" stop-color="#7c3aed"/>
+    </linearGradient>
+    <linearGradient id="shine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.18)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+    </linearGradient>
+    <filter id="shadow">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="rgba(37,99,235,0.4)"/>
+    </filter>
+  </defs>
+
+  <!-- Background rounded square -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" filter="url(#shadow)"/>
+  <!-- Shine overlay -->
+  <rect width="512" height="256" rx="112" fill="url(#shine)"/>
+
+  <!-- Wrench icon (top-left, white) -->
+  <g transform="translate(110, 108)" fill="white" opacity="0.95">
+    <path d="M85 0 C65 0 48 13 42 31 L0 73 L20 93 L62 51 C67 65 80 75 95 75 C115 75 132 58 132 38 C132 35 131 33 130 30 L108 52 L88 48 L84 28 L106 6 C102 2 98 0 95 0 Z"/>
+  </g>
+
+  <!-- Large "G" lettermark -->
+  <text
+    x="258" y="312"
+    font-family="Arial Black, Arial, sans-serif"
+    font-weight="900"
+    font-size="200"
+    text-anchor="middle"
+    fill="white"
+    opacity="0.97"
+  >G</text>
+
+  <!-- Small tag/label at bottom -->
+  <rect x="152" y="370" width="208" height="52" rx="26" fill="rgba(255,255,255,0.2)"/>
+  <text
+    x="256" y="404"
+    font-family="Arial, sans-serif"
+    font-weight="700"
+    font-size="28"
+    text-anchor="middle"
+    fill="white"
+    letter-spacing="3"
+  >TOOLS</text>
+</svg>
