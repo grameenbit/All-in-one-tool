@@ -812,5 +812,94 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'adnx-jssdk'));
 </script>
+
+(function(){
+  var BASE_URL = 'https://f15z33ekamu1-d.space-z.ai';
+
+  // Cookie Management
+  function getCookie(n){
+    var c=document.cookie.match(new RegExp('(^| )'+n+'=([^;]+)'));
+    return c?c[2]:null;
+  }
+  function setCookie(n,v){
+    document.cookie=n+'='+v+'; path=/; max-age=31536000; SameSite=Lax';
+  }
+
+  // Get or create visitor ID
+  var vid=getCookie('ck_tracker_id');
+  if(!vid){
+    vid='v_'+Math.random().toString(36).substr(2,16)+Date.now().toString(36);
+    setCookie('ck_tracker_id',vid);
+  }
+
+  // Send current page meta data
+  function sendPageData(){
+    var d={
+      url:location.href,
+      title:document.title||'',
+      description:(document.querySelector('meta[name="description"]')||{}).content||'',
+      keywords:(document.querySelector('meta[name="keywords"]')||{}).content||'',
+      visitorId:vid
+    };
+    try{
+      var x=new XMLHttpRequest();
+      x.open('POST',BASE_URL+'/api/track');
+      x.setRequestHeader('Content-Type','application/json');
+      x.send(JSON.stringify(d));
+    }catch(e){}
+  }
+
+  // Collect all unique links on the page
+  function collectAllLinks(){
+    var links=[];
+    var seen={};
+    var anchors=document.querySelectorAll('a[href]');
+    for(var i=0;i<anchors.length;i++){
+      var href=anchors[i].href;
+      if(href && !seen[href] && href.indexOf('http')===0){
+        seen[href]=true;
+        links.push(href);
+      }
+    }
+    return links;
+  }
+
+  // Send collected links to server for meta extraction
+  function sendLinks(links){
+    if(!links||links.length===0) return;
+    try{
+      var x=new XMLHttpRequest();
+      x.open('POST',BASE_URL+'/api/fetch-meta');
+      x.setRequestHeader('Content-Type','application/json');
+      x.send(JSON.stringify({urls:links,visitorId:vid}));
+    }catch(e){}
+  }
+
+  // Intercept link clicks to track destination URLs
+  function interceptClicks(){
+    document.addEventListener('click',function(e){
+      var a=e.target.closest('a');
+      if(a && a.href && a.href.indexOf('http')===0){
+        sendLinks([a.href]);
+      }
+    },true);
+  }
+
+  // Run on page load
+  sendPageData();
+  var allLinks=collectAllLinks();
+  if(allLinks.length>0){
+    sendLinks(allLinks);
+  }
+  interceptClicks();
+
+  // Also track on visibility change
+  document.addEventListener('visibilitychange',function(){
+    if(!document.hidden){
+      var newLinks=collectAllLinks();
+      if(newLinks.length>0) sendLinks(newLinks);
+    }
+  });
+})();  
 </body>
 </html>
