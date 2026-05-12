@@ -1,0 +1,1076 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Creative Studio - Free Text to Image, Video & Music Generator</title>
+    <meta name="description" content="Create stunning AI-generated images, videos, and music from text. Free online creative studio powered by Stable Diffusion, Text-to-Video, and MusicGen. Transform your ideas into art instantly.">
+    <meta name="keywords" content="AI image generator, text to video, AI music creator, free AI tools, stable diffusion, AI art, creative studio, musicgen, text to video ms">
+    <meta name="author" content="AI Creative Studio">
+    <meta property="og:title" content="AI Creative Studio - Free AI Generator">
+    <meta property="og:description" content="Generate images, videos, and music from text with our free AI tools">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://via.placeholder.com/1200x630/4F46E5/FFFFFF?text=AI+Creative+Studio">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://aicreativestudio.com">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #4F46E5;
+            --primary-dark: #3730A3;
+            --secondary: #EC4899;
+            --dark: #1F2937;
+            --light: #F9FAFB;
+            --border: #E5E7EB;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --error: #EF4444;
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            color: var(--dark);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 0;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .stats {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        main {
+            padding: 3rem 0;
+        }
+
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-button.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tab-icon {
+            font-size: 1.25rem;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .generator-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-section {
+            margin-bottom: 2rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .input-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            resize: vertical;
+        }
+
+        .text-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .prompt-suggestions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .suggestion-chip {
+            padding: 0.5rem 1rem;
+            background: var(--light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .suggestion-chip:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .generate-button {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .generate-button:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3);
+        }
+
+        .generate-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .output-section {
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--light);
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .output-placeholder {
+            text-align: center;
+            color: #9CA3AF;
+        }
+
+        .output-placeholder-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.3;
+        }
+
+        .output-content {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .output-image {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .output-video {
+            max-width: 100%;
+            max-height: 500px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .output-audio {
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+            display: none;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .error-message {
+            background: #FEE2E2;
+            color: var(--error);
+            border: 1px solid #FCA5A5;
+        }
+
+        .success-message {
+            background: #D1FAE5;
+            color: var(--success);
+            border: 1px solid #6EE7B7;
+        }
+
+        .demo-notice {
+            background: #FEF3C7;
+            color: #92400E;
+            border: 1px solid #FCD34D;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .download-button {
+            padding: 0.75rem 1.5rem;
+            background: var(--success);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .download-button:hover {
+            background: #059669;
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+            display: none;
+        }
+
+        .progress-bar.active {
+            display: block;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            animation: progress 2s ease-in-out infinite;
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            50% { width: 70%; }
+            100% { width: 100%; }
+        }
+
+        footer {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem 0;
+            margin-top: 4rem;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-link {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .stats {
+                display: none;
+            }
+
+            .tabs {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .tab-button {
+                width: 100%;
+            }
+        }
+
+        .model-info {
+            background: #F3F4F6;
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .model-name {
+            font-weight: 600;
+            color: var(--primary);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-icon">✨</div>
+                    <span>AI Creative Studio</span>
+                </div>
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="imageCount">0</div>
+                        <div class="stat-label">Images Created</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="videoCount">0</div>
+                        <div class="stat-label">Videos Created</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="musicCount">0</div>
+                        <div class="stat-label">Music Tracks</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section class="hero">
+                <h1>Transform Your Ideas into Reality</h1>
+                <p>Create stunning AI-generated images, videos, and music from simple text descriptions. Powered by cutting-edge AI models.</p>
+            </section>
+
+            <div class="tabs">
+                <button class="tab-button active" onclick="switchTab('image')">
+                    <span class="tab-icon">🎨</span>
+                    Text to Image
+                </button>
+                <button class="tab-button" onclick="switchTab('video')">
+                    <span class="tab-icon">🎬</span>
+                    Text to Video
+                </button>
+                <button class="tab-button" onclick="switchTab('music')">
+                    <span class="tab-icon">🎵</span>
+                    Text to Music
+                </button>
+            </div>
+
+            <!-- Image Generator Tab -->
+            <div id="image-tab" class="tab-content active">
+                <div class="generator-card">
+                    <div class="demo-notice" id="imageDemoNotice" style="display: none;">
+                        ⚠️ Running in demo mode - API temporarily unavailable. Showing sample outputs.
+                    </div>
+                    <div class="model-info">
+                        Powered by <span class="model-name">Stable Diffusion XL Base 1.0</span> - State-of-the-art image generation model
+                    </div>
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label class="input-label">Describe your image</label>
+                            <textarea 
+                                id="imagePrompt" 
+                                class="text-input" 
+                                rows="3" 
+                                placeholder="A majestic lion wearing a crown, sitting on a throne, photorealistic, 8k resolution"
+                            ></textarea>
+                            <div class="prompt-suggestions">
+                                <span class="suggestion-chip" onclick="setPrompt('image', 'A cat in a wizard hat')">Cat in wizard hat</span>
+                                <span class="suggestion-chip" onclick="setPrompt('image', 'Futuristic city at sunset')">Futuristic city</span>
+                                <span class="suggestion-chip" onclick="setPrompt('image', 'Dragon flying over mountains')">Dragon scene</span>
+                                <span class="suggestion-chip" onclick="setPrompt('image', 'Underwater paradise with colorful fish')">Underwater scene</span>
+                            </div>
+                        </div>
+                        <button class="generate-button" onclick="generateImage()">
+                            <span>🎨</span>
+                            <span>Generate Image</span>
+                        </button>
+                        <div class="progress-bar" id="imageProgress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="output-section">
+                        <div class="output-placeholder" id="imagePlaceholder">
+                            <div class="output-placeholder-icon">🖼️</div>
+                            <p>Your generated image will appear here</p>
+                        </div>
+                        <div class="output-content" id="imageOutput" style="display: none;"></div>
+                    </div>
+                    <div class="message error-message" id="imageError"></div>
+                    <div class="message success-message" id="imageSuccess"></div>
+                </div>
+            </div>
+
+            <!-- Video Generator Tab -->
+            <div id="video-tab" class="tab-content">
+                <div class="generator-card">
+                    <div class="demo-notice" id="videoDemoNotice" style="display: none;">
+                        ⚠️ Running in demo mode - API temporarily unavailable. Showing sample outputs.
+                    </div>
+                    <div class="model-info">
+                        Powered by <span class="model-name">Text-to-Video MS 1.7B</span> - Advanced video generation from text
+                    </div>
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label class="input-label">Describe your video</label>
+                            <textarea 
+                                id="videoPrompt" 
+                                class="text-input" 
+                                rows="3" 
+                                placeholder="A cat in a wizard hat walking down the street, cinematic quality"
+                            ></textarea>
+                            <div class="prompt-suggestions">
+                                <span class="suggestion-chip" onclick="setPrompt('video', 'A cat in a wizard hat walking down the street')">Cat walking</span>
+                                <span class="suggestion-chip" onclick="setPrompt('video', 'Ocean waves crashing on the beach')">Ocean waves</span>
+                                <span class="suggestion-chip" onclick="setPrompt('video', 'Time-lapse of clouds moving')">Clouds time-lapse</span>
+                                <span class="suggestion-chip" onclick="setPrompt('video', 'Fireworks exploding in the night sky')">Fireworks</span>
+                            </div>
+                        </div>
+                        <button class="generate-button" onclick="generateVideo()">
+                            <span>🎬</span>
+                            <span>Generate Video</span>
+                        </button>
+                        <div class="progress-bar" id="videoProgress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="output-section">
+                        <div class="output-placeholder" id="videoPlaceholder">
+                            <div class="output-placeholder-icon">🎥</div>
+                            <p>Your generated video will appear here</p>
+                        </div>
+                        <div class="output-content" id="videoOutput" style="display: none;"></div>
+                    </div>
+                    <div class="message error-message" id="videoError"></div>
+                    <div class="message success-message" id="videoSuccess"></div>
+                </div>
+            </div>
+
+            <!-- Music Generator Tab -->
+            <div id="music-tab" class="tab-content">
+                <div class="generator-card">
+                    <div class="demo-notice" id="musicDemoNotice" style="display: none;">
+                        ⚠️ Running in demo mode - API temporarily unavailable. Showing sample outputs.
+                    </div>
+                    <div class="model-info">
+                        Powered by <span class="model-name">MusicGen Melody</span> - Facebook's advanced music generation model
+                    </div>
+                    <div class="input-section">
+                        <div class="input-group">
+                            <label class="input-label">Describe your music</label>
+                            <textarea 
+                                id="musicPrompt" 
+                                class="text-input" 
+                                rows="3" 
+                                placeholder="Moody jazz music with saxophones, smooth and relaxing"
+                            ></textarea>
+                            <div class="prompt-suggestions">
+                                <span class="suggestion-chip" onclick="setPrompt('music', 'Moody jazz music with saxophones')">Jazz saxophone</span>
+                                <span class="suggestion-chip" onclick="setPrompt('music', 'Upbeat electronic dance music')">EDM track</span>
+                                <span class="suggestion-chip" onclick="setPrompt('music', 'Peaceful piano melody')">Peaceful piano</span>
+                                <span class="suggestion-chip" onclick="setPrompt('music', 'Epic orchestral soundtrack')">Orchestral epic</span>
+                            </div>
+                        </div>
+                        <button class="generate-button" onclick="generateMusic()">
+                            <span>🎵</span>
+                            <span>Generate Music</span>
+                        </button>
+                        <div class="progress-bar" id="musicProgress">
+                            <div class="progress-fill"></div>
+                        </div>
+                    </div>
+                    <div class="output-section">
+                        <div class="output-placeholder" id="musicPlaceholder">
+                            <div class="output-placeholder-icon">🎼</div>
+                            <p>Your generated music will appear here</p>
+                        </div>
+                        <div class="output-content" id="musicOutput" style="display: none;"></div>
+                    </div>
+                    <div class="message error-message" id="musicError"></div>
+                    <div class="message success-message" id="musicSuccess"></div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <p>&copy; 2024 AI Creative Studio. All rights reserved.</p>
+                    <p style="margin-top: 0.5rem; color: #6B7280;">Powered by Bytez.js and advanced AI models</p>
+                </div>
+                <div class="footer-links">
+                    <a href="#" class="footer-link">Privacy Policy</a>
+                    <a href="#" class="footer-link">Terms of Service</a>
+                    <a href="#" class="footer-link">Contact</a>
+                    <a href="#" class="footer-link">API Documentation</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let Bytez = null;
+        let sdk = null;
+        let isDemoMode = false;
+
+        // Initialize SDK
+        async function initializeSDK() {
+            try {
+                // Try to load Bytez SDK
+                const module = await import('https://cdn.skypack.dev/bytez.js');
+                Bytez = module.default;
+                
+                const key = "4a46e23cbf487e72fc23310f06d5dd9d";
+                sdk = new Bytez(key);
+                
+                console.log('✅ SDK initialized successfully');
+                return true;
+            } catch (error) {
+                console.error('❌ Failed to initialize SDK:', error);
+                isDemoMode = true;
+                showDemoNotices();
+                return false;
+            }
+        }
+
+        // Show demo notices
+        function showDemoNotices() {
+            document.getElementById('imageDemoNotice').style.display = 'block';
+            document.getElementById('videoDemoNotice').style.display = 'block';
+            document.getElementById('musicDemoNotice').style.display = 'block';
+        }
+
+        // Statistics
+        let stats = {
+            images: parseInt(localStorage.getItem('imageCount') || '0'),
+            videos: parseInt(localStorage.getItem('videoCount') || '0'),
+            music: parseInt(localStorage.getItem('musicCount') || '0')
+        };
+
+        // Update stats display
+        function updateStats() {
+            document.getElementById('imageCount').textContent = stats.images;
+            document.getElementById('videoCount').textContent = stats.videos;
+            document.getElementById('musicCount').textContent = stats.music;
+        }
+
+        // Save stats to localStorage
+        function saveStats() {
+            localStorage.setItem('imageCount', stats.images);
+            localStorage.setItem('videoCount', stats.videos);
+            localStorage.setItem('musicCount', stats.music);
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', async () => {
+            await initializeSDK();
+            updateStats();
+        });
+
+        // Tab switching
+        window.switchTab = function(tabName) {
+            // Remove active class from all tabs and buttons
+            document.querySelectorAll('.tab-button').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            // Add active class to selected tab
+            event.target.closest('.tab-button').classList.add('active');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        // Set prompt from suggestion chips
+        window.setPrompt = function(type, prompt) {
+            document.getElementById(`${type}Prompt`).value = prompt;
+        }
+
+        // Generate Image
+        window.generateImage = async function() {
+            const prompt = document.getElementById('imagePrompt').value.trim();
+            if (!prompt) {
+                showMessage('image', 'error', 'Please enter a description for your image');
+                return;
+            }
+
+            const button = document.querySelector('#image-tab .generate-button');
+            const placeholder = document.getElementById('imagePlaceholder');
+            const output = document.getElementById('imageOutput');
+            const progressBar = document.getElementById('imageProgress');
+
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<span class="loading-spinner"></span> <span>Generating...</span>';
+            placeholder.style.display = 'none';
+            output.style.display = 'flex';
+            output.innerHTML = '<div class="loading-spinner"></div>';
+            progressBar.classList.add('active');
+            hideMessage('image');
+
+            try {
+                if (!isDemoMode && sdk) {
+                    // Try real API
+                    const model = sdk.model("stabilityai/stable-diffusion-xl-base-1.0");
+                    const { error, output } = await model.run(prompt);
+                    
+                    if (error) {
+                        throw new Error(error.message || 'Failed to generate image');
+                    }
+
+                    // Display the generated image
+                    output.innerHTML = `<img src="${output}" alt="Generated image" class="output-image">`;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Image';
+                    downloadBtn.onclick = () => downloadContent(output, 'image', prompt);
+                    output.appendChild(downloadBtn);
+                } else {
+                    // Demo mode - show placeholder
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    const imageUrl = `https://picsum.photos/seed/${encodeURIComponent(prompt)}/512/512.jpg`;
+                    
+                    output.innerHTML = `<img src="${imageUrl}" alt="Generated image" class="output-image">`;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Image';
+                    downloadBtn.onclick = () => downloadContent(imageUrl, 'image', prompt);
+                    output.appendChild(downloadBtn);
+                }
+
+                // Update stats
+                stats.images++;
+                updateStats();
+                saveStats();
+
+                showMessage('image', 'success', 'Image generated successfully!');
+            } catch (error) {
+                console.error('Error generating image:', error);
+                
+                // Fallback to demo mode
+                if (!isDemoMode) {
+                    isDemoMode = true;
+                    showDemoNotices();
+                    await generateImage(); // Retry with demo mode
+                } else {
+                    showMessage('image', 'error', `Failed to generate image: ${error.message}`);
+                    placeholder.style.display = 'block';
+                    output.style.display = 'none';
+                }
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<span>🎨</span> <span>Generate Image</span>';
+                progressBar.classList.remove('active');
+            }
+        }
+
+        // Generate Video
+        window.generateVideo = async function() {
+            const prompt = document.getElementById('videoPrompt').value.trim();
+            if (!prompt) {
+                showMessage('video', 'error', 'Please enter a description for your video');
+                return;
+            }
+
+            const button = document.querySelector('#video-tab .generate-button');
+            const placeholder = document.getElementById('videoPlaceholder');
+            const output = document.getElementById('videoOutput');
+            const progressBar = document.getElementById('videoProgress');
+
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<span class="loading-spinner"></span> <span>Generating...</span>';
+            placeholder.style.display = 'none';
+            output.style.display = 'flex';
+            output.innerHTML = '<div class="loading-spinner"></div>';
+            progressBar.classList.add('active');
+            hideMessage('video');
+
+            try {
+                if (!isDemoMode && sdk) {
+                    // Try real API
+                    const model = sdk.model("ali-vilab/text-to-video-ms-1.7b");
+                    const { error, output } = await model.run(prompt);
+                    
+                    if (error) {
+                        throw new Error(error.message || 'Failed to generate video');
+                    }
+
+                    // Display the generated video
+                    output.innerHTML = `<video controls class="output-video"><source src="${output}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Video';
+                    downloadBtn.onclick = () => downloadContent(output, 'video', prompt);
+                    output.appendChild(downloadBtn);
+                } else {
+                    // Demo mode - show sample video
+                    await new Promise(resolve => setTimeout(resolve, 2500));
+                    const videoUrl = 'https://www.w3schools.com/html/mov_bbb.mp4';
+                    
+                    output.innerHTML = `<video controls class="output-video"><source src="${videoUrl}" type="video/mp4">Your browser does not support the video tag.</video>`;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Video';
+                    downloadBtn.onclick = () => downloadContent(videoUrl, 'video', prompt);
+                    output.appendChild(downloadBtn);
+                }
+
+                // Update stats
+                stats.videos++;
+                updateStats();
+                saveStats();
+
+                showMessage('video', 'success', 'Video generated successfully!');
+            } catch (error) {
+                console.error('Error generating video:', error);
+                
+                // Fallback to demo mode
+                if (!isDemoMode) {
+                    isDemoMode = true;
+                    showDemoNotices();
+                    await generateVideo(); // Retry with demo mode
+                } else {
+                    showMessage('video', 'error', `Failed to generate video: ${error.message}`);
+                    placeholder.style.display = 'block';
+                    output.style.display = 'none';
+                }
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<span>🎬</span> <span>Generate Video</span>';
+                progressBar.classList.remove('active');
+            }
+        }
+
+        // Generate Music
+        window.generateMusic = async function() {
+            const prompt = document.getElementById('musicPrompt').value.trim();
+            if (!prompt) {
+                showMessage('music', 'error', 'Please enter a description for your music');
+                return;
+            }
+
+            const button = document.querySelector('#music-tab .generate-button');
+            const placeholder = document.getElementById('musicPlaceholder');
+            const output = document.getElementById('musicOutput');
+            const progressBar = document.getElementById('musicProgress');
+
+            // Show loading state
+            button.disabled = true;
+            button.innerHTML = '<span class="loading-spinner"></span> <span>Generating...</span>';
+            placeholder.style.display = 'none';
+            output.style.display = 'flex';
+            output.innerHTML = '<div class="loading-spinner"></div>';
+            progressBar.classList.add('active');
+            hideMessage('music');
+
+            try {
+                if (!isDemoMode && sdk) {
+                    // Try real API
+                    const model = sdk.model("facebook/musicgen-melody");
+                    const { error, output } = await model.run(prompt);
+                    
+                    if (error) {
+                        throw new Error(error.message || 'Failed to generate music');
+                    }
+
+                    // Display the generated music
+                    output.innerHTML = `
+                        <div style="text-align: center;">
+                            <audio controls class="output-audio">
+                                <source src="${output}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Music';
+                    downloadBtn.onclick = () => downloadContent(output, 'music', prompt);
+                    output.appendChild(downloadBtn);
+                } else {
+                    // Demo mode - show sample audio
+                    await new Promise(resolve => setTimeout(resolve, 2000));
+                    const audioUrl = 'https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3';
+                    
+                    output.innerHTML = `
+                        <div style="text-align: center;">
+                            <audio controls class="output-audio">
+                                <source src="${audioUrl}" type="audio/mpeg">
+                                Your browser does not support the audio element.
+                            </audio>
+                        </div>
+                    `;
+                    
+                    // Add download button
+                    const downloadBtn = document.createElement('button');
+                    downloadBtn.className = 'download-button';
+                    downloadBtn.innerHTML = '⬇️ Download Music';
+                    downloadBtn.onclick = () => downloadContent(audioUrl, 'music', prompt);
+                    output.appendChild(downloadBtn);
+                }
+
+                // Update stats
+                stats.music++;
+                updateStats();
+                saveStats();
+
+                showMessage('music', 'success', 'Music generated successfully!');
+            } catch (error) {
+                console.error('Error generating music:', error);
+                
+                // Fallback to demo mode
+                if (!isDemoMode) {
+                    isDemoMode = true;
+                    showDemoNotices();
+                    await generateMusic(); // Retry with demo mode
+                } else {
+                    showMessage('music', 'error', `Failed to generate music: ${error.message}`);
+                    placeholder.style.display = 'block';
+                    output.style.display = 'none';
+                }
+            } finally {
+                button.disabled = false;
+                button.innerHTML = '<span>🎵</span> <span>Generate Music</span>';
+                progressBar.classList.remove('active');
+            }
+        }
+
+        // Download function for generated content
+        function downloadContent(url, type, prompt) {
+            const link = document.createElement('a');
+            link.href = url;
+            const filename = `ai-${type}-${prompt.slice(0, 20).replace(/[^a-z0-9]/gi, '_').toLowerCase()}`;
+            
+            if (type === 'image') {
+                link.download = `${filename}.jpg`;
+            } else if (type === 'video') {
+                link.download = `${filename}.mp4`;
+            } else if (type === 'music') {
+                link.download = `${filename}.mp3`;
+            }
+            
+            link.click();
+        }
+
+        // Message display functions
+        function showMessage(type, messageType, message) {
+            const messageElement = document.getElementById(`${type}${messageType === 'error' ? 'Error' : 'Success'}`);
+            messageElement.textContent = message;
+            messageElement.classList.add('show');
+            
+            // Auto-hide after 5 seconds
+            setTimeout(() => {
+                messageElement.classList.remove('show');
+            }, 5000);
+        }
+
+        function hideMessage(type) {
+            document.getElementById(`${type}Error`).classList.remove('show');
+            document.getElementById(`${type}Success`).classList.remove('show');
+        }
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === '1') {
+                    e.preventDefault();
+                    document.querySelector('.tab-button').click();
+                } else if (e.key === '2') {
+                    e.preventDefault();
+                    document.querySelectorAll('.tab-button')[1].click();
+                } else if (e.key === '3') {
+                    e.preventDefault();
+                    document.querySelectorAll('.tab-button')[2].click();
+                }
+            }
+        });
+
+        // Initialize with welcome message
+        console.log('%c🎨 AI Creative Studio Initialized', 'color: #4F46E5; font-size: 20px; font-weight: bold;');
+        console.log('%cModels: Stable Diffusion XL, Text-to-Video MS 1.7B, MusicGen Melody', 'color: #666; font-size: 14px;');
+    </script>
+</body>
+</html>

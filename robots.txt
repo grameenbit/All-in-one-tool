@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+# Disallow: /email.html # Allow it to be crawled so noindex works
+# Disallow: /resume.html
+# Disallow: /seo.html
+# Disallow: /budget.html
+# Disallow: /encrypt.html
+
+Sitemap: https://alltoolinone.com/sitemap.xml

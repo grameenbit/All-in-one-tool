@@ -1,0 +1,29 @@
+# llm.txt
+# This file provides metadata and a list of tools available on the Googli Free Tools website for Large Language Models.
+
+title: Googli All Free Tools
+description: A collection of completely free, client-side web tools and utilities. Featuring calculators, converters, text generators, and more with no signup required. All processing happens entirely in the browser for complete privacy.
+url: https://alltoolinone.com
+
+## Available Tools
+
+- **AI Image Generator**: (/aimage.html) Generate beautiful AI artwork and images from text descriptions.
+- **Binary Converter**: (/binary.html) Convert between binary and text.
+- **BMI Calculator**: (/bmi.html) A completely free Body Mass Index calculator.
+- **Budget Planner**: (/budget.html) Free personal finance and budget planner tool.
+- **Color Picker**: (/color-picker.html) Easily grab color codes (HEX, RGB, HSL) with our free tool.
+- **Temporary Email**: (/email.html) Throwaway email address generator for protecting privacy.
+- **File Encryptor**: (/encrypt.html) Securely encrypt and decrypt files directly in your web browser.
+- **Fee AI / Calculator**: (/feeai.html) Calculate payment gateway fees.
+- **Image Resizer Pro**: (/image.html) Instantly compress and resize images without uploading them.
+- **Invoice Generator**: (/invoice.html) Build customized invoices.
+- **JSON Formatter**: (/json.html) Validate and format JSON code locally for privacy-first development.
+- **QR Code Generator**: (/qr.html) Instantly generate scannable QR codes for text, URLs, and more.
+- **AI Resume Builder**: (/resume.html) Craft professional ATS-friendly resumes.
+- **SEO Analyzer Pro**: (/seo.html) Perform technical audits and website SEO analysis.
+- **Text Counter**: (/text-counter.html) Count words, characters, sentences, and paragraphs in real-time.
+- **URL Converter**: (/url.html) Quickly encode or decode URLs to handle special characters.
+- **Weather App**: (/weather.html) Fast local and global weather forecasts.
+- **WiFi QR Generator**: (/wifi.html) Generate WiFi QR codes to share your network connection securely without giving out your password text.
+
+Many more free utilities are available from the Googli index. Googli is committed to remaining 100% free with no premium versions and no account registrations required.

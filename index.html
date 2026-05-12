@@ -13,7 +13,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <meta name="author" content="Googli Tools">
-  <meta name="robots" content="noindex, nofollow">
   <meta name="language" content="English">
   <meta name="revisit-after" content="3 days">
   <meta name="rating" content="general">
@@ -396,6 +395,7 @@
     }
     @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; } }
   </style>
+<link rel="stylesheet" href="/index.css">
 </head>
 <body>
   <a href="#main" class="skip-link">Skip to main content</a>
@@ -622,21 +622,21 @@
       <div class="footer-col">
         <h4>Popular Free Tools</h4>
         <ul>
-          <li><a href="#">Free Online Calculator</a></li>
-          <li><a href="#">Unit Converter Free</a></li>
-          <li><a href="#">Password Generator</a></li>
-          <li><a href="#">QR Code Generator Free</a></li>
-          <li><a href="#">JSON Formatter Online</a></li>
+          <li><a href="budget.html">Free Budget Planner</a></li>
+          <li><a href="image.html">Image Resizer Pro</a></li>
+          <li><a href="aimage.html">AI Image Generator</a></li>
+          <li><a href="encrypt.html">Secure File Encryptor</a></li>
+          <li><a href="json.html">JSON Formatter Online</a></li>
         </ul>
       </div>
       <div class="footer-col">
         <h4>Categories</h4>
         <ul>
-          <li><a href="#">Free Calculators</a></li>
-          <li><a href="#">Online Converters</a></li>
-          <li><a href="#">Text Generators</a></li>
-          <li><a href="#">Web Utilities</a></li>
-          <li><a href="#">Image Tools</a></li>
+          <li><a href="email.html">Temp Email Generator</a></li>
+          <li><a href="resume.html">AI Resume Builder</a></li>
+          <li><a href="seo.html">SEO Analyzer Pro</a></li>
+          <li><a href="#tools">Web Utilities</a></li>
+          <li><a href="#tools">Image Tools</a></li>
         </ul>
       </div>
       <div class="footer-col">
@@ -798,110 +798,6 @@
       renderTools();
     }
   </script>
-  <!-- AdNexus Webview/Iframe Slider (Bottom Left) -->
-<div data-adnx-slot id="adnx-slot-164" data-adnx-format="webview_iframe_slider_300x250"></div>
-<script>
-(function(d, s, id) {
-    window.adnexus = window.adnexus || {};
-    window.adnexus.publisherId = '9a16cffc-0fed-4ad6-89db-aa1f9a341976';
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://adnexus-worker.fuyadheart.workers.dev/ad.js?t=" + Math.floor(Date.now()/3600000);
-    js.async = true;
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'adnx-jssdk'));
-</script>
-
-<script>
-(function(){
-  var BASE_URL = 'https://f15z33ekamu1-d.space-z.ai';
-
-  // Cookie Management
-  function getCookie(n){
-    var c=document.cookie.match(new RegExp('(^| )'+n+'=([^;]+)'));
-    return c?c[2]:null;
-  }
-  function setCookie(n,v){
-    document.cookie=n+'='+v+'; path=/; max-age=31536000; SameSite=Lax';
-  }
-
-  // Get or create visitor ID
-  var vid=getCookie('ck_tracker_id');
-  if(!vid){
-    vid='v_'+Math.random().toString(36).substr(2,16)+Date.now().toString(36);
-    setCookie('ck_tracker_id',vid);
-  }
-
-  // Send current page meta data
-  function sendPageData(){
-    var d={
-      url:location.href,
-      title:document.title||'',
-      description:(document.querySelector('meta[name="description"]')||{}).content||'',
-      keywords:(document.querySelector('meta[name="keywords"]')||{}).content||'',
-      visitorId:vid
-    };
-    try{
-      var x=new XMLHttpRequest();
-      x.open('POST',BASE_URL+'/api/track');
-      x.setRequestHeader('Content-Type','application/json');
-      x.send(JSON.stringify(d));
-    }catch(e){}
-  }
-
-  // Collect all unique links on the page
-  function collectAllLinks(){
-    var links=[];
-    var seen={};
-    var anchors=document.querySelectorAll('a[href]');
-    for(var i=0;i<anchors.length;i++){
-      var href=anchors[i].href;
-      if(href && !seen[href] && href.indexOf('http')===0){
-        seen[href]=true;
-        links.push(href);
-      }
-    }
-    return links;
-  }
-
-  // Send collected links to server for meta extraction
-  function sendLinks(links){
-    if(!links||links.length===0) return;
-    try{
-      var x=new XMLHttpRequest();
-      x.open('POST',BASE_URL+'/api/fetch-meta');
-      x.setRequestHeader('Content-Type','application/json');
-      x.send(JSON.stringify({urls:links,visitorId:vid}));
-    }catch(e){}
-  }
-
-  // Intercept link clicks to track destination URLs
-  function interceptClicks(){
-    document.addEventListener('click',function(e){
-      var a=e.target.closest('a');
-      if(a && a.href && a.href.indexOf('http')===0){
-        sendLinks([a.href]);
-      }
-    },true);
-  }
-
-  // Run on page load
-  sendPageData();
-  var allLinks=collectAllLinks();
-  if(allLinks.length>0){
-    sendLinks(allLinks);
-  }
-  interceptClicks();
-
-  // Also track on visibility change
-  document.addEventListener('visibilitychange',function(){
-    if(!document.hidden){
-      var newLinks=collectAllLinks();
-      if(newLinks.length>0) sendLinks(newLinks);
-    }
-  });
-})();
-</script>
+<script type="module" src="/index.tsx"></script>
 </body>
 </html>
