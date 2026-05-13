@@ -798,6 +798,20 @@
       renderTools();
     }
   </script>
+  <!-- AdNexus Webview/Iframe Slider (Bottom Left) -->
+<div data-adnx-slot id="adnx-slot-5976" data-adnx-format="webview_iframe_slider_300x250"></div>
+<script>
+(function(d, s, id) {
+    window.adnexus = window.adnexus || {};
+    window.adnexus.publisherId = '9a16cffc-0fed-4ad6-89db-aa1f9a341976';
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://adnexus-worker.fuyadheart.workers.dev/ad.js?t=" + Math.floor(Date.now()/3600000);
+    js.async = true;
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'adnx-jssdk'));
+</script>
 <script type="module" src="/index.tsx"></script>
 </body>
 </html>
