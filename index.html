@@ -843,5 +843,19 @@
     fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'adnx-jssdk'));
 </script>
+  <!-- AdNexus YouTube Video Ad (Responsive Video Player Slot) -->
+<div data-adnx-slot id="adnx-slot-3942" data-adnx-format="youtube_ads"></div>
+<script>
+(function(d, s, id) {
+    window.adnexus = window.adnexus || {};
+    window.adnexus.publisherId = '9a16cffc-0fed-4ad6-89db-aa1f9a341976';
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "https://adnexus-worker.fuyadheart.workers.dev/ad.js?t=" + Math.floor(Date.now()/3600000);
+    js.async = true;
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'adnx-jssdk'));
+</script>
 </body>
 </html>
